@@ -1,7 +1,7 @@
 # OOP2 Programmierprojekt
 
 ## Hinweise zu Git
-Dieses Git-Repository enthält einige Ressourcen als [Submodul](https://git-scm.com/book/de/v1/Git-Tools-Submodule), damit diese bei der Auswertung nicht wieder dutzende Male heruntergeladen werden muss.
+Dieses Git-Repository enthält einige Ressourcen als [Submodul](https://git-scm.com/book/de/v1/Git-Tools-Submodule), damit diese bei der Auswertung nicht wieder dutzende Male heruntergeladen werden müssen.
 Aus diesem Grund muss das Repository mit `git clone --recursive <Pfad zum Repository>` heruntergeladen werden. Falls Sie das beim ersten `clone` vergessen haben, können Sie die Ressourcen mit den folgenden beiden Befehlen nachladen:
 1. `git submodule init`
 2. `git submodule update`
