@@ -13,8 +13,8 @@ Implementieren Sie eine Applikation auf Basis JavaFX gemäss der Aufgabenbeschre
 
 
 ## Abgabe
-- Klasse 2Ibb: Dienstag, 13.6.2017, 18:00 Uhr
-- Klasse 2Ia und 2iCa: Mittwoch, 14.6.2017, 18:00 Uhr
+- Klasse 2Ibb: Dienstag, 13.6.2017, 15:00 Uhr
+- Klasse 2Ia und 2iCa: Mittwoch, 14.6.2017, 8:00 Uhr
 
 
 ## Bitte beachten Sie:
