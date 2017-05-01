@@ -1,7 +1,13 @@
 # OOP2 Programmierprojekt
 
-## FootballplayerFX
+## Hinweise zu Git
+Dieses Git-Repository enthält einige Ressourcen als [Submodul](https://git-scm.com/book/de/v1/Git-Tools-Submodule), damit diese bei der Auswertung nicht wieder dutzende Male heruntergeladen werden muss.
+Aus diesem Grund müssen Sie das Repository mit
+'git clone --recursive <*Pfad zum Repository*>' heruntergeladen werden. Falls Sie das beim ersten 'clone' vergessen haben, können Sie die Ressourcen mit den folgenden beiden Befehlen nachladen:
+'git submodule init'
+'git submodule update'
 
+## FootballplayerFX
 Implementieren Sie eine Applikation auf Basis JavaFX gemäss der Aufgabenbeschreibung aus der Lektion (siehe Moodle). 
  - Benutzen Sie zur Umsetzung die vorgegebene Struktur des "Application-Template".
  - Die Verwendung von SceneBuilder und FXML ist nicht erlaubt.
