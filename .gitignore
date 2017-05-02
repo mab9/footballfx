@@ -1,4 +1,8 @@
 *.idea
 *.iml
 target
-src/main/resources/*
+src/main/resources/associations/*
+src/main/resources/flags/*
+src/main/resources/icons/*
+src/main/resources/marks/*
+src/main/resources/player.csv
