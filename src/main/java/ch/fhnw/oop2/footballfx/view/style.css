@@ -1,3 +1,21 @@
 .root {
     -fx-padding: 20px;
+
+}
+GridPane {
+    -fx-padding: 4px;
+    -fx-hgap: 4px;
+    -fx-vgap: 4px;
+}
+
+.gridTop {
+    -fx-background-color: white;
+
+}
+.gridBottom{
+    -fx-hgap: 12px;
+}
+
+.label {
+
 }
