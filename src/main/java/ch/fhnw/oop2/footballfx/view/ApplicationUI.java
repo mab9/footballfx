@@ -1,7 +1,11 @@
 package ch.fhnw.oop2.footballfx.view;
 
 import ch.fhnw.oop2.footballfx.presentationmodel.PresentationModel;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -69,7 +73,7 @@ public class ApplicationUI extends VBox {
     }
 
     private void initializeSelf() {
-        String stylesheet = getClass().getResource("style.css").toExternalForm();
+        String stylesheet = ClassLoader.getSystemClassLoader().getResource("style.css").toExternalForm();
         getStylesheets().add(stylesheet);
     }
 
