@@ -20,17 +20,17 @@ public class PresentationModel {
     private final StringProperty applicationTitle = new SimpleStringProperty("JavaFX Application");
     private final StringProperty greeting = new SimpleStringProperty("Hello World!");
 
-    private final StringProperty playerName;
-    private final StringProperty playerGeboren;
-    private final StringProperty playerCountry;
-    private final StringProperty playerVerband;
-    private final StringProperty playerPosition;
-    private final StringProperty playerHundertesSpiel;
-    private final StringProperty playerGegen;
-    private final StringProperty playerFifa;
-    private final StringProperty playerRSSSF;
-    private final StringProperty playerStartJahr;
-    private final StringProperty playerEndJahr;
+    private final StringProperty playerName = new SimpleStringProperty();
+    private final StringProperty playerGeboren = new SimpleStringProperty();
+    private final StringProperty playerCountry = new SimpleStringProperty();
+    private final StringProperty playerVerband = new SimpleStringProperty();
+    private final StringProperty playerPosition = new SimpleStringProperty();
+    private final StringProperty playerHundertesSpiel = new SimpleStringProperty();
+    private final StringProperty playerGegen = new SimpleStringProperty();
+    private final StringProperty playerFifa = new SimpleStringProperty();
+    private final StringProperty playerRSSSF = new SimpleStringProperty();
+    private final StringProperty playerStartJahr = new SimpleStringProperty();
+    private final StringProperty playerEndJahr = new SimpleStringProperty();
 
     private final StringProperty playerLaenderspiele = new SimpleStringProperty("Länderspiel");
     private final StringProperty playerErstesSpiel = new SimpleStringProperty("Erstes Spiel");
@@ -42,17 +42,21 @@ public class PresentationModel {
         } catch (FileAccessException e) {
             System.err.println("Could not load data");
         }
-        playerName = new SimpleStringProperty(data.get(1).get(1));
-        playerGeboren = new SimpleStringProperty(data.get(1).get(2));
-        playerCountry = new SimpleStringProperty(data.get(1).get(3));
-        playerVerband = new SimpleStringProperty(data.get(1).get(4));
-        playerPosition = new SimpleStringProperty(data.get(1).get(5));
-        playerHundertesSpiel = new SimpleStringProperty(data.get(1).get(6));
-        playerGegen = new SimpleStringProperty(data.get(1).get(7));
-        playerFifa = new SimpleStringProperty(data.get(1).get(8));
-        playerRSSSF = new SimpleStringProperty(data.get(1).get(9));
-        playerStartJahr = new SimpleStringProperty(data.get(1).get(10));
-        playerEndJahr = new SimpleStringProperty(data.get(1).get(11));
+        initDefaultData(1);
+    }
+
+    private void initDefaultData(int rowNumber) {
+        playerName.set(data.get(rowNumber).get(1));
+        playerGeboren.set(data.get(rowNumber).get(2));
+        playerCountry.set(data.get(rowNumber).get(3));
+        playerVerband.set(data.get(rowNumber).get(4));
+        playerPosition.set(data.get(rowNumber).get(5));
+        playerHundertesSpiel.set(data.get(rowNumber).get(6));
+        playerGegen.set(data.get(rowNumber).get(7));
+        playerFifa.set(data.get(rowNumber).get(8));
+        playerRSSSF.set(data.get(rowNumber).get(9));
+        playerStartJahr.set(data.get(rowNumber).get(10));
+        playerEndJahr.set(data.get(rowNumber).get(11));
     }
 
     private List<List<String>> loadData() throws FileAccessException {
