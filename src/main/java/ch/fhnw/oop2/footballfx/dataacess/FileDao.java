@@ -24,6 +24,7 @@ public class FileDao {
 
     public void saveFile(Path path, Stream<String> data) throws FileAccessException {
         try {
+            // TODO adjust path so that it writes via relative path to resources.
             Files.write(path, (Iterable<String>) data::iterator);
         } catch (IOException e) {
             throw new FileAccessException("Could not save file: " + path.getFileName() + ".", e);
