@@ -15,11 +15,11 @@ public class ApplicationUI extends VBox {
 
     private final PresentationModel model;
 
-    private Button buttonAdd;
-    private Button buttonRemove;
-    private Button buttonUndo;
-    private Button buttonRedo;
-    private Button buttonSave;
+    private Button buttonAddPlayer;
+    private Button buttonRemovePlayer;
+    private Button buttonUndoAction;
+    private Button buttonRedoAction;
+    private Button buttonSaveData;
     private TextField search;
     private TableView playerTableView;
     private ImageView countryImageView;
@@ -28,7 +28,7 @@ public class ApplicationUI extends VBox {
     private TextField playerName;
     private TextField playerCountry;
     private TextField playerLaenderspiele;
-    private Label textLaenderspiele;
+    private Label lblTextLaenderspiele;
     private TextField playerStartJahr;
     private TextField playerEndJahr;
     private TextField playerGegen;
@@ -41,24 +41,24 @@ public class ApplicationUI extends VBox {
     private TextField playerLetztesSpiel;
     private TextField playerVerband;
     private Label playerRang;
-    private Label textName;
-    private Label overName;
-    private Label overLand;
-    private Label overLaenderspiele;
-    private Label overStartJahr;
-    private Label overEndJahr;
-    private Label textLand;
-    private Label textBis;
-    private Label textVerband;
-    private Label textSpieleFifa;
-    private Label textSpieleRSSSF;
-    private Label textGeboren;
-    private Label textRang;
-    private Label textPosition;
-    private Label textHundertesSpiel;
-    private Label textGegen;
-    private Label textErstesSpiel;
-    private Label textLetztesSpiel;
+    private Label lblTextName;
+    private Label lblOverName;
+    private Label lblOverLand;
+    private Label lblOverLaenderspiele;
+    private Label lblOverStartJahr;
+    private Label lblOverEndJahr;
+    private Label lblTextLand;
+    private Label lblTextBis;
+    private Label lblTextVerband;
+    private Label lblTextSpieleFifa;
+    private Label lblTextSpieleRSSSF;
+    private Label lblTextGeboren;
+    private Label lblTextRang;
+    private Label lblTextPosition;
+    private Label lblTextHundertesSpiel;
+    private Label lblTextGegen;
+    private Label lblTextErstesSpiel;
+    private Label lblTextLetztesSpiel;
 
     public ApplicationUI(PresentationModel model) {
         this.model = model;
@@ -76,6 +76,7 @@ public class ApplicationUI extends VBox {
     }
 
     private void initializeControls() {
+
         /*
          * Controls
          * text* = Labels, welche Statischen text darstellen, wie z.B "Name","Verband" etc.
@@ -86,16 +87,16 @@ public class ApplicationUI extends VBox {
          * 
          */
         // Init buttons
-        buttonAdd = new Button();
-        buttonRemove = new Button();
-        buttonSave = new Button();
-        buttonUndo = new Button();
-        buttonRedo = new Button();
-        buttonSave.setText("Save");
-        buttonAdd.setText("+");
-        buttonRemove.setText("-");
-        buttonUndo.setText("<--");
-        buttonRedo.setText("-->");
+        buttonAddPlayer = new Button();
+        buttonRemovePlayer = new Button();
+        buttonSaveData = new Button();
+        buttonUndoAction = new Button();
+        buttonRedoAction = new Button();
+        buttonSaveData.setText("Save");
+        buttonAddPlayer.setText("+");
+        buttonRemovePlayer.setText("-");
+        buttonUndoAction.setText("<--");
+        buttonRedoAction.setText("-->");
 
         // init Textfields
         search = new TextField();
@@ -128,29 +129,27 @@ public class ApplicationUI extends VBox {
         playerRSSSF = new TextField();
         playerGegen = new TextField();
         playerLetztesSpiel = new TextField();
-        textLaenderspiele = new Label();
-        textName = new Label();
-        textLand = new Label();
-        textVerband = new Label();
-        textSpieleFifa = new Label();
-        textSpieleRSSSF = new Label();
-        textVerband = new Label();
-        textGeboren = new Label();
-        textRang = new Label();
-        textPosition = new Label();
-        textHundertesSpiel = new Label();
-        textGegen = new Label();
-        textErstesSpiel = new Label();
-        textLetztesSpiel = new Label();
-        textBis = new Label();
-        overName = new Label();
-        overLand = new Label();
-        overEndJahr = new Label();
-        overStartJahr = new Label();
-        overLaenderspiele = new Label();
+        lblTextLaenderspiele = new Label();
+        lblTextName = new Label();
+        lblTextLand = new Label();
+        lblTextSpieleFifa = new Label();
+        lblTextSpieleRSSSF = new Label();
+        lblTextVerband = new Label();
+        lblTextGeboren = new Label();
+        lblTextRang = new Label();
+        lblTextPosition = new Label();
+        lblTextHundertesSpiel = new Label();
+        lblTextGegen = new Label();
+        lblTextErstesSpiel = new Label();
+        lblTextLetztesSpiel = new Label();
+        lblTextBis = new Label();
+        lblOverName = new Label();
+        lblOverLand = new Label();
+        lblOverEndJahr = new Label();
+        lblOverStartJahr = new Label();
+        lblOverLaenderspiele = new Label();
 
         // Set Layout Gaps
-
     }
 
     private void layoutControls() {
@@ -168,25 +167,26 @@ public class ApplicationUI extends VBox {
 
         // Add toolbar
         // this.getChildren().add(toolBar);
-        toolBar.getItems().addAll(buttonSave, buttonAdd, buttonRemove, buttonUndo, buttonRedo);
+        toolBar.getItems().addAll(buttonSaveData, buttonAddPlayer, buttonRemovePlayer, buttonUndoAction,
+                buttonRedoAction);
         // Add Grid
-        gridTop.add(overName, 0, 0, 4, 1);
-        gridTop.add(overLand, 0, 1);
+        gridTop.add(lblOverName, 0, 0, 4, 1);
+        gridTop.add(lblOverLand, 0, 1);
         gridTop.add(countryImageView, 3, 1, 1, 2);
-        gridTop.add(overLaenderspiele, 0, 2);
-        gridTop.add(textLaenderspiele, 1, 2);
+        gridTop.add(lblOverLaenderspiele, 0, 2);
+        gridTop.add(lblTextLaenderspiele, 1, 2);
         gridTop.add(teamImageView, 3, 2, 1, 2);
-        gridTop.add(overStartJahr, 0, 3);
-        gridTop.add(textBis, 1, 3);
-        gridTop.add(overEndJahr, 2, 3);
+        gridTop.add(lblOverStartJahr, 0, 3);
+        gridTop.add(lblTextBis, 1, 3);
+        gridTop.add(lblOverEndJahr, 2, 3);
 
         // Column 0
-        gridBottom.add(textName, 0, 0);
-        gridBottom.add(textLand, 0, 1);
-        gridBottom.add(textVerband, 0, 2);
-        gridBottom.add(textSpieleFifa, 0, 3);
-        gridBottom.add(textHundertesSpiel, 0, 4);
-        gridBottom.add(textErstesSpiel, 0, 5);
+        gridBottom.add(lblTextName, 0, 0);
+        gridBottom.add(lblTextLand, 0, 1);
+        gridBottom.add(lblTextVerband, 0, 2);
+        gridBottom.add(lblTextSpieleFifa, 0, 3);
+        gridBottom.add(lblTextHundertesSpiel, 0, 4);
+        gridBottom.add(lblTextErstesSpiel, 0, 5);
         // Column 1
         gridBottom.add(playerName, 1, 0);
         gridBottom.add(playerCountry, 1, 1);
@@ -196,12 +196,12 @@ public class ApplicationUI extends VBox {
         gridBottom.add(playerErstesSpiel, 1, 5);
 
         // Column 2
-        gridBottom.add(textGeboren, 2, 0);
-        gridBottom.add(textPosition, 2, 1);
-        gridBottom.add(textRang, 2, 2);
-        gridBottom.add(textSpieleRSSSF, 2, 3);
-        gridBottom.add(textGegen, 2, 4);
-        gridBottom.add(textLetztesSpiel, 2, 5);
+        gridBottom.add(lblTextGeboren, 2, 0);
+        gridBottom.add(lblTextPosition, 2, 1);
+        gridBottom.add(lblTextRang, 2, 2);
+        gridBottom.add(lblTextSpieleRSSSF, 2, 3);
+        gridBottom.add(lblTextGegen, 2, 4);
+        gridBottom.add(lblTextLetztesSpiel, 2, 5);
 
         // Column 3
         gridBottom.add(playerGeboren, 3, 0);
@@ -212,33 +212,38 @@ public class ApplicationUI extends VBox {
         gridBottom.add(playerLetztesSpiel, 3, 5);
 
         // Text for Overview
-        overName.setText("Ahmed Hassan");
-        overLand.setText("Ägypten");
-        overLaenderspiele.setText("184");
-        textLaenderspiele.setText("Länderspiele");
-        overStartJahr.setText("2020");
-        textBis.setText("bis");
-        overEndJahr.setText("2021");
+        lblOverName.setText("Ahmed Hassan");
+        lblOverLand.setText("Ägypten");
+        lblOverLaenderspiele.setText("184");
+        lblTextLaenderspiele.setText("Länderspiele");
+        lblOverStartJahr.setText("2020");
+        lblTextBis.setText("bis");
+        lblOverEndJahr.setText("2021");
 
         // Text for Editor
-        textName.setText("Name");
-        textLand.setText("Land");
-        textVerband.setText("Verband");
-        textSpieleFifa.setText("Spiele (FIFA)");
-        textSpieleRSSSF.setText("Spiele (RSSSF)");
-        textHundertesSpiel.setText("100. Spiel");
-        textGegen.setText("gegen");
-        textErstesSpiel.setText("erstes Spiel");
-        textLetztesSpiel.setText("letztes Spiel");
-        textGeboren.setText("geboren");
-        textPosition.setText("position");
-        textRang.setText("Rang");
+        lblTextName.setText("Name");
+        lblTextLand.setText("Land");
+        lblTextVerband.setText("Verband");
+        lblTextSpieleFifa.setText("Spiele (FIFA)");
+        lblTextSpieleRSSSF.setText("Spiele (RSSSF)");
+        lblTextHundertesSpiel.setText("100. Spiel");
+        lblTextGegen.setText("gegen");
+        lblTextErstesSpiel.setText("erstes Spiel");
+        lblTextLetztesSpiel.setText("letztes Spiel");
+        lblTextGeboren.setText("geboren");
+        lblTextPosition.setText("position");
+        lblTextRang.setText("Rang");
 
         hBox.getChildren().addAll(playerTableView, vBoxright);
         this.getChildren().addAll(toolBar, hBox);
     }
 
     private void setupEventHandlers() {
+        buttonAddPlayer.setOnAction(e -> model.addPlayer());
+        buttonRemovePlayer.setOnAction(e -> model.removePlayer());
+        buttonSaveData.setOnAction(e -> model.saveData());
+        buttonUndoAction.setOnAction(e -> model.undoAction());
+        buttonRedoAction.setOnAction(e -> model.redoAction());
     }
 
     private void setupValueChangedListeners() {
