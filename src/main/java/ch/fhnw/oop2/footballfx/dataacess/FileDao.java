@@ -1,25 +1,30 @@
 package ch.fhnw.oop2.footballfx.dataacess;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.stream.Stream;
 
 public class FileDao {
 
     public FileDao() {
     }
 
-    public byte[] readFile(Path path) throws FileAccessException {
+    public Stream<String> readFile(Path path) throws FileAccessException {
         try {
-            return Files.readAllBytes(path.getFileName());
-        } catch (IOException e) {
+            InputStream data = ClassLoader.getSystemResourceAsStream(path.getFileName().toString());
+            return new BufferedReader(new InputStreamReader(data)).lines();
+        } catch (NullPointerException e) {
             throw new FileAccessException("Could not read file: " + path.getFileName() + ".", e);
         }
     }
 
-    public void saveFile(Path path, byte[] data) throws FileAccessException {
+    public void saveFile(Path path, Stream<String> data) throws FileAccessException {
         try {
-            Files.write(path, data);
+            Files.write(path, (Iterable<String>) data::iterator);
         } catch (IOException e) {
             throw new FileAccessException("Could not save file: " + path.getFileName() + ".", e);
         }
