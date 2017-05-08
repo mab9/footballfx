@@ -18,7 +18,7 @@ public class FileDao {
             InputStream data = ClassLoader.getSystemResourceAsStream(path.getFileName().toString());
             return new BufferedReader(new InputStreamReader(data)).lines();
         } catch (NullPointerException e) {
-            throw new FileAccessException("Could not read file: " + path.getFileName() + ".", e);
+            throw new FileAccessException("Could not load file: " + path.getFileName() + ".", e);
         }
     }
 
