@@ -250,6 +250,19 @@ public class ApplicationUI extends VBox {
     }
 
     private void setupBindings() {
-        // button.textProperty().bind(model.greetingProperty());
+        playerName.textProperty().bindBidirectional(model.getPlayerName());
+        playerCountry.textProperty().bindBidirectional(model.getPlayerCountry());
+        playerLaenderspiele.textProperty().bindBidirectional(model.getPlayerLaenderspiele());
+        playerStartJahr.textProperty().bindBidirectional(model.getPlayerStartJahr());
+        playerEndJahr.textProperty().bindBidirectional(model.getPlayerEndJahr());
+        playerVerband.textProperty().bindBidirectional(model.getPlayerVerband());
+        playerFifa.textProperty().bindBidirectional(model.getPlayerFifa());
+        playerRSSSF.textProperty().bindBidirectional(model.getPlayerRSSSF());
+        playerHundertesSpiel.textProperty().bindBidirectional(model.getPlayerHundertesSpiel());
+        playerErstesSpiel.textProperty().bindBidirectional(model.getPlayerErstesSpiel());
+        playerGeboren.textProperty().bindBidirectional(model.getPlayerGeboren());
+        playerPosition.textProperty().bindBidirectional(model.getPlayerPosition());
+        playerGegen.textProperty().bindBidirectional(model.getPlayerGegen());
+        playerLetztesSpiel.textProperty().bindBidirectional(model.getPlayerLetztesSpiel());
     }
 }
