@@ -7,7 +7,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class ApplicationUI extends HBox {
+public class ApplicationUI extends VBox {
 
     private final PresentationModel model;
 
@@ -75,6 +75,7 @@ public class ApplicationUI extends HBox {
 
     private void initializeControls() {
 
+
         /* Controls
         text* = Labels, welche Statischen text darstellen, wie z.B "Name","Verband" etc.
         over* = Labels, welche in der Overview verwendet werden und dynamisch nach Auswahl sich anpassen
@@ -88,6 +89,11 @@ public class ApplicationUI extends HBox {
         buttonSave = new Button();
         buttonUndo = new Button();
         buttonRedo = new Button();
+        buttonSave.setText("Save");
+        buttonAdd.setText("+");
+        buttonRemove.setText("-");
+        buttonUndo.setText("<--");
+        buttonRedo.setText("-->");
 
         // init Textfields
         search = new TextField();
@@ -150,6 +156,8 @@ public class ApplicationUI extends HBox {
     }
 
     private void layoutControls() {
+        HBox hBox = new HBox();
+        ToolBar toolBar = new ToolBar();
         GridPane gridTop = new GridPane();
         gridTop.getStyleClass().add("gridTop");
         GridPane gridBottom = new GridPane();
@@ -160,8 +168,10 @@ public class ApplicationUI extends HBox {
         gridTop.setHgap(3);
         gridTop.setVgap(3);
 
-
-
+        // Add toolbar
+       // this.getChildren().add(toolBar);
+        toolBar.getItems().addAll(buttonSave,buttonAdd,buttonRemove,buttonUndo,buttonRedo);
+        // Add Grid
         gridTop.add(overName,0,0,4,1);
         gridTop.add(overLand,0,1);
         gridTop.add(countryImageView,3,1,1,2);
@@ -226,7 +236,8 @@ public class ApplicationUI extends HBox {
         textPosition.setText("position");
         textRang.setText("Rang");
 
-        getChildren().addAll(playerTableView,vBoxright);
+        hBox.getChildren().addAll(playerTableView,vBoxright);
+        this.getChildren().addAll(toolBar,hBox);
     }
 
     private void setupEventHandlers() {
