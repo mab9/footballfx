@@ -248,6 +248,8 @@ public class ApplicationUI extends VBox {
         TableColumn<Player, String> startjahrColumn = new TableColumn<>("Start Jahr");
         TableColumn<Player, String> endjahrColumn = new TableColumn<>("End Jahr");
 
+        playerTableView.getItems().setAll(model.getData());
+
         playerTableView.getColumns().add(nameColumn);
         playerTableView.getColumns().add(birthDateColumn);
         playerTableView.getColumns().add(countryColumn);
@@ -289,7 +291,6 @@ public class ApplicationUI extends VBox {
     }
 
     private void setupBindings() {
-
         playerName.textProperty().bindBidirectional(model.getPlayerName());
         playerCountry.textProperty().bindBidirectional(model.getPlayerCountry());
         playerLaenderspiele.textProperty().bindBidirectional(model.getPlayerLaenderspiele());

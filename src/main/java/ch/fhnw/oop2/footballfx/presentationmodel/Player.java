@@ -104,5 +104,4 @@ public class Player {
     public void setEndjahr(String endjahr) {
         this.endjahr.set(endjahr);
     }
-
 }

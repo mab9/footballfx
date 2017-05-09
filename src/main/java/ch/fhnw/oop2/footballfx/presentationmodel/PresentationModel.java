@@ -3,9 +3,7 @@ package ch.fhnw.oop2.footballfx.presentationmodel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import ch.fhnw.oop2.footballfx.dataacess.FileAccessException;
@@ -19,7 +17,7 @@ public class PresentationModel {
 
     private final Path DATA_SOURCE = Paths.get("player.csv");
     private final FileDao fileDao = new FileDao();
-    private List<ObservableList<String>> data = FXCollections.observableArrayList();
+    private ObservableList<Player> data = FXCollections.observableArrayList();
 
     private final StringProperty applicationTitle = new SimpleStringProperty("JavaFX Application");
     private final StringProperty greeting = new SimpleStringProperty("Hello World!");
@@ -36,9 +34,9 @@ public class PresentationModel {
     private final StringProperty playerStartJahr = new SimpleStringProperty();
     private final StringProperty playerEndJahr = new SimpleStringProperty();
 
-    private final StringProperty playerLaenderspiele = new SimpleStringProperty("Länderspiel");
-    private final StringProperty playerErstesSpiel = new SimpleStringProperty("Erstes Spiel");
-    private final StringProperty playerLetztesSpiel = new SimpleStringProperty("letztes spiel");
+    private final StringProperty playerLaenderspiele = new SimpleStringProperty();
+    private final StringProperty playerErstesSpiel = new SimpleStringProperty();
+    private final StringProperty playerLetztesSpiel = new SimpleStringProperty();
 
     public PresentationModel() {
         try {
@@ -49,37 +47,53 @@ public class PresentationModel {
         }
 
         try {
-            initDefaultData(1);
+            // initDefaultData(1);
         } catch (IndexOutOfBoundsException e) {
             throw new RuntimeException("Loaded Data are wrong formatted");
         }
     }
 
-    private void initDefaultData(int rowNumber) {
-        playerName.set(data.get(rowNumber).get(1));
-        playerBirthDate.set(data.get(rowNumber).get(2));
-        playerCountry.set(data.get(rowNumber).get(3));
-        playerVerband.set(data.get(rowNumber).get(4));
-        playerPosition.set(data.get(rowNumber).get(5));
-        playerHundertesSpiel.set(data.get(rowNumber).get(6));
-        playerGegen.set(data.get(rowNumber).get(7));
-        playerFifa.set(data.get(rowNumber).get(8));
-        playerRSSSF.set(data.get(rowNumber).get(9));
-        playerStartJahr.set(data.get(rowNumber).get(10));
-        playerEndJahr.set(data.get(rowNumber).get(11));
+    public ObservableList<Player> getData() {
+        return data;
     }
 
-    private List<ObservableList<String>> loadData() throws FileAccessException {
-        Stream<String> stream = fileDao.readFile(DATA_SOURCE);
-        List<ObservableList<String>> datas = new ArrayList<>();
+    private void initDefaultData(int rowNumber) {
+        /*
+         * playerName.set(data.get(rowNumber).get(1));
+         * playerBirthDate.set(data.get(rowNumber).get(2));
+         * playerCountry.set(data.get(rowNumber).get(3));
+         * playerVerband.set(data.get(rowNumber).get(4));
+         * playerPosition.set(data.get(rowNumber).get(5));
+         * playerHundertesSpiel.set(data.get(rowNumber).get(6));
+         * playerGegen.set(data.get(rowNumber).get(7));
+         * playerFifa.set(data.get(rowNumber).get(8));
+         * playerRSSSF.set(data.get(rowNumber).get(9));
+         * playerStartJahr.set(data.get(rowNumber).get(10));
+         * playerEndJahr.set(data.get(rowNumber).get(11));
+         */
+    }
 
-        List<String> rows = stream.collect(Collectors.toList());
-        rows.forEach(row -> {
-            String[] split = row.split(";");
-            ObservableList<String> columns = FXCollections.observableList(Arrays.asList(split));
-            datas.add(columns);
+    private ObservableList<Player> loadData() throws FileAccessException {
+        Stream<String> stream = fileDao.readFile(DATA_SOURCE);
+        ObservableList<Player> players = FXCollections.observableArrayList();
+
+        stream.skip(1).forEach(row -> {
+            String[] splitedData = row.split(";");
+            Player player = new Player();
+            player.setName(splitedData[0]);
+            player.setBirthDate(splitedData[1]);
+            player.setCountry(splitedData[2]);
+            player.setVerband(splitedData[3]);
+            player.setPosition(splitedData[4]);
+            player.setHundertesSpiel(splitedData[5]);
+            player.setGegen(splitedData[6]);
+            player.setFifa(splitedData[7]);
+            player.setRsssf(splitedData[8]);
+            player.setStartjahr(splitedData[9]);
+            player.setEndjahr(splitedData[10]);
+            players.add(player);
         });
-        return datas;
+        return players;
     }
 
     public String getApplicationTitle() {
@@ -104,11 +118,13 @@ public class PresentationModel {
     private List<String> getFormatedData() {
         List<String> rows = new ArrayList<>();
         data.forEach(row -> {
-            StringBuilder sb = new StringBuilder();
-            row.forEach(element -> {
-                sb.append(element).append(";");
-            });
-            rows.add(sb.toString());
+            /*
+             * StringBuilder sb = new StringBuilder();
+             * row.forEach(element -> {
+             * sb.append(element).append(";");
+             * });
+             * rows.add(sb.toString());
+             */
         });
 
         return rows;
