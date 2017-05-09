@@ -53,11 +53,11 @@ public class Player {
         return rsssf;
     }
 
-    public StringProperty getStartjahr() {
+    public StringProperty getStartJahr() {
         return startjahr;
     }
 
-    public StringProperty getEndjahr() {
+    public StringProperty getEndJahr() {
         return endjahr;
     }
 

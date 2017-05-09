@@ -46,31 +46,11 @@ public class PresentationModel {
             System.exit(-1);
         }
 
-        try {
-            // initDefaultData(1);
-        } catch (IndexOutOfBoundsException e) {
-            throw new RuntimeException("Loaded Data are wrong formatted");
-        }
+        showPlayerDetails(data.get(1));
     }
 
     public ObservableList<Player> getData() {
         return data;
-    }
-
-    private void initDefaultData(int rowNumber) {
-        /*
-         * playerName.set(data.get(rowNumber).get(1));
-         * playerBirthDate.set(data.get(rowNumber).get(2));
-         * playerCountry.set(data.get(rowNumber).get(3));
-         * playerVerband.set(data.get(rowNumber).get(4));
-         * playerPosition.set(data.get(rowNumber).get(5));
-         * playerHundertesSpiel.set(data.get(rowNumber).get(6));
-         * playerGegen.set(data.get(rowNumber).get(7));
-         * playerFifa.set(data.get(rowNumber).get(8));
-         * playerRSSSF.set(data.get(rowNumber).get(9));
-         * playerStartJahr.set(data.get(rowNumber).get(10));
-         * playerEndJahr.set(data.get(rowNumber).get(11));
-         */
     }
 
     private ObservableList<Player> loadData() throws FileAccessException {
@@ -94,6 +74,34 @@ public class PresentationModel {
             players.add(player);
         });
         return players;
+    }
+
+    public void showPlayerDetails(Player player) {
+        if (player != null) {
+            playerName.set(player.getName().get());
+            playerBirthDate.set(player.getBirthDate().get());
+            playerCountry.set(player.getCountry().get());
+            playerVerband.set(player.getVerband().get());
+            playerPosition.set(player.getPosition().get());
+            playerHundertesSpiel.set(player.getHundertesSpiel().get());
+            playerGegen.set(player.getGegen().get());
+            playerFifa.set(player.getFifa().get());
+            playerRSSSF.set(player.getRsssf().get());
+            playerStartJahr.set(player.getStartJahr().get());
+            playerEndJahr.set(player.getEndJahr().get());
+        } else {
+            playerName.set("");
+            playerBirthDate.set("");
+            playerCountry.set("");
+            playerVerband.set("");
+            playerPosition.set("");
+            playerHundertesSpiel.set("");
+            playerGegen.set("");
+            playerFifa.set("");
+            playerRSSSF.set("");
+            playerStartJahr.set("");
+            playerEndJahr.set("");
+        }
     }
 
     public String getApplicationTitle() {

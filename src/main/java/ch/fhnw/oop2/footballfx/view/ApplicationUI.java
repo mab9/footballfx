@@ -271,14 +271,16 @@ public class ApplicationUI extends VBox {
         gegenColumn.setCellValueFactory(e -> e.getValue().getGegen());
         fifaColumn.setCellValueFactory(e -> e.getValue().getFifa());
         rsssfColumn.setCellValueFactory(e -> e.getValue().getRsssf());
-        startjahrColumn.setCellValueFactory(e -> e.getValue().getStartjahr());
-        endjahrColumn.setCellValueFactory(e -> e.getValue().getEndjahr());
+        startjahrColumn.setCellValueFactory(e -> e.getValue().getStartJahr());
+        endjahrColumn.setCellValueFactory(e -> e.getValue().getEndJahr());
 
         hBox.getChildren().addAll(playerTableView, vBoxright);
         this.getChildren().addAll(toolBar, hBox);
     }
 
     private void setupEventHandlers() {
+        playerTableView.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> model.showPlayerDetails(newValue));
         buttonAddPlayer.setOnAction(e -> model.addPlayer());
         buttonRemovePlayer.setOnAction(e -> model.removePlayer());
         buttonSaveData.setOnAction(e -> model.saveData());
