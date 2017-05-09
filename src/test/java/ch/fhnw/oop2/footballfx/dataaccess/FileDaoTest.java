@@ -36,10 +36,22 @@ public class FileDaoTest {
 
         String row = "something";
         fileRows.add(row);
-        fileDao.saveFile(Paths.get("player.csv"), fileRows.stream());
+
+        fileDao.saveFile((Paths.get("player.csv")), fileRows.stream());
 
         Stream<String> updatedData = fileDao.readFile(Paths.get("player.csv"));
         List<String> updatedFileRows = updatedData.collect(Collectors.toList());
         assertTrue(updatedFileRows.contains(row));
+    }
+
+    @Test(expected = FileAccessException.class)
+    public void failSaveFile() throws FileAccessException, IOException {
+        Stream<String> data = fileDao.readFile(Paths.get("player.csv"));
+        List<String> fileRows = data.collect(Collectors.toList());
+
+        String row = "something";
+        fileRows.add(row);
+
+        fileDao.saveFile((Paths.get("notExistingFile.csv")), fileRows.stream());
     }
 }
