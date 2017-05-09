@@ -15,6 +15,7 @@ public class Player {
     private final StringProperty fifa = new SimpleStringProperty();
     private final StringProperty rsssf = new SimpleStringProperty();
     private final StringProperty startjahr = new SimpleStringProperty();
+    private final StringProperty endjahr = new SimpleStringProperty();
 
     public StringProperty getName() {
         return name;
@@ -59,4 +60,49 @@ public class Player {
     public StringProperty getEndjahr() {
         return endjahr;
     }
+
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate.set(birthDate);
+    }
+
+    public void setCountry(String country) {
+        this.country.set(country);
+    }
+
+    public void setVerband(String verband) {
+        this.verband.set(verband);
+    }
+
+    public void setPosition(String position) {
+        this.position.set(position);
+    }
+
+    public void setHundertesSpiel(String hundertesSpiel) {
+        this.hundertesSpiel.set(hundertesSpiel);
+    }
+
+    public void setGegen(String gegen) {
+        this.gegen.set(gegen);
+    }
+
+    public void setFifa(String fifa) {
+        this.fifa.set(fifa);
+    }
+
+    public void setRsssf(String rsssf) {
+        this.rsssf.set(rsssf);
+    }
+
+    public void setStartjahr(String startjahr) {
+        this.startjahr.set(startjahr);
+    }
+
+    public void setEndjahr(String endjahr) {
+        this.endjahr.set(endjahr);
+    }
+
 }
