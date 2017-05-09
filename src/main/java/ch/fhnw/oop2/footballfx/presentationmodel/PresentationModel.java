@@ -2,8 +2,6 @@ package ch.fhnw.oop2.footballfx.presentationmodel;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Stream;
 
 import ch.fhnw.oop2.footballfx.dataacess.FileAccessException;
@@ -111,31 +109,13 @@ public class PresentationModel {
     public void addPlayer() {
     }
 
-    public void removePlayer() {
+    public void removePlayer(Player player) {
 
+        data.remove(player);
     }
 
     public void saveData() {
-        try {
-            fileDao.saveFile(DATA_SOURCE, getFormatedData().stream());
-        } catch (FileAccessException e) {
-            e.printStackTrace();
-        }
-    }
 
-    private List<String> getFormatedData() {
-        List<String> rows = new ArrayList<>();
-        data.forEach(row -> {
-            /*
-             * StringBuilder sb = new StringBuilder();
-             * row.forEach(element -> {
-             * sb.append(element).append(";");
-             * });
-             * rows.add(sb.toString());
-             */
-        });
-
-        return rows;
     }
 
     public void undoAction() {

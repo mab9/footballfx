@@ -2,6 +2,7 @@ package ch.fhnw.oop2.footballfx.view;
 
 import ch.fhnw.oop2.footballfx.presentationmodel.Player;
 import ch.fhnw.oop2.footballfx.presentationmodel.PresentationModel;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -282,7 +283,19 @@ public class ApplicationUI extends VBox {
         playerTableView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> model.showPlayerDetails(newValue));
         buttonAddPlayer.setOnAction(e -> model.addPlayer());
-        buttonRemovePlayer.setOnAction(e -> model.removePlayer());
+        buttonRemovePlayer.setOnAction(e -> {
+            int selectedIndex = playerTableView.getSelectionModel().getSelectedIndex();
+            if (selectedIndex >= 0) {
+                playerTableView.getItems().remove(selectedIndex);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("No Selection");
+                alert.setHeaderText("No player selected");
+                alert.setContentText("Please select a player in the table.");
+                alert.showAndWait();
+            }
+
+        });
         buttonSaveData.setOnAction(e -> model.saveData());
         buttonUndoAction.setOnAction(e -> model.undoAction());
         buttonRedoAction.setOnAction(e -> model.redoAction());
