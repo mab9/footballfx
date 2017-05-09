@@ -1,5 +1,6 @@
 package ch.fhnw.oop2.footballfx.presentationmodel;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +15,7 @@ import javafx.beans.property.StringProperty;
 
 public class PresentationModel {
 
+    private final Path DATA_SOURCE = Paths.get("player.csv");
     private final FileDao fileDao = new FileDao();
     private List<List<String>> data = new ArrayList<>();
 
@@ -40,9 +42,15 @@ public class PresentationModel {
         try {
             data = loadData();
         } catch (FileAccessException e) {
-            System.err.println("Could not load data");
+            System.err.println(e.getMessage());
+            System.exit(-1);
         }
-        initDefaultData(1);
+
+        try {
+            initDefaultData(1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new RuntimeException("Loaded Data are wrong formatted");
+        }
     }
 
     private void initDefaultData(int rowNumber) {
@@ -60,7 +68,7 @@ public class PresentationModel {
     }
 
     private List<List<String>> loadData() throws FileAccessException {
-        Stream<String> stream = fileDao.readFile(Paths.get("player.csv"));
+        Stream<String> stream = fileDao.readFile(DATA_SOURCE);
         List<List<String>> datas = new ArrayList<>();
 
         List<String> rows = stream.collect(Collectors.toList());
@@ -84,10 +92,27 @@ public class PresentationModel {
     }
 
     public void saveData() {
+        try {
+            fileDao.saveFile(DATA_SOURCE, getFormatedData().stream());
+        } catch (FileAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private List<String> getFormatedData() {
+        List<String> rows = new ArrayList<>();
+        data.forEach(row -> {
+            StringBuilder sb = new StringBuilder();
+            row.forEach(element -> {
+                sb.append(element).append(";");
+            });
+            rows.add(sb.toString());
+        });
+
+        return rows;
     }
 
     public void undoAction() {
-
     }
 
     public void redoAction() {

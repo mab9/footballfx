@@ -24,7 +24,7 @@ public class FileDaoTest {
         assertTrue(headerLine.contains("#Platz; Name;Geboren;"));
     }
 
-    @Test
+    @Test(expected = FileAccessException.class)
     public void failReadFileNotExisting() throws FileAccessException {
         fileDao.readFile(Paths.get("playerssssss.csv"));
     }

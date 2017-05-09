@@ -29,6 +29,10 @@ public class FileDao {
     public void saveFile(Path path, Stream<String> data) throws FileAccessException {
         try {
             Path relativePath = getRelativePathToResourceFolder(path);
+            if (!Files.isWritable(relativePath)) {
+                throw new FileAccessException(
+                        "Could not write data to file: " + path.getFileName() + ". No write access");
+            }
             Files.write(relativePath, (Iterable<String>) data::iterator);
         } catch (IOException e) {
             throw new FileAccessException("Could not write data to file: " + path.getFileName() + ".", e);
@@ -47,7 +51,7 @@ public class FileDao {
                     "Could not write data to file: " + path + ". File Path could not be resolved.");
         } catch (URISyntaxException | NullPointerException e) {
             throw new FileAccessException(
-                    "Could not write data to file: " + path.getFileName() + ". File does not exist in filesystem");
+                    "Could not write data to file: " + path.getFileName() + ". File does not exist.");
         }
     }
 }
