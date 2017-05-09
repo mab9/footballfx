@@ -12,18 +12,20 @@ import ch.fhnw.oop2.footballfx.dataacess.FileAccessException;
 import ch.fhnw.oop2.footballfx.dataacess.FileDao;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class PresentationModel {
 
     private final Path DATA_SOURCE = Paths.get("player.csv");
     private final FileDao fileDao = new FileDao();
-    private List<List<String>> data = new ArrayList<>();
+    private List<ObservableList<String>> data = FXCollections.observableArrayList();
 
     private final StringProperty applicationTitle = new SimpleStringProperty("JavaFX Application");
     private final StringProperty greeting = new SimpleStringProperty("Hello World!");
 
     private final StringProperty playerName = new SimpleStringProperty();
-    private final StringProperty playerGeboren = new SimpleStringProperty();
+    private final StringProperty playerBirthDate = new SimpleStringProperty();
     private final StringProperty playerCountry = new SimpleStringProperty();
     private final StringProperty playerVerband = new SimpleStringProperty();
     private final StringProperty playerPosition = new SimpleStringProperty();
@@ -55,7 +57,7 @@ public class PresentationModel {
 
     private void initDefaultData(int rowNumber) {
         playerName.set(data.get(rowNumber).get(1));
-        playerGeboren.set(data.get(rowNumber).get(2));
+        playerBirthDate.set(data.get(rowNumber).get(2));
         playerCountry.set(data.get(rowNumber).get(3));
         playerVerband.set(data.get(rowNumber).get(4));
         playerPosition.set(data.get(rowNumber).get(5));
@@ -67,14 +69,14 @@ public class PresentationModel {
         playerEndJahr.set(data.get(rowNumber).get(11));
     }
 
-    private List<List<String>> loadData() throws FileAccessException {
+    private List<ObservableList<String>> loadData() throws FileAccessException {
         Stream<String> stream = fileDao.readFile(DATA_SOURCE);
-        List<List<String>> datas = new ArrayList<>();
+        List<ObservableList<String>> datas = new ArrayList<>();
 
         List<String> rows = stream.collect(Collectors.toList());
         rows.forEach(row -> {
             String[] split = row.split(";");
-            List<String> columns = Arrays.asList(split);
+            ObservableList<String> columns = FXCollections.observableList(Arrays.asList(split));
             datas.add(columns);
         });
         return datas;
@@ -179,8 +181,8 @@ public class PresentationModel {
         return playerErstesSpiel;
     }
 
-    public StringProperty getPlayerGeboren() {
-        return playerGeboren;
+    public StringProperty getPlayerBirthDate() {
+        return playerBirthDate;
     }
 
     public StringProperty getPlayerPosition() {

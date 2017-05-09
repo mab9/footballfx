@@ -1,8 +1,10 @@
 package ch.fhnw.oop2.footballfx.view;
 
+import ch.fhnw.oop2.footballfx.presentationmodel.Player;
 import ch.fhnw.oop2.footballfx.presentationmodel.PresentationModel;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
@@ -21,7 +23,7 @@ public class ApplicationUI extends VBox {
     private Button buttonRedoAction;
     private Button buttonSaveData;
     private TextField search;
-    private TableView playerTableView;
+    private TableView<Player> playerTableView;
     private ImageView countryImageView;
     private ImageView teamImageView;
     private ToolBar toolBar;
@@ -35,7 +37,7 @@ public class ApplicationUI extends VBox {
     private TextField playerFifa;
     private TextField playerRSSSF;
     private TextField playerPosition;
-    private TextField playerGeboren;
+    private TextField playerBirthDate;
     private TextField playerHundertesSpiel;
     private TextField playerErstesSpiel;
     private TextField playerLetztesSpiel;
@@ -52,7 +54,7 @@ public class ApplicationUI extends VBox {
     private Label lblTextVerband;
     private Label lblTextSpieleFifa;
     private Label lblTextSpieleRSSSF;
-    private Label lblTextGeboren;
+    private Label lblTextBirthDate;
     private Label lblTextRang;
     private Label lblTextPosition;
     private Label lblTextHundertesSpiel;
@@ -92,11 +94,11 @@ public class ApplicationUI extends VBox {
         buttonSaveData = new Button();
         buttonUndoAction = new Button();
         buttonRedoAction = new Button();
-        buttonSaveData.setText("Save");
-        buttonAddPlayer.setText("+");
-        buttonRemovePlayer.setText("-");
-        buttonUndoAction.setText("<--");
-        buttonRedoAction.setText("-->");
+        buttonSaveData.setText("save data");
+        buttonAddPlayer.setText("add player");
+        buttonRemovePlayer.setText("remove player");
+        buttonUndoAction.setText("undo");
+        buttonRedoAction.setText("redo");
 
         // init Textfields
         search = new TextField();
@@ -123,7 +125,7 @@ public class ApplicationUI extends VBox {
         playerHundertesSpiel = new TextField();
         playerErstesSpiel = new TextField();
         playerRang = new Label();
-        playerGeboren = new TextField();
+        playerBirthDate = new TextField();
         playerPosition = new TextField();
         playerRang = new Label();
         playerRSSSF = new TextField();
@@ -135,7 +137,7 @@ public class ApplicationUI extends VBox {
         lblTextSpieleFifa = new Label();
         lblTextSpieleRSSSF = new Label();
         lblTextVerband = new Label();
-        lblTextGeboren = new Label();
+        lblTextBirthDate = new Label();
         lblTextRang = new Label();
         lblTextPosition = new Label();
         lblTextHundertesSpiel = new Label();
@@ -196,7 +198,7 @@ public class ApplicationUI extends VBox {
         gridBottom.add(playerErstesSpiel, 1, 5);
 
         // Column 2
-        gridBottom.add(lblTextGeboren, 2, 0);
+        gridBottom.add(lblTextBirthDate, 2, 0);
         gridBottom.add(lblTextPosition, 2, 1);
         gridBottom.add(lblTextRang, 2, 2);
         gridBottom.add(lblTextSpieleRSSSF, 2, 3);
@@ -204,7 +206,7 @@ public class ApplicationUI extends VBox {
         gridBottom.add(lblTextLetztesSpiel, 2, 5);
 
         // Column 3
-        gridBottom.add(playerGeboren, 3, 0);
+        gridBottom.add(playerBirthDate, 3, 0);
         gridBottom.add(playerPosition, 3, 1);
         gridBottom.add(playerRang, 3, 2);
         gridBottom.add(playerRSSSF, 3, 3);
@@ -228,11 +230,47 @@ public class ApplicationUI extends VBox {
         lblTextSpieleRSSSF.setText("Spiele (RSSSF)");
         lblTextHundertesSpiel.setText("100. Spiel");
         lblTextGegen.setText("gegen");
-        lblTextErstesSpiel.setText("erstes Spiel");
-        lblTextLetztesSpiel.setText("letztes Spiel");
-        lblTextGeboren.setText("geboren");
-        lblTextPosition.setText("position");
+        lblTextErstesSpiel.setText("Erstes Spiel");
+        lblTextLetztesSpiel.setText("Letztes Spiel");
+        lblTextBirthDate.setText("Geburtsdatum");
+        lblTextPosition.setText("Position");
         lblTextRang.setText("Rang");
+
+        TableColumn<Player, String> nameColumn = new TableColumn<>("Name");
+        TableColumn<Player, String> birthDateColumn = new TableColumn<>("Geburtsjahr");
+        TableColumn<Player, String> countryColumn = new TableColumn<>("Nationalität");
+        TableColumn<Player, String> verbandColumn = new TableColumn<>("Verband");
+        TableColumn<Player, String> positionColumn = new TableColumn<>("Position");
+        TableColumn<Player, String> hundertesSpielColumn = new TableColumn<>("100 Spiel");
+        TableColumn<Player, String> gegenColumn = new TableColumn<>("Gegen");
+        TableColumn<Player, String> fifaColumn = new TableColumn<>("Fifa");
+        TableColumn<Player, String> rsssfColumn = new TableColumn<>("RSSSF");
+        TableColumn<Player, String> startjahrColumn = new TableColumn<>("Start Jahr");
+        TableColumn<Player, String> endjahrColumn = new TableColumn<>("End Jahr");
+
+        playerTableView.getColumns().add(nameColumn);
+        playerTableView.getColumns().add(birthDateColumn);
+        playerTableView.getColumns().add(countryColumn);
+        playerTableView.getColumns().add(verbandColumn);
+        playerTableView.getColumns().add(positionColumn);
+        playerTableView.getColumns().add(hundertesSpielColumn);
+        playerTableView.getColumns().add(gegenColumn);
+        playerTableView.getColumns().add(fifaColumn);
+        playerTableView.getColumns().add(rsssfColumn);
+        playerTableView.getColumns().add(startjahrColumn);
+        playerTableView.getColumns().add(endjahrColumn);
+
+        nameColumn.setCellValueFactory(e -> e.getValue().getName());
+        birthDateColumn.setCellValueFactory(e -> e.getValue().getBirthDate());
+        countryColumn.setCellValueFactory(e -> e.getValue().getCountry());
+        verbandColumn.setCellValueFactory(e -> e.getValue().getVerband());
+        positionColumn.setCellValueFactory(e -> e.getValue().getPosition());
+        hundertesSpielColumn.setCellValueFactory(e -> e.getValue().getHundertesSpiel());
+        gegenColumn.setCellValueFactory(e -> e.getValue().getGegen());
+        fifaColumn.setCellValueFactory(e -> e.getValue().getFifa());
+        rsssfColumn.setCellValueFactory(e -> e.getValue().getRsssf());
+        startjahrColumn.setCellValueFactory(e -> e.getValue().getStartjahr());
+        endjahrColumn.setCellValueFactory(e -> e.getValue().getEndjahr());
 
         hBox.getChildren().addAll(playerTableView, vBoxright);
         this.getChildren().addAll(toolBar, hBox);
@@ -247,9 +285,11 @@ public class ApplicationUI extends VBox {
     }
 
     private void setupValueChangedListeners() {
+
     }
 
     private void setupBindings() {
+
         playerName.textProperty().bindBidirectional(model.getPlayerName());
         playerCountry.textProperty().bindBidirectional(model.getPlayerCountry());
         playerLaenderspiele.textProperty().bindBidirectional(model.getPlayerLaenderspiele());
@@ -260,7 +300,7 @@ public class ApplicationUI extends VBox {
         playerRSSSF.textProperty().bindBidirectional(model.getPlayerRSSSF());
         playerHundertesSpiel.textProperty().bindBidirectional(model.getPlayerHundertesSpiel());
         playerErstesSpiel.textProperty().bindBidirectional(model.getPlayerErstesSpiel());
-        playerGeboren.textProperty().bindBidirectional(model.getPlayerGeboren());
+        playerBirthDate.textProperty().bindBidirectional(model.getPlayerBirthDate());
         playerPosition.textProperty().bindBidirectional(model.getPlayerPosition());
         playerGegen.textProperty().bindBidirectional(model.getPlayerGegen());
         playerLetztesSpiel.textProperty().bindBidirectional(model.getPlayerLetztesSpiel());
