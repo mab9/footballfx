@@ -80,15 +80,6 @@ public class ApplicationUI extends VBox {
 
     private void initializeControls() {
 
-        /*
-         * Controls
-         * text* = Labels, welche Statischen text darstellen, wie z.B "Name","Verband" etc.
-         * over* = Labels, welche in der Overview verwendet werden und dynamisch nach Auswahl sich anpassen
-         * player* = TextFields, welche zur Eingabe im Editorbereich verwendet werden. Ausnahme: PlayerRand = Label,
-         * weil nicht vom User veränderbar,
-         * 
-         * 
-         */
         // Init buttons
         buttonAddPlayer = new Button();
         buttonRemovePlayer = new Button();
