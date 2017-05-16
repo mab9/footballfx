@@ -1,3 +1,6 @@
 [submodule "src/main/java/ch/fhnw/oop2/footballfx/resources"]
 	path = src/main/java/ch/fhnw/oop2/footballfx/resources
 	url = git@github.com:FHNW-OOP2/football-resources.git
+[submodule "football-resources"]
+	path = football-resources
+	url = https://github.com/FHNW-OOP2/football-resources.git

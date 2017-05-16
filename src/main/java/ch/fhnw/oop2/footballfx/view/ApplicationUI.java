@@ -43,7 +43,7 @@ public class ApplicationUI extends VBox {
     private TextField playerErstesSpiel;
     private TextField playerLetztesSpiel;
     private TextField playerVerband;
-    private Label playerRang;
+    private Label playerNumber;
     private Label lblTextName;
     private Label lblOverName;
     private Label lblOverLand;
@@ -116,11 +116,9 @@ public class ApplicationUI extends VBox {
         playerRSSSF = new TextField();
         playerHundertesSpiel = new TextField();
         playerErstesSpiel = new TextField();
-        playerRang = new Label();
+        playerNumber = new Label();
         playerBirthDate = new TextField();
         playerPosition = new TextField();
-        playerRang = new Label();
-        playerRSSSF = new TextField();
         playerGegen = new TextField();
         playerLetztesSpiel = new TextField();
         lblTextLaenderspiele = new Label();
@@ -200,7 +198,7 @@ public class ApplicationUI extends VBox {
         // Column 3
         gridBottom.add(playerBirthDate, 3, 0);
         gridBottom.add(playerPosition, 3, 1);
-        gridBottom.add(playerRang, 3, 2);
+        gridBottom.add(playerNumber, 3, 2);
         gridBottom.add(playerRSSSF, 3, 3);
         gridBottom.add(playerGegen, 3, 4);
         gridBottom.add(playerLetztesSpiel, 3, 5);
@@ -228,6 +226,7 @@ public class ApplicationUI extends VBox {
         lblTextPosition.setText("Position");
         lblTextRang.setText("Rang");
 
+        TableColumn<Player, String> numberColumn = new TableColumn<>("Rank");
         TableColumn<Player, String> nameColumn = new TableColumn<>("Name");
         TableColumn<Player, String> birthDateColumn = new TableColumn<>("Geburtsjahr");
         TableColumn<Player, String> countryColumn = new TableColumn<>("Nationalität");
@@ -242,6 +241,7 @@ public class ApplicationUI extends VBox {
 
         playerTableView.getItems().setAll(model.getData());
 
+        playerTableView.getColumns().add(numberColumn);
         playerTableView.getColumns().add(nameColumn);
         playerTableView.getColumns().add(birthDateColumn);
         playerTableView.getColumns().add(countryColumn);
@@ -297,14 +297,14 @@ public class ApplicationUI extends VBox {
     }
 
     private void setupBindings() {
+        playerNumber.textProperty().bindBidirectional(model.getPlayerNumber());
         playerName.textProperty().bindBidirectional(model.getPlayerName());
         playerCountry.textProperty().bindBidirectional(model.getPlayerCountry());
         playerLaenderspiele.textProperty().bindBidirectional(model.getPlayerLaenderspiele());
-        playerStartJahr.textProperty().bindBidirectional(model.getPlayerStartJahr());
-        playerEndJahr.textProperty().bindBidirectional(model.getPlayerEndJahr());
         playerVerband.textProperty().bindBidirectional(model.getPlayerVerband());
         playerFifa.textProperty().bindBidirectional(model.getPlayerFifa());
         playerRSSSF.textProperty().bindBidirectional(model.getPlayerRSSSF());
+        playerNumber.textProperty().bindBidirectional(model.getPlayerNumber());
         playerHundertesSpiel.textProperty().bindBidirectional(model.getPlayerHundertesSpiel());
         playerErstesSpiel.textProperty().bindBidirectional(model.getPlayerErstesSpiel());
         playerBirthDate.textProperty().bindBidirectional(model.getPlayerBirthDate());

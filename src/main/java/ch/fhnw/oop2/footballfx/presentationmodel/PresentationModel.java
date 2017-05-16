@@ -1,15 +1,15 @@
 package ch.fhnw.oop2.footballfx.presentationmodel;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.stream.Stream;
-
 import ch.fhnw.oop2.footballfx.dataacess.FileAccessException;
 import ch.fhnw.oop2.footballfx.dataacess.FileDao;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 public class PresentationModel {
 
@@ -20,6 +20,7 @@ public class PresentationModel {
     private final StringProperty applicationTitle = new SimpleStringProperty("JavaFX Application");
     private final StringProperty greeting = new SimpleStringProperty("Hello World!");
 
+    private final StringProperty playerNumber = new SimpleStringProperty();
     private final StringProperty playerName = new SimpleStringProperty();
     private final StringProperty playerBirthDate = new SimpleStringProperty();
     private final StringProperty playerCountry = new SimpleStringProperty();
@@ -29,9 +30,6 @@ public class PresentationModel {
     private final StringProperty playerGegen = new SimpleStringProperty();
     private final StringProperty playerFifa = new SimpleStringProperty();
     private final StringProperty playerRSSSF = new SimpleStringProperty();
-    private final StringProperty playerStartJahr = new SimpleStringProperty();
-    private final StringProperty playerEndJahr = new SimpleStringProperty();
-
     private final StringProperty playerLaenderspiele = new SimpleStringProperty();
     private final StringProperty playerErstesSpiel = new SimpleStringProperty();
     private final StringProperty playerLetztesSpiel = new SimpleStringProperty();
@@ -58,17 +56,18 @@ public class PresentationModel {
         stream.skip(1).forEach(row -> {
             String[] splitedData = row.split(";");
             Player player = new Player();
-            player.setName(splitedData[0]);
-            player.setBirthDate(splitedData[1]);
-            player.setCountry(splitedData[2]);
-            player.setVerband(splitedData[3]);
-            player.setPosition(splitedData[4]);
-            player.setHundertesSpiel(splitedData[5]);
-            player.setGegen(splitedData[6]);
-            player.setFifa(splitedData[7]);
-            player.setRsssf(splitedData[8]);
-            player.setStartjahr(splitedData[9]);
-            player.setEndjahr(splitedData[10]);
+            player.setName(splitedData[1]);
+            player.setBirthDate(splitedData[2]);
+            player.setCountry(splitedData[3]);
+            player.setVerband(splitedData[4]);
+            player.setPosition(splitedData[5]);
+            player.setHundertesSpiel(splitedData[6]);
+            player.setGegen(splitedData[7]);
+            player.setFifa(splitedData[8]);
+            player.setRsssf(splitedData[9]);
+            player.setNumber(splitedData[0]);
+            player.setStartjahr(splitedData[10]);
+            player.setEndjahr(splitedData[11]);
             players.add(player);
         });
         return players;
@@ -85,8 +84,9 @@ public class PresentationModel {
             playerGegen.set(player.getGegen().get());
             playerFifa.set(player.getFifa().get());
             playerRSSSF.set(player.getRsssf().get());
-            playerStartJahr.set(player.getStartJahr().get());
-            playerEndJahr.set(player.getEndJahr().get());
+            playerNumber.set(player.getNumber().get());
+            playerErstesSpiel.set(player.getStartJahr().get());
+            playerLetztesSpiel.set(player.getEndJahr().get());
         } else {
             playerName.set("");
             playerBirthDate.set("");
@@ -97,8 +97,9 @@ public class PresentationModel {
             playerGegen.set("");
             playerFifa.set("");
             playerRSSSF.set("");
-            playerStartJahr.set("");
-            playerEndJahr.set("");
+            playerNumber.set("");
+            playerErstesSpiel.set("");
+            playerLetztesSpiel.set("");
         }
     }
 
@@ -145,6 +146,8 @@ public class PresentationModel {
         this.greeting.set(greeting);
     }
 
+    public StringProperty getPlayerNumber() {return playerNumber; }
+
     public StringProperty getPlayerName() {
         return playerName;
     }
@@ -155,14 +158,6 @@ public class PresentationModel {
 
     public StringProperty getPlayerLaenderspiele() {
         return playerLaenderspiele;
-    }
-
-    public StringProperty getPlayerStartJahr() {
-        return playerStartJahr;
-    }
-
-    public StringProperty getPlayerEndJahr() {
-        return playerEndJahr;
     }
 
     public StringProperty getPlayerVerband() {

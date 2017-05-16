@@ -14,6 +14,7 @@ public class Player {
     private final StringProperty gegen = new SimpleStringProperty();
     private final StringProperty fifa = new SimpleStringProperty();
     private final StringProperty rsssf = new SimpleStringProperty();
+    private final StringProperty number = new SimpleStringProperty();
     private final StringProperty startjahr = new SimpleStringProperty();
     private final StringProperty endjahr = new SimpleStringProperty();
 
@@ -103,5 +104,12 @@ public class Player {
 
     public void setEndjahr(String endjahr) {
         this.endjahr.set(endjahr);
+    }
+
+    public void setNumber(String number) { this.number.set(number);
+    }
+
+    public StringProperty getNumber() {
+        return number;
     }
 }
