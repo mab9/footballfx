@@ -5,7 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ch.mabru.footballFx</groupId>
+    <packaging>pom</packaging>
     <name>Football FX</name>
+    <modules>
+        <module>footballfxcore</module>
+    </modules>
     <artifactId>footballplayerfx-marcantoineBruelhart</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -16,7 +20,6 @@
             <version>4.12</version>
         </dependency>
     </dependencies>
-
 
 
     <build>
