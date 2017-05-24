@@ -1,28 +1,30 @@
 package ch.fhnw.oop2.footballfx.view;
 
+import ch.fhnw.oop2.footballfx.dataacess.FileAccessException;
 import ch.fhnw.oop2.footballfx.presentationmodel.Player;
 import ch.fhnw.oop2.footballfx.presentationmodel.PresentationModel;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToolBar;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class ApplicationUI extends VBox {
 
     private final PresentationModel model;
 
+    private ComboBox comboBoxLanguges;
     private Button buttonAddPlayer;
     private Button buttonRemovePlayer;
     private Button buttonUndoAction;
     private Button buttonRedoAction;
     private Button buttonSaveData;
+    private Button buttonChangeLanguage;
     private TextField search;
     private TableView<Player> playerTableView;
     private ImageView countryImageView;
@@ -62,6 +64,21 @@ public class ApplicationUI extends VBox {
     private Label lblTextGegen;
     private Label lblTextErstesSpiel;
     private Label lblTextLetztesSpiel;
+    private Locale localeDE;
+    private Locale localeEN;
+    private TableColumn<Player, String> numberColumn;
+    private TableColumn<Player, String> nameColumn;
+    private TableColumn<Player, String> birthDateColumn;
+    private TableColumn<Player, String> countryColumn ;
+    private TableColumn<Player, String> verbandColumn ;
+    private TableColumn<Player, String> positionColumn ;
+    private TableColumn<Player, String> hundertesSpielColumn ;
+    private TableColumn<Player, String> gegenColumn ;
+    private TableColumn<Player, String> fifaColumn ;
+    private TableColumn<Player, String> rsssfColumn ;
+    private TableColumn<Player, String> startjahrColumn ;
+    private TableColumn<Player, String> endjahrColumn ;
+
 
     public ApplicationUI(PresentationModel model) {
         this.model = model;
@@ -71,6 +88,7 @@ public class ApplicationUI extends VBox {
         setupEventHandlers();
         setupValueChangedListeners();
         setupBindings();
+        setTextLocalized();
     }
 
     private void initializeSelf() {
@@ -80,23 +98,27 @@ public class ApplicationUI extends VBox {
 
     private void initializeControls() {
 
+        localeDE = new Locale("en","US");
+        localeEN = new Locale("de","DE");
         // Init buttons
         buttonAddPlayer = new Button();
         buttonRemovePlayer = new Button();
         buttonSaveData = new Button();
         buttonUndoAction = new Button();
         buttonRedoAction = new Button();
-        buttonSaveData.setText("save data");
-        buttonAddPlayer.setText("add player");
-        buttonRemovePlayer.setText("remove player");
-        buttonUndoAction.setText("undo");
-        buttonRedoAction.setText("redo");
+        buttonChangeLanguage = new Button();
+
 
         // init Textfields
         search = new TextField();
 
         // init Tableview
         playerTableView = new TableView();
+        playerTableView.setEditable(true);
+
+        // init Combobox
+        comboBoxLanguges = new ComboBox();
+
 
         // init Imageview
         countryImageView = new ImageView();
@@ -104,6 +126,9 @@ public class ApplicationUI extends VBox {
 
         // init toolbar
         toolBar = new ToolBar();
+
+        // init Languagedropdown in toolbar
+        comboBoxLanguges = new ComboBox();
 
         // init Labels
         playerName = new TextField();
@@ -141,6 +166,20 @@ public class ApplicationUI extends VBox {
         lblOverStartJahr = new Label();
         lblOverLaenderspiele = new Label();
 
+        numberColumn = new TableColumn<>();
+        nameColumn = new TableColumn<>();
+        birthDateColumn = new TableColumn<>();
+        countryColumn  = new TableColumn<>();
+        verbandColumn  = new TableColumn<>();
+        positionColumn  = new TableColumn<>();
+        hundertesSpielColumn  = new TableColumn<>();
+        gegenColumn  = new TableColumn<>();
+        fifaColumn  = new TableColumn<>();
+        rsssfColumn  = new TableColumn<>();
+        startjahrColumn  = new TableColumn<>();
+        endjahrColumn  = new TableColumn<>();
+
+
         // Set Layout Gaps
     }
 
@@ -160,7 +199,7 @@ public class ApplicationUI extends VBox {
         // Add toolbar
         // this.getChildren().add(toolBar);
         toolBar.getItems().addAll(buttonSaveData, buttonAddPlayer, buttonRemovePlayer, buttonUndoAction,
-                buttonRedoAction);
+                buttonRedoAction,comboBoxLanguges);
         // Add Grid
         gridTop.add(lblOverName, 0, 0, 4, 1);
         gridTop.add(lblOverLand, 0, 1);
@@ -203,42 +242,6 @@ public class ApplicationUI extends VBox {
         gridBottom.add(playerGegen, 3, 4);
         gridBottom.add(playerLetztesSpiel, 3, 5);
 
-        // Text for Overview
-        lblOverName.setText("Ahmed Hassan");
-        lblOverLand.setText("Ägypten");
-        lblOverLaenderspiele.setText("184");
-        lblTextLaenderspiele.setText("Länderspiele");
-        lblOverStartJahr.setText("2020");
-        lblTextBis.setText("bis");
-        lblOverEndJahr.setText("2021");
-
-        // Text for Editor
-        lblTextName.setText("Name");
-        lblTextLand.setText("Land");
-        lblTextVerband.setText("Verband");
-        lblTextSpieleFifa.setText("Spiele (FIFA)");
-        lblTextSpieleRSSSF.setText("Spiele (RSSSF)");
-        lblTextHundertesSpiel.setText("100. Spiel");
-        lblTextGegen.setText("gegen");
-        lblTextErstesSpiel.setText("Erstes Spiel");
-        lblTextLetztesSpiel.setText("Letztes Spiel");
-        lblTextBirthDate.setText("Geburtsdatum");
-        lblTextPosition.setText("Position");
-        lblTextRang.setText("Rang");
-
-        TableColumn<Player, String> numberColumn = new TableColumn<>("Rank");
-        TableColumn<Player, String> nameColumn = new TableColumn<>("Name");
-        TableColumn<Player, String> birthDateColumn = new TableColumn<>("Geburtsjahr");
-        TableColumn<Player, String> countryColumn = new TableColumn<>("Nationalität");
-        TableColumn<Player, String> verbandColumn = new TableColumn<>("Verband");
-        TableColumn<Player, String> positionColumn = new TableColumn<>("Position");
-        TableColumn<Player, String> hundertesSpielColumn = new TableColumn<>("100 Spiel");
-        TableColumn<Player, String> gegenColumn = new TableColumn<>("Gegen");
-        TableColumn<Player, String> fifaColumn = new TableColumn<>("Fifa");
-        TableColumn<Player, String> rsssfColumn = new TableColumn<>("RSSSF");
-        TableColumn<Player, String> startjahrColumn = new TableColumn<>("Start Jahr");
-        TableColumn<Player, String> endjahrColumn = new TableColumn<>("End Jahr");
-
         playerTableView.getItems().setAll(model.getData());
 
         playerTableView.getColumns().add(numberColumn);
@@ -254,6 +257,7 @@ public class ApplicationUI extends VBox {
         playerTableView.getColumns().add(startjahrColumn);
         playerTableView.getColumns().add(endjahrColumn);
 
+        numberColumn.setCellValueFactory(e -> e.getValue().getNumber());
         nameColumn.setCellValueFactory(e -> e.getValue().getName());
         birthDateColumn.setCellValueFactory(e -> e.getValue().getBirthDate());
         countryColumn.setCellValueFactory(e -> e.getValue().getCountry());
@@ -266,8 +270,65 @@ public class ApplicationUI extends VBox {
         startjahrColumn.setCellValueFactory(e -> e.getValue().getStartJahr());
         endjahrColumn.setCellValueFactory(e -> e.getValue().getEndJahr());
 
+        ObservableList<Locale> options =
+                FXCollections.observableArrayList(
+                    localeDE,
+                    localeEN
+                );
+        comboBoxLanguges.setItems(options);
+        comboBoxLanguges.getSelectionModel().select(0);
+        comboBoxLanguges.setOnAction((event) -> {
+            setTextLocalized();
+        });
         hBox.getChildren().addAll(playerTableView, vBoxright);
         this.getChildren().addAll(toolBar, hBox);
+    }
+    private void setTextLocalized(){
+        // Text for Overview
+        String lStringsplit[] = comboBoxLanguges.getValue().toString().split("_");
+        Locale locale = new Locale(lStringsplit[0].toString(),lStringsplit[1].toString());
+        ResourceBundle messages = ResourceBundle.getBundle("ch.fhnw.oop2.footballfx.MessegesBundle", locale);
+        lblOverName.setText("");
+        lblOverLand.setText("");
+        lblOverLaenderspiele.setText("");
+        lblTextLaenderspiele.setText(messages.getString("internationalgames"));
+        lblOverStartJahr.setText("");
+        lblTextBis.setText(messages.getString("to"));
+        lblOverEndJahr.setText("");
+
+        // Text for Editor
+        lblTextName.setText(messages.getString("name"));
+        lblTextLand.setText(messages.getString("nationality"));
+        lblTextVerband.setText(messages.getString("association"));
+        lblTextSpieleFifa.setText(messages.getString("fifa"));
+        lblTextSpieleRSSSF.setText(messages.getString("rsssf"));
+        lblTextHundertesSpiel.setText(messages.getString("100game"));
+        lblTextGegen.setText(messages.getString("against"));
+        lblTextErstesSpiel.setText(messages.getString("firstgame"));
+        lblTextLetztesSpiel.setText(messages.getString("lastgame"));
+        lblTextBirthDate.setText(messages.getString("birthdate"));
+        lblTextPosition.setText(messages.getString("position"));
+        lblTextRang.setText(messages.getString("rang"));
+
+        numberColumn.setText(messages.getString("rang"));
+        nameColumn.setText(messages.getString("name"));
+        birthDateColumn.setText(messages.getString("birthyear"));
+        countryColumn.setText(messages.getString("nationality"));
+        verbandColumn.setText(messages.getString("association"));
+        positionColumn.setText(messages.getString("position"));
+        hundertesSpielColumn.setText(messages.getString("100game"));
+        gegenColumn.setText(messages.getString("against"));
+        fifaColumn.setText(messages.getString("fifa"));
+        rsssfColumn.setText(messages.getString("rsssf"));
+        startjahrColumn.setText(messages.getString("firstgame"));
+        endjahrColumn.setText(messages.getString("lastgame"));
+
+        buttonSaveData.setText(messages.getString("save"));
+        buttonAddPlayer.setText(messages.getString("addplayer"));
+        buttonRemovePlayer.setText(messages.getString("removeplayer"));
+        buttonUndoAction.setText(messages.getString("undo"));
+        buttonRedoAction.setText(messages.getString("redo"));
+
     }
 
     private void setupEventHandlers() {
@@ -287,7 +348,13 @@ public class ApplicationUI extends VBox {
             }
 
         });
-        buttonSaveData.setOnAction(e -> model.saveData());
+        buttonSaveData.setOnAction(e -> {
+            try {
+                model.saveData();
+            } catch (FileAccessException e1) {
+                e1.printStackTrace();
+            }
+        });
         buttonUndoAction.setOnAction(e -> model.undoAction());
         buttonRedoAction.setOnAction(e -> model.redoAction());
     }
@@ -311,5 +378,13 @@ public class ApplicationUI extends VBox {
         playerPosition.textProperty().bindBidirectional(model.getPlayerPosition());
         playerGegen.textProperty().bindBidirectional(model.getPlayerGegen());
         playerLetztesSpiel.textProperty().bindBidirectional(model.getPlayerLetztesSpiel());
+
+        lblOverName.textProperty().bindBidirectional(model.getPlayerName());
+        lblOverLand.textProperty().bindBidirectional(model.getPlayerCountry());
+        lblOverStartJahr.textProperty().bindBidirectional(model.getPlayerErstesSpiel());
+        lblOverEndJahr.textProperty().bindBidirectional(model.getPlayerLetztesSpiel());
+     //   countryImageView.imageProperty().bindBidirectional(model.getCountryImage());
+     //   teamImageView.imageProperty().bindBidirectional(model.getTeamImage());
+
     }
 }

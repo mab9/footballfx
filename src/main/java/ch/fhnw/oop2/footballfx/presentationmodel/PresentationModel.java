@@ -33,6 +33,9 @@ public class PresentationModel {
     private final StringProperty playerLaenderspiele = new SimpleStringProperty();
     private final StringProperty playerErstesSpiel = new SimpleStringProperty();
     private final StringProperty playerLetztesSpiel = new SimpleStringProperty();
+    //private final Property<Image> countryImage = new Property<Image>();
+    //private final Property<Image> teamImage = new Property<Image>();
+
 
     public PresentationModel() {
         try {
@@ -87,6 +90,9 @@ public class PresentationModel {
             playerNumber.set(player.getNumber().get());
             playerErstesSpiel.set(player.getStartJahr().get());
             playerLetztesSpiel.set(player.getEndJahr().get());
+
+
+
         } else {
             playerName.set("");
             playerBirthDate.set("");
@@ -115,7 +121,8 @@ public class PresentationModel {
         data.remove(player);
     }
 
-    public void saveData() {
+    public void saveData() throws FileAccessException{
+        //fileDao.saveFile("player.csv",);
 
     }
 
@@ -195,4 +202,15 @@ public class PresentationModel {
     public StringProperty getPlayerLetztesSpiel() {
         return playerLetztesSpiel;
     }
+
+  /*  public Property<Image> getTeamImage() {
+        return null;
+        //return teamImage;
+    }
+
+    public Property<Image> getCountryImage() {
+        return
+                null;
+        //countryImage;
+    } */
 }
