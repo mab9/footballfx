@@ -11,10 +11,6 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.stream.Stream;
-
 public class PresentationModel {
 
     private final Path DATA_SOURCE = Paths.get("player.csv");
@@ -114,24 +110,6 @@ public class PresentationModel {
         return applicationTitle.get();
     }
 
-    public void addPlayer() {
-    }
-
-    public void removePlayer(Player player) {
-
-        data.remove(player);
-    }
-
-    public void saveData() {
-
-    }
-
-    public void undoAction() {
-    }
-
-    public void redoAction() {
-
-    }
 
     public StringProperty applicationTitleProperty() {
         return applicationTitle;
