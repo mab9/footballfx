@@ -1,15 +1,15 @@
 package ch.fhnw.oop2.footballfx.client.view;
 
-import ch.fhnw.oop2.footballfx.dataacess.FileAccessException;
-import ch.fhnw.oop2.footballfx.presentationmodel.Player;
-import ch.fhnw.oop2.footballfx.presentationmodel.PresentationModel;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import ch.fhnw.oop2.footballfx.client.presentationmodel.Player;
 import ch.fhnw.oop2.footballfx.client.presentationmodel.PresentationModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -19,9 +19,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class ApplicationUI extends VBox {
 
@@ -296,7 +293,7 @@ public class ApplicationUI extends VBox {
         // Text for Overview
         String lStringsplit[] = comboBoxLanguges.getValue().toString().split("_");
         Locale locale = new Locale(lStringsplit[0].toString(),lStringsplit[1].toString());
-        ResourceBundle messages = ResourceBundle.getBundle("ch.fhnw.oop2.footballfx.MessegesBundle", locale);
+        ResourceBundle messages = ResourceBundle.getBundle("MessegesBundle", locale);
         lblOverName.setText("");
         lblOverLand.setText("");
         lblOverLaenderspiele.setText("");
@@ -358,11 +355,7 @@ public class ApplicationUI extends VBox {
 
         });
         buttonSaveData.setOnAction(e -> {
-            try {
-                model.saveData();
-            } catch (FileAccessException e1) {
-                e1.printStackTrace();
-            }
+            model.saveData();
         });
         buttonUndoAction.setOnAction(e -> model.undoAction());
         buttonRedoAction.setOnAction(e -> model.redoAction());
