@@ -27,8 +27,6 @@ public class ApplicationUI extends VBox {
     private ComboBox comboBoxLanguges;
     private Button buttonAddPlayer;
     private Button buttonRemovePlayer;
-    private Button buttonUndoAction;
-    private Button buttonRedoAction;
     private Button buttonSaveData;
     private Button buttonChangeLanguage;
     private TextField search;
@@ -106,37 +104,26 @@ public class ApplicationUI extends VBox {
 
         localeDE = new Locale("en","US");
         localeEN = new Locale("de","DE");
-        // Init buttons
+
         buttonAddPlayer = new Button();
         buttonRemovePlayer = new Button();
         buttonSaveData = new Button();
-        buttonUndoAction = new Button();
-        buttonRedoAction = new Button();
         buttonChangeLanguage = new Button();
 
-
-        // init Textfields
         search = new TextField();
 
-        // init Tableview
         playerTableView = new TableView();
         playerTableView.setEditable(true);
 
-        // init Combobox
         comboBoxLanguges = new ComboBox();
 
-
-        // init Imageview
         countryImageView = new ImageView();
         teamImageView = new ImageView();
 
-        // init toolbar
         toolBar = new ToolBar();
 
-        // init Languagedropdown in toolbar
         comboBoxLanguges = new ComboBox();
 
-        // init Labels
         playerName = new TextField();
         playerCountry = new TextField();
         playerLaenderspiele = new TextField();
@@ -184,9 +171,6 @@ public class ApplicationUI extends VBox {
         rsssfColumn  = new TableColumn<>();
         startjahrColumn  = new TableColumn<>();
         endjahrColumn  = new TableColumn<>();
-
-
-        // Set Layout Gaps
     }
 
     private void layoutControls() {
@@ -203,9 +187,8 @@ public class ApplicationUI extends VBox {
         gridTop.setVgap(3);
 
         // Add toolbar
-        // this.getChildren().add(toolBar);
-        toolBar.getItems().addAll(buttonSaveData, buttonAddPlayer, buttonRemovePlayer, buttonUndoAction,
-                buttonRedoAction,comboBoxLanguges);
+        toolBar.getItems().addAll(buttonSaveData, buttonAddPlayer, buttonRemovePlayer, comboBoxLanguges);
+
         // Add Grid
         gridTop.add(lblOverName, 0, 0, 4, 1);
         gridTop.add(lblOverLand, 0, 1);
@@ -217,14 +200,13 @@ public class ApplicationUI extends VBox {
         gridTop.add(lblTextBis, 1, 3);
         gridTop.add(lblOverEndJahr, 2, 3);
 
-        // Column 0
         gridBottom.add(lblTextName, 0, 0);
         gridBottom.add(lblTextLand, 0, 1);
         gridBottom.add(lblTextVerband, 0, 2);
         gridBottom.add(lblTextSpieleFifa, 0, 3);
         gridBottom.add(lblTextHundertesSpiel, 0, 4);
         gridBottom.add(lblTextErstesSpiel, 0, 5);
-        // Column 1
+
         gridBottom.add(playerName, 1, 0);
         gridBottom.add(playerCountry, 1, 1);
         gridBottom.add(playerVerband, 1, 2);
@@ -332,15 +314,14 @@ public class ApplicationUI extends VBox {
         buttonSaveData.setText(messages.getString("save"));
         buttonAddPlayer.setText(messages.getString("addplayer"));
         buttonRemovePlayer.setText(messages.getString("removeplayer"));
-        buttonUndoAction.setText(messages.getString("undo"));
-        buttonRedoAction.setText(messages.getString("redo"));
-
     }
 
     private void setupEventHandlers() {
         playerTableView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> model.showPlayerDetails(newValue));
+
         buttonAddPlayer.setOnAction(e -> model.addPlayer());
+
         buttonRemovePlayer.setOnAction(e -> {
             int selectedIndex = playerTableView.getSelectionModel().getSelectedIndex();
             if (selectedIndex >= 0) {
@@ -354,11 +335,10 @@ public class ApplicationUI extends VBox {
             }
 
         });
+
         buttonSaveData.setOnAction(e -> {
             model.saveData();
         });
-        buttonUndoAction.setOnAction(e -> model.undoAction());
-        buttonRedoAction.setOnAction(e -> model.redoAction());
     }
 
     private void setupValueChangedListeners() {
@@ -385,8 +365,5 @@ public class ApplicationUI extends VBox {
         lblOverLand.textProperty().bindBidirectional(model.getPlayerCountry());
         lblOverStartJahr.textProperty().bindBidirectional(model.getPlayerErstesSpiel());
         lblOverEndJahr.textProperty().bindBidirectional(model.getPlayerLetztesSpiel());
-     //   countryImageView.imageProperty().bindBidirectional(model.getCountryImage());
-     //   teamImageView.imageProperty().bindBidirectional(model.getTeamImage());
-
     }
 }

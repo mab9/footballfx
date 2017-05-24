@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import ch.fhnw.oop2.footballfx.core.business.FootballService;
 import ch.fhnw.oop2.footballfx.core.model.Player;
 
-@Path("/football")
+@Path("football")
 public class FootballApi {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());

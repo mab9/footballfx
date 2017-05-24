@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+import ch.fhnw.oop2.footballfx.client.business.FootballService;
 import ch.fhnw.oop2.footballfx.client.dataacess.FileAccessException;
 import ch.fhnw.oop2.footballfx.client.dataacess.FileDao;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,10 +16,10 @@ public class PresentationModel {
 
     private final Path DATA_SOURCE = Paths.get("player.csv");
     private final FileDao fileDao = new FileDao();
+    private final FootballService footballService = new FootballService();
     private ObservableList<Player> data = FXCollections.observableArrayList();
 
     private final StringProperty applicationTitle = new SimpleStringProperty("JavaFX Application");
-    private final StringProperty greeting = new SimpleStringProperty("Hello World!");
 
     private final StringProperty playerNumber = new SimpleStringProperty();
     private final StringProperty playerName = new SimpleStringProperty();
@@ -33,9 +34,6 @@ public class PresentationModel {
     private final StringProperty playerLaenderspiele = new SimpleStringProperty();
     private final StringProperty playerErstesSpiel = new SimpleStringProperty();
     private final StringProperty playerLetztesSpiel = new SimpleStringProperty();
-    //private final Property<Image> countryImage = new Property<Image>();
-    //private final Property<Image> teamImage = new Property<Image>();
-
 
     public PresentationModel() {
         try {
@@ -106,29 +104,9 @@ public class PresentationModel {
         }
     }
 
-    public String getApplicationTitle() {
-        return applicationTitle.get();
-    }
-
 
     public StringProperty applicationTitleProperty() {
         return applicationTitle;
-    }
-
-    public void setApplicationTitle(String applicationTitle) {
-        this.applicationTitle.set(applicationTitle);
-    }
-
-    public String getGreeting() {
-        return greeting.get();
-    }
-
-    public StringProperty greetingProperty() {
-        return greeting;
-    }
-
-    public void setGreeting(String greeting) {
-        this.greeting.set(greeting);
     }
 
     public StringProperty getPlayerNumber() {return playerNumber; }
@@ -181,14 +159,12 @@ public class PresentationModel {
         return playerLetztesSpiel;
     }
 
-  /*  public Property<Image> getTeamImage() {
-        return null;
-        //return teamImage;
+    public void addPlayer() {
+        System.out.println("TEST REST CALL");
+        footballService.retrieveAllPlayers();
     }
 
-    public Property<Image> getCountryImage() {
-        return
-                null;
-        //countryImage;
-    } */
+    public void saveData() {
+
+    }
 }
