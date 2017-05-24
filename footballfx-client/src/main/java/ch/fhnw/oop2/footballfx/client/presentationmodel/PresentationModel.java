@@ -11,6 +11,10 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+
 public class PresentationModel {
 
     private final Path DATA_SOURCE = Paths.get("player.csv");
@@ -33,6 +37,9 @@ public class PresentationModel {
     private final StringProperty playerLaenderspiele = new SimpleStringProperty();
     private final StringProperty playerErstesSpiel = new SimpleStringProperty();
     private final StringProperty playerLetztesSpiel = new SimpleStringProperty();
+    //private final Property<Image> countryImage = new Property<Image>();
+    //private final Property<Image> teamImage = new Property<Image>();
+
 
     public PresentationModel() {
         try {
@@ -195,4 +202,15 @@ public class PresentationModel {
     public StringProperty getPlayerLetztesSpiel() {
         return playerLetztesSpiel;
     }
+
+  /*  public Property<Image> getTeamImage() {
+        return null;
+        //return teamImage;
+    }
+
+    public Property<Image> getCountryImage() {
+        return
+                null;
+        //countryImage;
+    } */
 }
