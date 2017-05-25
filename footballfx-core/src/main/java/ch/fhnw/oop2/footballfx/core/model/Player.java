@@ -1,7 +1,10 @@
 package ch.fhnw.oop2.footballfx.core.model;
 
+import javax.validation.constraints.NotNull;
+
 public class Player {
 
+    @NotNull
     private String name;
     private String birthDate;
     private String country;

@@ -2,6 +2,7 @@ package ch.fhnw.oop2.footballfx.core.api;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -32,19 +33,19 @@ public class FootballApi {
     }
 
     @POST
-    public Player createPlayer(Player player) {
+    public Player createPlayer(@NotNull Player player) {
         log.info("create player");
         return footballService.createPlayer(player);
     }
 
     @PUT
-    public Player updateFootballPlayer(Player player) {
+    public Player updatePlayer(@NotNull Player player) {
         log.info("update player");
         return footballService.updatePlayer(player);
     }
 
     @DELETE
-    public void deleteFootballPlayer(Player player) {
+    public void deletePlayer(@NotNull Player player) {
         log.info("delete player");
         footballService.deletePlayer(player);
     }
