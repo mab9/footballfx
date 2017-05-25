@@ -1,10 +1,19 @@
-package ch.fhnw.oop2.footballfx.core.model;
+package ch.fhnw.oop2.footballfx.core.player.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+@Entity
 public class Player {
 
+    @Id
     @NotNull
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String name;
     private String birthDate;
     private String country;

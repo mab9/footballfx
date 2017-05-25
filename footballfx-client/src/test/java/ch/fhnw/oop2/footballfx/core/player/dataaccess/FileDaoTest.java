@@ -1,4 +1,4 @@
-package ch.fhnw.oop2.footballfx.core.dataaccess;
+package ch.fhnw.oop2.footballfx.core.player.dataaccess;
 
 import java.io.IOException;
 import java.nio.file.Paths;

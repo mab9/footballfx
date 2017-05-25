@@ -1,18 +1,18 @@
-package ch.fhnw.oop2.footballfx.core.business;
+package ch.fhnw.oop2.footballfx.core.player.business;
 
 import java.util.List;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
-import ch.fhnw.oop2.footballfx.core.dataaccess.FootballRepository;
-import ch.fhnw.oop2.footballfx.core.model.Player;
+import ch.fhnw.oop2.footballfx.core.player.dataaccess.PlayerRepository;
+import ch.fhnw.oop2.footballfx.core.player.model.Player;
 
-public class FootballService {
+public class PlayerService {
 
-    private final FootballRepository footballRepository;
+    private final PlayerRepository footballRepository;
 
-    public FootballService(FootballRepository footballRepository) {
+    public PlayerService(PlayerRepository footballRepository) {
         this.footballRepository = footballRepository;
     }
 

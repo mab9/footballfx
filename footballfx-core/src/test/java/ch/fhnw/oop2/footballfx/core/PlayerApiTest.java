@@ -10,29 +10,29 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import ch.fhnw.oop2.footballfx.core.api.FootballApi;
-import ch.fhnw.oop2.footballfx.core.business.FootballService;
-import ch.fhnw.oop2.footballfx.core.dataaccess.FootballRepository;
-import ch.fhnw.oop2.footballfx.core.model.Player;
+import ch.fhnw.oop2.footballfx.core.player.api.PlayerApi;
+import ch.fhnw.oop2.footballfx.core.player.business.PlayerService;
+import ch.fhnw.oop2.footballfx.core.player.dataaccess.PlayerRepository;
+import ch.fhnw.oop2.footballfx.core.player.model.Player;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = { FootballApi.class, FootballService.class, FootballRepository.class })
+@SpringBootTest(classes = { PlayerApi.class, PlayerService.class, PlayerRepository.class })
 @EnableConfigurationProperties
-public class FootballApiTest {
+public class PlayerApiTest {
 
     @Inject
-    private FootballApi footballApi;
+    private PlayerApi playerApi;
 
     @Test
     public void contextLoad() {
-        assertThat(footballApi).isNotNull();
+        assertThat(playerApi).isNotNull();
     }
 
     @Test
     public void retrieveAllPlayers() {
-        List<Player> players = footballApi.retrieveAllPlayers();
+        List<Player> players = playerApi.retrieveAllPlayers();
         assertThat(players).isNotNull();
     }
 
@@ -40,45 +40,45 @@ public class FootballApiTest {
     public void createPlayer() {
         Player player = new Player();
         player.setName("Hakuna");
-        Player expectedPlayer = footballApi.createPlayer(player);
+        Player expectedPlayer = playerApi.createPlayer(player);
 
-        List<Player> actualPlayers = footballApi.retrieveAllPlayers();
+        List<Player> actualPlayers = playerApi.retrieveAllPlayers();
         assertThat(actualPlayers).contains(expectedPlayer);
     }
 
     @Test
     public void failCreatePlayerNull() {
-        footballApi.createPlayer(null);
+        playerApi.createPlayer(null);
     }
 
     @Test
     public void deletePlayer() {
         Player player = new Player();
         player.setName("Hakuna");
-        footballApi.deletePlayer(player);
+        playerApi.deletePlayer(player);
 
-        List<Player> actuealPlayers = footballApi.retrieveAllPlayers();
+        List<Player> actuealPlayers = playerApi.retrieveAllPlayers();
         assertThat(actuealPlayers).doesNotContain(player);
     }
 
     @Test
     public void failDeletePlayerNull() {
-        footballApi.deletePlayer(null);
+        playerApi.deletePlayer(null);
     }
 
     @Test
     public void updatePlayer() {
-        Player expectedPlayer = footballApi.retrieveAllPlayers().get(0);
+        Player expectedPlayer = playerApi.retrieveAllPlayers().get(0);
         expectedPlayer.setName("Hakuna");
 
-        footballApi.updatePlayer(expectedPlayer);
+        playerApi.updatePlayer(expectedPlayer);
 
-        List<Player> actualPlayers = footballApi.retrieveAllPlayers();
+        List<Player> actualPlayers = playerApi.retrieveAllPlayers();
         assertThat(actualPlayers).contains(expectedPlayer);
     }
 
     @Test
     public void failUpdatePlayerNull() {
-        footballApi.updatePlayer(null);
+        playerApi.updatePlayer(null);
     }
 }
