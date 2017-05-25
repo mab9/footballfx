@@ -1,6 +1,7 @@
 package ch.fhnw.oop2.footballfx.core;
 
 import java.sql.SQLException;
+import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import ch.fhnw.oop2.footballfx.core.player.dataaccess.PlayerRepo;
@@ -34,20 +36,18 @@ public class RepoTests {
 
     @Before
     public void setup() throws SQLException {
-        org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(
+        ScriptUtils.executeSqlScript(
                 jdbcTemplate.getDataSource().getConnection(), new ClassPathResource(INSERT_DATA_SCRIPT));
     }
 
     @Test
-    public void savePlayers() {
+    public void savePlayer() {
         Player expectedPlayer = new Player();
         expectedPlayer.setName("Hakuna");
-
+        expectedPlayer.setId(UUID.fromString("65ce8d96-26e3-42fc-a812-64d9b525af35"));
         entityManager.persist(expectedPlayer);
 
         Iterable<Player> actualPlayers = repository.findAll();
-        actualPlayers.forEach(player -> System.out.println(player.getName()));
-        Player p = actualPlayers.iterator().next();
-        assertThat(p.getName()).isEqualTo(expectedPlayer.getName());
+        assertThat(actualPlayers).contains(expectedPlayer);
     }
 }

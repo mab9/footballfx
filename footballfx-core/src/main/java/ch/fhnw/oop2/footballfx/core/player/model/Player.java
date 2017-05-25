@@ -1,30 +1,48 @@
 package ch.fhnw.oop2.footballfx.core.player.model;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Player {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "player_id")
-    private Long id;
+    @NotNull
+    private UUID id;
+    private String platz;
     private String name;
-    private String birthDate;
+    private String birthday;
     private String country;
     private String verband;
     private String position;
+
+    @Column(name = "hundertes_spiel")
     private String hundertesSpiel;
-    private String gegen;
-    private String fifa;
-    private String rsssf;
-    private String number;
+    private String gegner;
+    private String fifa_spiele;
+    private String rsssf_spiele;
     private String startjahr;
     private String endjahr;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getPlatz() {
+        return platz;
+    }
+
+    public void setPlatz(String platz) {
+        this.platz = platz;
+    }
 
     public String getName() {
         return name;
@@ -34,12 +52,12 @@ public class Player {
         this.name = name;
     }
 
-    public String getBirthDate() {
-        return birthDate;
+    public String getBirthday() {
+        return birthday;
     }
 
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     public String getCountry() {
@@ -74,36 +92,28 @@ public class Player {
         this.hundertesSpiel = hundertesSpiel;
     }
 
-    public String getGegen() {
-        return gegen;
+    public String getGegner() {
+        return gegner;
     }
 
-    public void setGegen(String gegen) {
-        this.gegen = gegen;
+    public void setGegner(String gegner) {
+        this.gegner = gegner;
     }
 
-    public String getFifa() {
-        return fifa;
+    public String getFifa_spiele() {
+        return fifa_spiele;
     }
 
-    public void setFifa(String fifa) {
-        this.fifa = fifa;
+    public void setFifa_spiele(String fifa_spiele) {
+        this.fifa_spiele = fifa_spiele;
     }
 
-    public String getRsssf() {
-        return rsssf;
+    public String getRsssf_spiele() {
+        return rsssf_spiele;
     }
 
-    public void setRsssf(String rsssf) {
-        this.rsssf = rsssf;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
+    public void setRsssf_spiele(String rsssf_spiele) {
+        this.rsssf_spiele = rsssf_spiele;
     }
 
     public String getStartjahr() {
