@@ -1,5 +1,6 @@
 package ch.fhnw.oop2.footballfx.core.player.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ch.fhnw.oop2.footballfx.core.player.dataaccess.PlayerRepository;
@@ -14,12 +15,15 @@ public class PlayerService {
     }
 
     public List<Player> retrieveAllPlayers() {
-        return repository.findAll();
+        Iterable<Player> players = repository.findAll();
+        List<Player> players1 = new ArrayList<>();
+        players.forEach(players1::add);
+        return players1;
         // throw new WebApplicationException("Not implemented", Response.Status.NOT_FOUND);
     }
 
     public Player createPlayer(Player player) {
-        return repository.addPlayer(player);
+        return repository.createPlayer(player);
     }
 
     public Player updatePlayer(Player player) {

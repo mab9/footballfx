@@ -1,5 +1,6 @@
 package ch.fhnw.oop2.footballfx.core.player.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,8 +11,8 @@ public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "player_id")
     private Long id;
-
     private String name;
     private String birthDate;
     private String country;

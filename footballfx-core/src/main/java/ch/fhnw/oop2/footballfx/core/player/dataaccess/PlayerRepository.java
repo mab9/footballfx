@@ -1,21 +1,23 @@
 package ch.fhnw.oop2.footballfx.core.player.dataaccess;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import ch.fhnw.oop2.footballfx.core.player.model.Player;
 
 public class PlayerRepository {
+
+    @Autowired
+    private PlayerRepo repo;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public PlayerRepository() {
     }
 
-    public List<Player> findAll() {
-        return null;
+    public Iterable<Player> findAll() {
+        return repo.findAll();
     }
 
     public Player updatePlayer(Player player) {
@@ -26,7 +28,7 @@ public class PlayerRepository {
 
     }
 
-    public Player addPlayer(Player player) {
-        return player;
+    public Player createPlayer(Player player) {
+        return repo.save(player);
     }
 }
