@@ -6,8 +6,6 @@ import javax.inject.Inject;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -20,17 +18,10 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { PlayerApi.class, PlayerService.class, PlayerRepository.class })
-@EnableConfigurationProperties
-@DataJpaTest
-public class PlayerApiTest {
+public class PlayerApiTest extends JpaTest {
 
     @Inject
     private PlayerApi playerApi;
-
-    @Test
-    public void contextLoad() {
-        assertThat(playerApi).isNotNull();
-    }
 
     @Test
     public void retrieveAllPlayers() {
@@ -55,12 +46,12 @@ public class PlayerApiTest {
 
     @Test
     public void deletePlayer() {
-        Player player = new Player();
-        player.setName("Hakuna");
-        playerApi.deletePlayer(player);
+        List<Player> players = playerApi.retrieveAllPlayers();
+        Player expectedPlayer = players.get(0);
+        playerApi.deletePlayer(expectedPlayer.getId());
 
-        List<Player> actuealPlayers = playerApi.retrieveAllPlayers();
-        assertThat(actuealPlayers).doesNotContain(player);
+        List<Player> actualPlayers = playerApi.retrieveAllPlayers();
+        assertThat(actualPlayers).doesNotContain(expectedPlayer);
     }
 
     @Test
@@ -73,7 +64,7 @@ public class PlayerApiTest {
         Player expectedPlayer = playerApi.retrieveAllPlayers().get(0);
         expectedPlayer.setName("Hakuna");
 
-        playerApi.updatePlayer(expectedPlayer);
+        playerApi.updatePlayer(expectedPlayer.getId(), expectedPlayer);
 
         List<Player> actualPlayers = playerApi.retrieveAllPlayers();
         assertThat(actualPlayers).contains(expectedPlayer);
@@ -81,6 +72,6 @@ public class PlayerApiTest {
 
     @Test
     public void failUpdatePlayerNull() {
-        playerApi.updatePlayer(null);
+        playerApi.updatePlayer(null, null);
     }
 }

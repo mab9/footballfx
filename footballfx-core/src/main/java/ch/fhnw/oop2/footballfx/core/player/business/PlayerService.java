@@ -2,6 +2,10 @@ package ch.fhnw.oop2.footballfx.core.player.business;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 import ch.fhnw.oop2.footballfx.core.player.dataaccess.PlayerRepository;
 import ch.fhnw.oop2.footballfx.core.player.model.Player;
@@ -19,18 +23,25 @@ public class PlayerService {
         List<Player> players1 = new ArrayList<>();
         players.forEach(players1::add);
         return players1;
-        // throw new WebApplicationException("Not implemented", Response.Status.NOT_FOUND);
     }
 
     public Player createPlayer(Player player) {
         return repository.createPlayer(player);
     }
 
-    public Player updatePlayer(Player player) {
+    public Player updatePlayer(UUID id, Player player) {
+        Player update = repository.findById(id);
+        if (!update.getId().equals(player.getId())) {
+            throw new WebApplicationException("Player: " + player.getId() + " not found.", Response.Status.NOT_FOUND);
+        }
         return repository.updatePlayer(player);
     }
 
-    public void deletePlayer(Player player) {
-        repository.removePlayer(player);
+    public void deletePlayer(UUID id) {
+        Player update = repository.findById(id);
+        if (update == null) {
+            throw new WebApplicationException("Player: " + id + " not found.", Response.Status.NOT_FOUND);
+        }
+        repository.removePlayer(id);
     }
 }
