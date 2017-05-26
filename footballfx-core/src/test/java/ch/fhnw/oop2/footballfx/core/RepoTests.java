@@ -44,7 +44,7 @@ public class RepoTests {
     public void savePlayer() {
         Player expectedPlayer = new Player();
         expectedPlayer.setName("Hakuna");
-        expectedPlayer.setId(UUID.fromString("65ce8d96-26e3-42fc-a812-64d9b525af35"));
+        expectedPlayer.setId(UUID.randomUUID());
         entityManager.persist(expectedPlayer);
 
         Iterable<Player> actualPlayers = repository.findAll();
