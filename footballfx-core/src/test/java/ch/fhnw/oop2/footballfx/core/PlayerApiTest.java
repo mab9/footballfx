@@ -1,12 +1,14 @@
 package ch.fhnw.oop2.footballfx.core;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import ch.fhnw.oop2.footballfx.core.player.api.PlayerApi;
@@ -39,7 +41,7 @@ public class PlayerApiTest extends JpaTest {
         assertThat(actualPlayers).contains(expectedPlayer);
     }
 
-    @Test
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void failCreatePlayerNull() {
         playerApi.createPlayer(null);
     }
@@ -54,7 +56,7 @@ public class PlayerApiTest extends JpaTest {
         assertThat(actualPlayers).doesNotContain(expectedPlayer);
     }
 
-    @Test
+    @Test(expected = InvalidDataAccessApiUsageException.class)
     public void failDeletePlayerNull() {
         playerApi.deletePlayer(null);
     }
@@ -70,8 +72,19 @@ public class PlayerApiTest extends JpaTest {
         assertThat(actualPlayers).contains(expectedPlayer);
     }
 
-    @Test
-    public void failUpdatePlayerNull() {
+    @Test(expected = NullPointerException.class)
+    public void failUpdatePlayerAndIdNull() {
         playerApi.updatePlayer(null, null);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void failUpdatePlayerNullId() {
+        Player player = playerApi.retrieveAllPlayers().get(0);
+        playerApi.updatePlayer(null, player);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void failUpdatePlayerNullPlayer() {
+        playerApi.updatePlayer(UUID.randomUUID(), null);
     }
 }

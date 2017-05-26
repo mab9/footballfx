@@ -3,6 +3,7 @@ package ch.fhnw.oop2.footballfx.core;
 import java.sql.SQLException;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -28,5 +29,9 @@ public class JpaTest {
     public void setup() throws SQLException {
         ScriptUtils.executeSqlScript(jdbcTemplate.getDataSource().getConnection(),
                 new ClassPathResource(INSERT_DATA_SCRIPT));
+    }
+
+    @Test
+    public void contextLoader() {
     }
 }
