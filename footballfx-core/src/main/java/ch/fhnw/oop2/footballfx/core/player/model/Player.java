@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
@@ -12,6 +14,7 @@ public class Player {
 
     @Id
     @NotNull
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String platz;
     private String name;
@@ -30,10 +33,6 @@ public class Player {
 
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getPlatz() {

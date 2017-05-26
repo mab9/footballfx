@@ -9,7 +9,7 @@ import ch.fhnw.oop2.footballfx.core.player.model.Player;
 public class PlayerRepository {
 
     @Autowired
-    private PlayerRepo repo;
+    private PlayerRepositoryInterface repository;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -17,7 +17,7 @@ public class PlayerRepository {
     }
 
     public Iterable<Player> findAll() {
-        return repo.findAll();
+        return repository.findAll();
     }
 
     public Player updatePlayer(Player player) {
@@ -29,6 +29,6 @@ public class PlayerRepository {
     }
 
     public Player createPlayer(Player player) {
-        return repo.save(player);
+        return repository.save(player);
     }
 }

@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 import ch.fhnw.oop2.footballfx.core.player.model.Player;
 
-public interface PlayerRepo extends CrudRepository<Player, UUID> {
+public interface PlayerRepositoryInterface extends CrudRepository<Player, UUID> {
 }
