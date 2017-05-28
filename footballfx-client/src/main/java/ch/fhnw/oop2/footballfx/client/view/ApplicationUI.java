@@ -320,11 +320,16 @@ public class ApplicationUI extends VBox {
         playerTableView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> model.showPlayerDetails(newValue));
 
-        buttonAddPlayer.setOnAction(e -> model.addPlayer());
+        buttonAddPlayer.setOnAction(e -> {
+            // TODO AADD NEW PLAYER TO GUI, BY CLICK ON SAVE, SAVE TO SERVER
+            model.addPlayer();
+        });
 
         buttonRemovePlayer.setOnAction(e -> {
             int selectedIndex = playerTableView.getSelectionModel().getSelectedIndex();
             if (selectedIndex >= 0) {
+                // TODO add exception handling
+                model.removePlayer(playerTableView.getItems().get(selectedIndex));
                 playerTableView.getItems().remove(selectedIndex);
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -333,11 +338,11 @@ public class ApplicationUI extends VBox {
                 alert.setContentText("Please select a player in the table.");
                 alert.showAndWait();
             }
-
         });
 
         buttonSaveData.setOnAction(e -> {
-            model.saveData();
+            int selectedIndex = playerTableView.getSelectionModel().getSelectedIndex();
+            model.updatePlayer(playerTableView.getItems().get(selectedIndex));
         });
     }
 

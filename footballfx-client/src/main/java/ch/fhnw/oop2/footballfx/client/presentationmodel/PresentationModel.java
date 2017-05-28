@@ -166,12 +166,17 @@ public class PresentationModel {
     }
 
     public void addPlayer() {
-        System.out.println("TEST REST CALL");
-        footballService.createPlayer(null);
-        footballService.retrieveAllPlayers();
+        Player p = new Player();
+        p.setName("der player");
+
+        footballService.createPlayer(p);
     }
 
-    public void saveData() {
+    public void updatePlayer(Player player) {
+        footballService.updatePlayer(player);
+    }
 
+    public void removePlayer(Player player) {
+        footballService.deletePlayer(player);
     }
 }
