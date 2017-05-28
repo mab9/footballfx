@@ -245,16 +245,16 @@ public class ApplicationUI extends VBox {
         playerTableView.getColumns().add(startjahrColumn);
         playerTableView.getColumns().add(endjahrColumn);
 
-        numberColumn.setCellValueFactory(e -> e.getValue().getNumber());
+        numberColumn.setCellValueFactory(e -> e.getValue().getPlatz());
         nameColumn.setCellValueFactory(e -> e.getValue().getName());
-        birthDateColumn.setCellValueFactory(e -> e.getValue().getBirthDate());
+        birthDateColumn.setCellValueFactory(e -> e.getValue().getBirthday());
         countryColumn.setCellValueFactory(e -> e.getValue().getCountry());
         verbandColumn.setCellValueFactory(e -> e.getValue().getVerband());
         positionColumn.setCellValueFactory(e -> e.getValue().getPosition());
         hundertesSpielColumn.setCellValueFactory(e -> e.getValue().getHundertesSpiel());
-        gegenColumn.setCellValueFactory(e -> e.getValue().getGegen());
-        fifaColumn.setCellValueFactory(e -> e.getValue().getFifa());
-        rsssfColumn.setCellValueFactory(e -> e.getValue().getRsssf());
+        gegenColumn.setCellValueFactory(e -> e.getValue().getGegner());
+        fifaColumn.setCellValueFactory(e -> e.getValue().getFifa_spiele());
+        rsssfColumn.setCellValueFactory(e -> e.getValue().getRsssf_spiele());
         startjahrColumn.setCellValueFactory(e -> e.getValue().getStartJahr());
         endjahrColumn.setCellValueFactory(e -> e.getValue().getEndJahr());
 
@@ -288,8 +288,8 @@ public class ApplicationUI extends VBox {
         lblTextName.setText(messages.getString("name"));
         lblTextLand.setText(messages.getString("nationality"));
         lblTextVerband.setText(messages.getString("association"));
-        lblTextSpieleFifa.setText(messages.getString("fifa"));
-        lblTextSpieleRSSSF.setText(messages.getString("rsssf"));
+        lblTextSpieleFifa.setText(messages.getString("fifa_spiele"));
+        lblTextSpieleRSSSF.setText(messages.getString("rsssf_spiele"));
         lblTextHundertesSpiel.setText(messages.getString("100game"));
         lblTextGegen.setText(messages.getString("against"));
         lblTextErstesSpiel.setText(messages.getString("firstgame"));
@@ -306,8 +306,8 @@ public class ApplicationUI extends VBox {
         positionColumn.setText(messages.getString("position"));
         hundertesSpielColumn.setText(messages.getString("100game"));
         gegenColumn.setText(messages.getString("against"));
-        fifaColumn.setText(messages.getString("fifa"));
-        rsssfColumn.setText(messages.getString("rsssf"));
+        fifaColumn.setText(messages.getString("fifa_spiele"));
+        rsssfColumn.setText(messages.getString("rsssf_spiele"));
         startjahrColumn.setText(messages.getString("firstgame"));
         endjahrColumn.setText(messages.getString("lastgame"));
 

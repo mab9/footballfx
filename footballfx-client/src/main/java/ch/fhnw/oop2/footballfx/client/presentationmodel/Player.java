@@ -1,29 +1,40 @@
 package ch.fhnw.oop2.footballfx.client.presentationmodel;
 
+import java.util.UUID;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Player {
 
+    private UUID id;
     private final StringProperty name = new SimpleStringProperty();
-    private final StringProperty birthDate = new SimpleStringProperty();
+    private final StringProperty birthday = new SimpleStringProperty();
     private final StringProperty country = new SimpleStringProperty();
     private final StringProperty verband = new SimpleStringProperty();
     private final StringProperty position = new SimpleStringProperty();
     private final StringProperty hundertesSpiel = new SimpleStringProperty();
-    private final StringProperty gegen = new SimpleStringProperty();
-    private final StringProperty fifa = new SimpleStringProperty();
-    private final StringProperty rsssf = new SimpleStringProperty();
-    private final StringProperty number = new SimpleStringProperty();
+    private final StringProperty gegner = new SimpleStringProperty();
+    private final StringProperty fifa_spiele = new SimpleStringProperty();
+    private final StringProperty rsssf_spiele = new SimpleStringProperty();
     private final StringProperty startjahr = new SimpleStringProperty();
     private final StringProperty endjahr = new SimpleStringProperty();
+    private final StringProperty platz = new SimpleStringProperty();
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public StringProperty getName() {
         return name;
     }
 
-    public StringProperty getBirthDate() {
-        return birthDate;
+    public StringProperty getBirthday() {
+        return birthday;
     }
 
     public StringProperty getCountry() {
@@ -42,16 +53,16 @@ public class Player {
         return hundertesSpiel;
     }
 
-    public StringProperty getGegen() {
-        return gegen;
+    public StringProperty getGegner() {
+        return gegner;
     }
 
-    public StringProperty getFifa() {
-        return fifa;
+    public StringProperty getFifa_spiele() {
+        return fifa_spiele;
     }
 
-    public StringProperty getRsssf() {
-        return rsssf;
+    public StringProperty getRsssf_spiele() {
+        return rsssf_spiele;
     }
 
     public StringProperty getStartJahr() {
@@ -66,8 +77,8 @@ public class Player {
         this.name.set(name);
     }
 
-    public void setBirthDate(String birthDate) {
-        this.birthDate.set(birthDate);
+    public void setBirthday(String birthday) {
+        this.birthday.set(birthday);
     }
 
     public void setCountry(String country) {
@@ -86,16 +97,16 @@ public class Player {
         this.hundertesSpiel.set(hundertesSpiel);
     }
 
-    public void setGegen(String gegen) {
-        this.gegen.set(gegen);
+    public void setGegner(String gegner) {
+        this.gegner.set(gegner);
     }
 
-    public void setFifa(String fifa) {
-        this.fifa.set(fifa);
+    public void setFifa_spiele(String fifa_spiele) {
+        this.fifa_spiele.set(fifa_spiele);
     }
 
-    public void setRsssf(String rsssf) {
-        this.rsssf.set(rsssf);
+    public void setRsssf_spiele(String rsssf_spiele) {
+        this.rsssf_spiele.set(rsssf_spiele);
     }
 
     public void setStartjahr(String startjahr) {
@@ -106,11 +117,12 @@ public class Player {
         this.endjahr.set(endjahr);
     }
 
-    public void setNumber(String number) { this.number.set(number);
+    public void setPlatz(String platz) {
+        this.platz.set(platz);
     }
 
-    public StringProperty getNumber() {
-        return number;
+    public StringProperty getPlatz() {
+        return platz;
     }
 
 }

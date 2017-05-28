@@ -58,15 +58,15 @@ public class PresentationModel {
             String[] splitedData = row.split(";");
             Player player = new Player();
             player.setName(splitedData[1]);
-            player.setBirthDate(splitedData[2]);
+            player.setBirthday(splitedData[2]);
             player.setCountry(splitedData[3]);
             player.setVerband(splitedData[4]);
             player.setPosition(splitedData[5]);
             player.setHundertesSpiel(splitedData[6]);
-            player.setGegen(splitedData[7]);
-            player.setFifa(splitedData[8]);
-            player.setRsssf(splitedData[9]);
-            player.setNumber(splitedData[0]);
+            player.setGegner(splitedData[7]);
+            player.setFifa_spiele(splitedData[8]);
+            player.setRsssf_spiele(splitedData[9]);
+            player.setPlatz(splitedData[0]);
             player.setStartjahr(splitedData[10]);
             player.setEndjahr(splitedData[11]);
             players.add(player);
@@ -77,15 +77,15 @@ public class PresentationModel {
     public void showPlayerDetails(Player player) {
         if (player != null) {
             playerName.set(player.getName().get());
-            playerBirthDate.set(player.getBirthDate().get());
+            playerBirthDate.set(player.getBirthday().get());
             playerCountry.set(player.getCountry().get());
             playerVerband.set(player.getVerband().get());
             playerPosition.set(player.getPosition().get());
             playerHundertesSpiel.set(player.getHundertesSpiel().get());
-            playerGegen.set(player.getGegen().get());
-            playerFifa.set(player.getFifa().get());
-            playerRSSSF.set(player.getRsssf().get());
-            playerNumber.set(player.getNumber().get());
+            playerGegen.set(player.getGegner().get());
+            playerFifa.set(player.getFifa_spiele().get());
+            playerRSSSF.set(player.getRsssf_spiele().get());
+            playerNumber.set(player.getPlatz().get());
             playerErstesSpiel.set(player.getStartJahr().get());
             playerLetztesSpiel.set(player.getEndJahr().get());
         } else {
