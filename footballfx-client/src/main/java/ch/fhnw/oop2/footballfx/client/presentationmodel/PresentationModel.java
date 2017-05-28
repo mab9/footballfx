@@ -2,6 +2,7 @@ package ch.fhnw.oop2.footballfx.client.presentationmodel;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.stream.Stream;
 
 import ch.fhnw.oop2.footballfx.client.business.FootballService;
@@ -37,7 +38,7 @@ public class PresentationModel {
 
     public PresentationModel() {
         try {
-            data = loadData();
+            data = loadDataFromServer();
         } catch (FileAccessException e) {
             System.err.println(e.getMessage());
             System.exit(-1);
@@ -50,7 +51,12 @@ public class PresentationModel {
         return data;
     }
 
-    private ObservableList<Player> loadData() throws FileAccessException {
+    private ObservableList<Player> loadDataFromServer() throws FileAccessException {
+        List<Player> playerss = footballService.retrieveAllPlayers();
+        return FXCollections.observableArrayList(playerss);
+    }
+
+    private ObservableList<Player> loadDataFromCsv() throws FileAccessException {
         Stream<String> stream = fileDao.readFile(DATA_SOURCE);
         ObservableList<Player> players = FXCollections.observableArrayList();
 
@@ -161,6 +167,7 @@ public class PresentationModel {
 
     public void addPlayer() {
         System.out.println("TEST REST CALL");
+        footballService.createPlayer(null);
         footballService.retrieveAllPlayers();
     }
 

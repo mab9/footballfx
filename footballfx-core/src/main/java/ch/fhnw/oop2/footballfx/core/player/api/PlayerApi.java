@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -43,12 +44,16 @@ public class PlayerApi {
     }
 
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Player createPlayer(@NotNull @Valid Player player) {
         return playerService.createPlayer(player);
     }
 
     @PUT
     @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Player updatePlayer(@NotNull @PathParam("id") UUID id, @NotNull @Valid Player player) {
         uuidValidator(id, player);
         return playerService.updatePlayer(id, player);
@@ -56,6 +61,8 @@ public class PlayerApi {
 
     @DELETE
     @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public void deletePlayer(@NotNull @PathParam("id") UUID id) {
         playerService.deletePlayer(id);
     }

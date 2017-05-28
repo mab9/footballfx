@@ -27,12 +27,9 @@ public class FootballService {
     }
 
     public List<Player> retrieveAllPlayers() {
-        List<Player> playerss = client.target(BASE_URL).path("/football").request(MediaType.APPLICATION_JSON_TYPE)
+        return client.target(BASE_URL).path("/football").request(MediaType.APPLICATION_JSON_TYPE)
                 .get(new GenericType<List<Player>>() {
                 });
-
-        playerss.forEach(pl -> System.out.println(pl.getName()));
-        return playerss;
     }
 
     public Player createPlayer(Player player) {
