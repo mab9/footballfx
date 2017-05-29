@@ -29,6 +29,9 @@ public class Player {
     private String startjahr;
     private String endjahr;
 
+    public Player() {
+    }
+
     public UUID getId() {
         return id;
     }

@@ -21,6 +21,9 @@ public class Player {
     private final StringProperty endjahr = new SimpleStringProperty();
     private final StringProperty platz = new SimpleStringProperty();
 
+    public Player() {
+    }
+
     public UUID getId() {
         return id;
     }
