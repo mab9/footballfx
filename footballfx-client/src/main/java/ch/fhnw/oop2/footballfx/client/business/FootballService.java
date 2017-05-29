@@ -6,7 +6,6 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.client.ClientConfig;
@@ -29,21 +28,23 @@ public class FootballService {
     }
 
     public List<Player> retrieveAllPlayers() {
-        return client.target(BASE_URL).path("/football").request(MediaType.APPLICATION_JSON_TYPE)
+        return client.target(BASE_URL).path("/football").request(APPLICATION_JSON_TYPE)
                 .get(new GenericType<List<Player>>() {
                 });
     }
 
     public Player createPlayer(Player player) {
-        client.target(BASE_URL).path("/football").request()
-                .post(Entity.entity(player, MediaType.APPLICATION_JSON_TYPE));
-        return null;
+        // Response response = client.target(BASE_URL).path("/football").request().post(Entity.entity(player,
+        // APPLICATION_JSON_TYPE));
+        Response response = client.target(BASE_URL).path("/football").path("/add").request(APPLICATION_JSON_TYPE)
+                .put(Entity.entity(player, APPLICATION_JSON_TYPE));
+        return response.readEntity(Player.class);
     }
 
     public Player updatePlayer(Player player) {
-        Response put = client.target(BASE_URL).path("/football").path(player.getId().toString()).request()
+        Response response = client.target(BASE_URL).path("/football").path(player.getId().toString()).request()
                 .put(Entity.entity(player, APPLICATION_JSON_TYPE));
-        return put.readEntity(Player.class);
+        return response.readEntity(Player.class);
     }
 
     public void deletePlayer(Player player) {
