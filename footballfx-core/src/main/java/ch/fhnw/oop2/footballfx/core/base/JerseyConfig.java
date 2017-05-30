@@ -10,5 +10,6 @@ public class JerseyConfig extends ResourceConfig {
 
     public JerseyConfig() {
         register(PlayerApi.class);
+        register(CorsResponseFilter.class);
     }
 }
