@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,9 +10,12 @@
 
 <div class="container">
     <h1>Angular-Gulp-Browserify-Starter</h1>
+    <div ng-controller="MainController">
+        <h1>{{ message }}</h1>
+    </div>
     <div ng-view></div>
 </div>
 
-<script src="app.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
