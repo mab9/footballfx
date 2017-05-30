@@ -27,7 +27,7 @@ public class ApplicationUI extends VBox {
     private ComboBox comboBoxLanguges;
     private Button buttonAddPlayer;
     private Button buttonRemovePlayer;
-    private Button buttonSaveData;
+    private Button buttonSavePlayer;
     private Button buttonChangeLanguage;
     private TextField search;
     private TableView<Player> playerTableView;
@@ -107,7 +107,7 @@ public class ApplicationUI extends VBox {
 
         buttonAddPlayer = new Button();
         buttonRemovePlayer = new Button();
-        buttonSaveData = new Button();
+        buttonSavePlayer = new Button();
         buttonChangeLanguage = new Button();
 
         search = new TextField();
@@ -187,7 +187,7 @@ public class ApplicationUI extends VBox {
         gridTop.setVgap(3);
 
         // Add toolbar
-        toolBar.getItems().addAll(buttonSaveData, buttonAddPlayer, buttonRemovePlayer, comboBoxLanguges);
+        toolBar.getItems().addAll(buttonSavePlayer, buttonAddPlayer, buttonRemovePlayer, comboBoxLanguges);
 
         // Add Grid
         gridTop.add(lblOverName, 0, 0, 4, 1);
@@ -311,7 +311,7 @@ public class ApplicationUI extends VBox {
         startjahrColumn.setText(messages.getString("firstgame"));
         endjahrColumn.setText(messages.getString("lastgame"));
 
-        buttonSaveData.setText(messages.getString("save"));
+        buttonSavePlayer.setText(messages.getString("save"));
         buttonAddPlayer.setText(messages.getString("addplayer"));
         buttonRemovePlayer.setText(messages.getString("removeplayer"));
     }
@@ -322,7 +322,7 @@ public class ApplicationUI extends VBox {
 
         buttonAddPlayer.setOnAction(e -> {
             // TODO AADD NEW PLAYER TO GUI, BY CLICK ON SAVE, SAVE TO SERVER
-            model.addPlayer();
+            model.addPlayer(new Player());
         });
 
         buttonRemovePlayer.setOnAction(e -> {
@@ -340,7 +340,7 @@ public class ApplicationUI extends VBox {
             }
         });
 
-        buttonSaveData.setOnAction(e -> {
+        buttonSavePlayer.setOnAction(e -> {
             int selectedIndex = playerTableView.getSelectionModel().getSelectedIndex();
             model.updatePlayer(playerTableView.getItems().get(selectedIndex));
         });
@@ -348,7 +348,37 @@ public class ApplicationUI extends VBox {
 
     private void setupValueChangedListeners() {
         txtPlayerName.textProperty().addListener((observable, oldValue, newValue) -> {
-            model.getPlayerName().set(newValue);
+            playerTableView.getSelectionModel().getSelectedItem().setName(newValue);
+        });
+        txtPlayerCountry.textProperty().addListener((observable, oldValue, newValue) -> {
+            playerTableView.getSelectionModel().getSelectedItem().setCountry(newValue);
+        });
+        txtPlayerVerband.textProperty().addListener((observable, oldValue, newValue) -> {
+            playerTableView.getSelectionModel().getSelectedItem().setVerband(newValue);
+        });
+        txtPlayerFifa.textProperty().addListener((observable, oldValue, newValue) -> {
+            playerTableView.getSelectionModel().getSelectedItem().setFifa_spiele(newValue);
+        });
+        txtPlayerRSSSF.textProperty().addListener((observable, oldValue, newValue) -> {
+            playerTableView.getSelectionModel().getSelectedItem().setRsssf_spiele(newValue);
+        });
+        txtPlayerHundertesSpiel.textProperty().addListener((observable, oldValue, newValue) -> {
+            playerTableView.getSelectionModel().getSelectedItem().setHundertesSpiel(newValue);
+        });
+        txtPlayerErstesSpiel.textProperty().addListener((observable, oldValue, newValue) -> {
+            playerTableView.getSelectionModel().getSelectedItem().setStartjahr(newValue);
+        });
+        txtPlayerBirthDate.textProperty().addListener((observable, oldValue, newValue) -> {
+            playerTableView.getSelectionModel().getSelectedItem().setBirthday(newValue);
+        });
+        txtPlayerPosition.textProperty().addListener((observable, oldValue, newValue) -> {
+            playerTableView.getSelectionModel().getSelectedItem().setPosition(newValue);
+        });
+        txtPlayerGegen.textProperty().addListener((observable, oldValue, newValue) -> {
+            playerTableView.getSelectionModel().getSelectedItem().setGegner(newValue);
+        });
+        txtPlayerLetztesSpiel.textProperty().addListener((observable, oldValue, newValue) -> {
+            playerTableView.getSelectionModel().getSelectedItem().setEndjahr(newValue);
         });
     }
 
@@ -361,14 +391,14 @@ public class ApplicationUI extends VBox {
         txtPlayerRSSSF.textProperty().bindBidirectional(model.getPlayerRSSSF());
         txtPlayerHundertesSpiel.textProperty().bindBidirectional(model.getPlayerNumber());
         txtPlayerErstesSpiel.textProperty().bindBidirectional(model.getPlayerHundertesSpiel());
-        txtPlayerBirthDate.textProperty().bindBidirectional(model.getPlayerErstesSpiel());
+        txtPlayerBirthDate.textProperty().bindBidirectional(model.getPlayerStartJahr());
         txtPlayerPosition.textProperty().bindBidirectional(model.getPlayerBirthDate());
         txtPlayerGegen.textProperty().bindBidirectional(model.getPlayerPosition());
         txtPlayerLetztesSpiel.textProperty().bindBidirectional(model.getPlayerGegen());
 
         lblOverName.textProperty().bindBidirectional(model.getPlayerName());
         lblOverLand.textProperty().bindBidirectional(model.getPlayerCountry());
-        lblOverStartJahr.textProperty().bindBidirectional(model.getPlayerErstesSpiel());
-        lblOverEndJahr.textProperty().bindBidirectional(model.getPlayerLetztesSpiel());
+        lblOverStartJahr.textProperty().bindBidirectional(model.getPlayerStartJahr());
+        lblOverEndJahr.textProperty().bindBidirectional(model.getPlayerEndJahr());
     }
 }
