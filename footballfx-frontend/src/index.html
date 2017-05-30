@@ -5,30 +5,57 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Football Fx</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body class="page-md page-quick-sidebar-over-content">
 
 <div class="container">
-    <h1>Angular-Gulp-Browserify-Starter</h1>
     <div ng-controller="MainController">
-        <h1>{{ message }}</h1>
+        <h1>{{ title }}</h1>
 
-        <div ng-repeat="player in players">
-            {{ player.name }}
-        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Platz</th>
+                <th>Name</th>
+                <th>Birthday</th>
+                <th>Country</th>
+                <th>Verband</th>
+                <th>Position</th>
+                <th>Fifa_spiele</th>
+                <th>Rsssf_spiele</th>
+                <th>HudertesSpiel</th>
+                <th>Gegner</th>
+                <th>Startjahr</th>
+                <th>Endjahr</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="player in players">
+                <td> {{ player.platz }}</td>
+                <td> {{ player.name }}</td>
+                <td> {{ player.birthday }}</td>
+                <td> {{ player.country }}</td>
+                <td> {{ player.verband }}</td>
+                <td> {{ player.position }}</td>
+                <td> {{ player.fifa_spiele }}</td>
+                <td> {{ player.rsssf_spiele }}</td>
+                <td> {{ player.hundertesSpiel }}</td>
+                <td> {{ player.gegner }}</td>
+                <td> {{ player.startjahr }}</td>
+                <td> {{ player.endjahr }}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+</div>
 
 
 </div>
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
-        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
-        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
-        crossorigin="anonymous"></script>
 <script src="main.js"></script>
 </body>
 </html>
