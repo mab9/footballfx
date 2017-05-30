@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import ch.fhnw.oop2.footballfx.client.business.FootballService;
+import ch.fhnw.oop2.footballfx.client.business.ServerConnectionException;
 import ch.fhnw.oop2.footballfx.client.dataacess.FileAccessException;
 import ch.fhnw.oop2.footballfx.client.dataacess.FileDao;
 import javafx.beans.property.SimpleStringProperty;
@@ -39,11 +40,14 @@ public class PresentationModel {
     public PresentationModel() {
         try {
             data = loadDataFromServer();
-        } catch (FileAccessException e) {
-            System.err.println(e.getMessage());
-            System.exit(-1);
+        } catch (ServerConnectionException e) {
+            try {
+                data = loadDataFromCsv();
+            } catch (FileAccessException e1) {
+                System.err.println(e.getMessage());
+                System.exit(-1);
+            }
         }
-
         showPlayerDetails(data.get(1));
     }
 
@@ -51,7 +55,7 @@ public class PresentationModel {
         return data;
     }
 
-    private ObservableList<Player> loadDataFromServer() throws FileAccessException {
+    private ObservableList<Player> loadDataFromServer() throws ServerConnectionException {
         List<Player> playerss = footballService.retrieveAllPlayers();
         return FXCollections.observableArrayList(playerss);
     }
@@ -169,14 +173,26 @@ public class PresentationModel {
         Player p = new Player();
         p.setName("der player");
 
-        footballService.createPlayer(p);
+        try {
+            footballService.createPlayer(p);
+        } catch (ServerConnectionException e) {
+            System.err.println(e);
+        }
     }
 
     public void updatePlayer(Player player) {
-        footballService.updatePlayer(player);
+        try {
+            footballService.updatePlayer(player);
+        } catch (ServerConnectionException e) {
+            System.err.println(e);
+        }
     }
 
     public void removePlayer(Player player) {
-        footballService.deletePlayer(player);
+        try {
+            footballService.deletePlayer(player);
+        } catch (ServerConnectionException e) {
+            System.err.println(e);
+        }
     }
 }

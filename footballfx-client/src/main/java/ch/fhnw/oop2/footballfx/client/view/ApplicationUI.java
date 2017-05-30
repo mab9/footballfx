@@ -34,22 +34,22 @@ public class ApplicationUI extends VBox {
     private ImageView countryImageView;
     private ImageView teamImageView;
     private ToolBar toolBar;
-    private TextField playerName;
-    private TextField playerCountry;
-    private TextField playerLaenderspiele;
+    private TextField txtPlayerName;
+    private TextField txtPlayerCountry;
+    private TextField txtPlayerLaenderspiele;
+    private TextField txtPlayerStartJahr;
+    private TextField txtPlayerEndJahr;
+    private TextField txtPlayerGegen;
+    private TextField txtPlayerFifa;
+    private TextField txtPlayerRSSSF;
+    private TextField txtPlayerPosition;
+    private TextField txtPlayerBirthDate;
+    private TextField txtPlayerHundertesSpiel;
+    private TextField txtPlayerErstesSpiel;
+    private TextField txtPlayerLetztesSpiel;
+    private TextField txtPlayerVerband;
     private Label lblTextLaenderspiele;
-    private TextField playerStartJahr;
-    private TextField playerEndJahr;
-    private TextField playerGegen;
-    private TextField playerFifa;
-    private TextField playerRSSSF;
-    private TextField playerPosition;
-    private TextField playerBirthDate;
-    private TextField playerHundertesSpiel;
-    private TextField playerErstesSpiel;
-    private TextField playerLetztesSpiel;
-    private TextField playerVerband;
-    private Label playerNumber;
+    private Label lblPlayerPlatz;
     private Label lblTextName;
     private Label lblOverName;
     private Label lblOverLand;
@@ -124,21 +124,21 @@ public class ApplicationUI extends VBox {
 
         comboBoxLanguges = new ComboBox();
 
-        playerName = new TextField();
-        playerCountry = new TextField();
-        playerLaenderspiele = new TextField();
-        playerStartJahr = new TextField();
-        playerEndJahr = new TextField();
-        playerVerband = new TextField();
-        playerFifa = new TextField();
-        playerRSSSF = new TextField();
-        playerHundertesSpiel = new TextField();
-        playerErstesSpiel = new TextField();
-        playerNumber = new Label();
-        playerBirthDate = new TextField();
-        playerPosition = new TextField();
-        playerGegen = new TextField();
-        playerLetztesSpiel = new TextField();
+        txtPlayerName = new TextField();
+        txtPlayerCountry = new TextField();
+        txtPlayerLaenderspiele = new TextField();
+        txtPlayerStartJahr = new TextField();
+        txtPlayerEndJahr = new TextField();
+        txtPlayerVerband = new TextField();
+        txtPlayerFifa = new TextField();
+        txtPlayerRSSSF = new TextField();
+        txtPlayerHundertesSpiel = new TextField();
+        txtPlayerErstesSpiel = new TextField();
+        lblPlayerPlatz = new Label();
+        txtPlayerBirthDate = new TextField();
+        txtPlayerPosition = new TextField();
+        txtPlayerGegen = new TextField();
+        txtPlayerLetztesSpiel = new TextField();
         lblTextLaenderspiele = new Label();
         lblTextName = new Label();
         lblTextLand = new Label();
@@ -207,12 +207,12 @@ public class ApplicationUI extends VBox {
         gridBottom.add(lblTextHundertesSpiel, 0, 4);
         gridBottom.add(lblTextErstesSpiel, 0, 5);
 
-        gridBottom.add(playerName, 1, 0);
-        gridBottom.add(playerCountry, 1, 1);
-        gridBottom.add(playerVerband, 1, 2);
-        gridBottom.add(playerFifa, 1, 3);
-        gridBottom.add(playerHundertesSpiel, 1, 4);
-        gridBottom.add(playerErstesSpiel, 1, 5);
+        gridBottom.add(txtPlayerName, 1, 0);
+        gridBottom.add(txtPlayerCountry, 1, 1);
+        gridBottom.add(txtPlayerVerband, 1, 2);
+        gridBottom.add(txtPlayerFifa, 1, 3);
+        gridBottom.add(txtPlayerHundertesSpiel, 1, 4);
+        gridBottom.add(txtPlayerErstesSpiel, 1, 5);
 
         // Column 2
         gridBottom.add(lblTextBirthDate, 2, 0);
@@ -223,12 +223,12 @@ public class ApplicationUI extends VBox {
         gridBottom.add(lblTextLetztesSpiel, 2, 5);
 
         // Column 3
-        gridBottom.add(playerBirthDate, 3, 0);
-        gridBottom.add(playerPosition, 3, 1);
-        gridBottom.add(playerNumber, 3, 2);
-        gridBottom.add(playerRSSSF, 3, 3);
-        gridBottom.add(playerGegen, 3, 4);
-        gridBottom.add(playerLetztesSpiel, 3, 5);
+        gridBottom.add(txtPlayerBirthDate, 3, 0);
+        gridBottom.add(txtPlayerPosition, 3, 1);
+        gridBottom.add(lblPlayerPlatz, 3, 2);
+        gridBottom.add(txtPlayerRSSSF, 3, 3);
+        gridBottom.add(txtPlayerGegen, 3, 4);
+        gridBottom.add(txtPlayerLetztesSpiel, 3, 5);
 
         playerTableView.getItems().setAll(model.getData());
 
@@ -347,24 +347,24 @@ public class ApplicationUI extends VBox {
     }
 
     private void setupValueChangedListeners() {
-
+        txtPlayerName.textProperty().addListener((observable, oldValue, newValue) -> {
+            model.getPlayerName().set(newValue);
+        });
     }
 
     private void setupBindings() {
-        playerNumber.textProperty().bindBidirectional(model.getPlayerNumber());
-        playerName.textProperty().bindBidirectional(model.getPlayerName());
-        playerCountry.textProperty().bindBidirectional(model.getPlayerCountry());
-        playerLaenderspiele.textProperty().bindBidirectional(model.getPlayerLaenderspiele());
-        playerVerband.textProperty().bindBidirectional(model.getPlayerVerband());
-        playerFifa.textProperty().bindBidirectional(model.getPlayerFifa());
-        playerRSSSF.textProperty().bindBidirectional(model.getPlayerRSSSF());
-        playerNumber.textProperty().bindBidirectional(model.getPlayerNumber());
-        playerHundertesSpiel.textProperty().bindBidirectional(model.getPlayerHundertesSpiel());
-        playerErstesSpiel.textProperty().bindBidirectional(model.getPlayerErstesSpiel());
-        playerBirthDate.textProperty().bindBidirectional(model.getPlayerBirthDate());
-        playerPosition.textProperty().bindBidirectional(model.getPlayerPosition());
-        playerGegen.textProperty().bindBidirectional(model.getPlayerGegen());
-        playerLetztesSpiel.textProperty().bindBidirectional(model.getPlayerLetztesSpiel());
+        lblPlayerPlatz.textProperty().bindBidirectional(model.getPlayerNumber());
+        txtPlayerName.textProperty().bindBidirectional(model.getPlayerName());
+        txtPlayerCountry.textProperty().bindBidirectional(model.getPlayerCountry());
+        txtPlayerVerband.textProperty().bindBidirectional(model.getPlayerVerband());
+        txtPlayerFifa.textProperty().bindBidirectional(model.getPlayerFifa());
+        txtPlayerRSSSF.textProperty().bindBidirectional(model.getPlayerRSSSF());
+        txtPlayerHundertesSpiel.textProperty().bindBidirectional(model.getPlayerNumber());
+        txtPlayerErstesSpiel.textProperty().bindBidirectional(model.getPlayerHundertesSpiel());
+        txtPlayerBirthDate.textProperty().bindBidirectional(model.getPlayerErstesSpiel());
+        txtPlayerPosition.textProperty().bindBidirectional(model.getPlayerBirthDate());
+        txtPlayerGegen.textProperty().bindBidirectional(model.getPlayerPosition());
+        txtPlayerLetztesSpiel.textProperty().bindBidirectional(model.getPlayerGegen());
 
         lblOverName.textProperty().bindBidirectional(model.getPlayerName());
         lblOverLand.textProperty().bindBidirectional(model.getPlayerCountry());
