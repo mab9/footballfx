@@ -1,0 +1,26 @@
+{
+  "name": "footballfx-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mab",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-animate": "^1.6.4",
+    "angular-route": "^1.6.4",
+    "animate.css": "^3.5.2",
+    "bootstrap": "^3.3.7",
+    "fontawesome": "^4.7.2",
+    "gulp-clean": "^0.3.2",
+    "gulp-connect": "^5.0.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-uglify": "^3.0.0",
+    "install": "^0.10.1",
+    "jquery": "^3.2.1"
+  }
+}
