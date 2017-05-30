@@ -348,53 +348,79 @@ public class ApplicationUI extends VBox {
 
     private void setupValueChangedListeners() {
         txtPlayerName.textProperty().addListener((observable, oldValue, newValue) -> {
-            playerTableView.getSelectionModel().getSelectedItem().setName(newValue);
+            if (isItemSeleected()) {
+                playerTableView.getSelectionModel().getSelectedItem().setName(newValue);
+            }
         });
         txtPlayerCountry.textProperty().addListener((observable, oldValue, newValue) -> {
-            playerTableView.getSelectionModel().getSelectedItem().setCountry(newValue);
+            if (isItemSeleected()) {
+                playerTableView.getSelectionModel().getSelectedItem().setCountry(newValue);
+            }
         });
         txtPlayerVerband.textProperty().addListener((observable, oldValue, newValue) -> {
-            playerTableView.getSelectionModel().getSelectedItem().setVerband(newValue);
+            if (isItemSeleected()) {
+                playerTableView.getSelectionModel().getSelectedItem().setVerband(newValue);
+            }
         });
         txtPlayerFifa.textProperty().addListener((observable, oldValue, newValue) -> {
-            playerTableView.getSelectionModel().getSelectedItem().setFifa_spiele(newValue);
+            if (isItemSeleected()) {
+                playerTableView.getSelectionModel().getSelectedItem().setFifa_spiele(newValue);
+            }
         });
         txtPlayerRSSSF.textProperty().addListener((observable, oldValue, newValue) -> {
-            playerTableView.getSelectionModel().getSelectedItem().setRsssf_spiele(newValue);
+            if (isItemSeleected()) {
+                playerTableView.getSelectionModel().getSelectedItem().setRsssf_spiele(newValue);
+            }
         });
         txtPlayerHundertesSpiel.textProperty().addListener((observable, oldValue, newValue) -> {
-            playerTableView.getSelectionModel().getSelectedItem().setHundertesSpiel(newValue);
+            if (isItemSeleected()) {
+                playerTableView.getSelectionModel().getSelectedItem().setHundertesSpiel(newValue);
+            }
         });
         txtPlayerErstesSpiel.textProperty().addListener((observable, oldValue, newValue) -> {
-            playerTableView.getSelectionModel().getSelectedItem().setStartjahr(newValue);
+            if (isItemSeleected()) {
+                playerTableView.getSelectionModel().getSelectedItem().setStartjahr(newValue);
+            }
         });
         txtPlayerBirthDate.textProperty().addListener((observable, oldValue, newValue) -> {
-            playerTableView.getSelectionModel().getSelectedItem().setBirthday(newValue);
+            if (isItemSeleected()) {
+                playerTableView.getSelectionModel().getSelectedItem().setBirthday(newValue);
+            }
         });
         txtPlayerPosition.textProperty().addListener((observable, oldValue, newValue) -> {
-            playerTableView.getSelectionModel().getSelectedItem().setPosition(newValue);
+            if (isItemSeleected()) {
+                playerTableView.getSelectionModel().getSelectedItem().setPosition(newValue);
+            }
         });
         txtPlayerGegen.textProperty().addListener((observable, oldValue, newValue) -> {
-            playerTableView.getSelectionModel().getSelectedItem().setGegner(newValue);
+            if (isItemSeleected()) {
+                playerTableView.getSelectionModel().getSelectedItem().setGegner(newValue);
+            }
         });
         txtPlayerLetztesSpiel.textProperty().addListener((observable, oldValue, newValue) -> {
-            playerTableView.getSelectionModel().getSelectedItem().setEndjahr(newValue);
+            if (isItemSeleected()) {
+                playerTableView.getSelectionModel().getSelectedItem().setEndjahr(newValue);
+            }
         });
     }
 
+    private boolean isItemSeleected() {
+        return playerTableView.getSelectionModel().getSelectedItem() != null;
+    }
+
     private void setupBindings() {
-        lblPlayerPlatz.textProperty().bindBidirectional(model.getPlayerNumber());
+        lblPlayerPlatz.textProperty().bindBidirectional(model.getPlayerPlatz());
         txtPlayerName.textProperty().bindBidirectional(model.getPlayerName());
         txtPlayerCountry.textProperty().bindBidirectional(model.getPlayerCountry());
         txtPlayerVerband.textProperty().bindBidirectional(model.getPlayerVerband());
         txtPlayerFifa.textProperty().bindBidirectional(model.getPlayerFifa());
         txtPlayerRSSSF.textProperty().bindBidirectional(model.getPlayerRSSSF());
-        txtPlayerHundertesSpiel.textProperty().bindBidirectional(model.getPlayerNumber());
-        txtPlayerErstesSpiel.textProperty().bindBidirectional(model.getPlayerHundertesSpiel());
-        txtPlayerBirthDate.textProperty().bindBidirectional(model.getPlayerStartJahr());
-        txtPlayerPosition.textProperty().bindBidirectional(model.getPlayerBirthDate());
-        txtPlayerGegen.textProperty().bindBidirectional(model.getPlayerPosition());
-        txtPlayerLetztesSpiel.textProperty().bindBidirectional(model.getPlayerGegen());
+        txtPlayerHundertesSpiel.textProperty().bindBidirectional(model.getPlayerHundertesSpiel());
+        txtPlayerErstesSpiel.textProperty().bindBidirectional(model.getPlayerStartJahr());
+        txtPlayerBirthDate.textProperty().bindBidirectional(model.getPlayerBirthDate());
+        txtPlayerPosition.textProperty().bindBidirectional(model.getPlayerPosition());
+        txtPlayerGegen.textProperty().bindBidirectional(model.getPlayerGegen());
+        txtPlayerLetztesSpiel.textProperty().bindBidirectional(model.getPlayerEndJahr());
 
         lblOverName.textProperty().bindBidirectional(model.getPlayerName());
         lblOverLand.textProperty().bindBidirectional(model.getPlayerCountry());

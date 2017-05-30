@@ -1,7 +1,6 @@
 package ch.fhnw.oop2.footballfx.client.presentationmodel;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import ch.fhnw.oop2.footballfx.client.business.FootballService;
 import ch.fhnw.oop2.footballfx.client.business.ServerConnectionException;
@@ -17,7 +16,7 @@ public class PresentationModel {
 
     private final StringProperty applicationTitle = new SimpleStringProperty("JavaFX Application");
 
-    private final StringProperty playerNumber = new SimpleStringProperty();
+    private final StringProperty playerPlatz = new SimpleStringProperty();
     private final StringProperty playerName = new SimpleStringProperty();
     private final StringProperty playerBirthDate = new SimpleStringProperty();
     private final StringProperty playerCountry = new SimpleStringProperty();
@@ -52,7 +51,7 @@ public class PresentationModel {
 
     public void showPlayerDetails(Player player) {
         if (player != null) {
-            playerNumber.set(player.getPlatz().get());
+            playerPlatz.set(player.getPlatz().get());
             playerName.set(player.getName().get());
             playerBirthDate.set(player.getBirthday().get());
             playerCountry.set(player.getCountry().get());
@@ -74,7 +73,7 @@ public class PresentationModel {
             playerGegen.set("");
             playerFifa.set("");
             playerRSSSF.set("");
-            playerNumber.set("");
+            playerPlatz.set("");
             playerStartJahr.set("");
             playerEndJahr.set("");
         }
@@ -85,7 +84,9 @@ public class PresentationModel {
         return applicationTitle;
     }
 
-    public StringProperty getPlayerNumber() {return playerNumber; }
+    public StringProperty getPlayerPlatz() {
+        return playerPlatz;
+    }
 
     public StringProperty getPlayerName() {
         return playerName;
