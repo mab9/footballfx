@@ -9,17 +9,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <link href="app/styles/style.css" rel="stylesheet">
 </head>
 <body class="page-md page-quick-sidebar-over-content">
 
 <div class="container">
     <div ng-controller="MainController">
-        <h1>{{ title }}</h1>
+        <div ng-hide="isEditMode">
+            <h1>{{ title }}</h1>
 
         <table class="table table-striped">
             <thead>
             <tr>
+                <th>Wappen</th>
                 <th>Platz</th>
                 <th>Name</th>
                 <th>Birthday</th>
@@ -32,10 +34,12 @@
                 <th>Gegner</th>
                 <th>Startjahr</th>
                 <th>Endjahr</th>
+                <th>Bearbeiten</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="player in players">
+                <td><img ng-src="app/assets/images/flags/{{player.country}}.png" alt="{{player.country}} image"></td>
                 <td> {{ player.platz }}</td>
                 <td> {{ player.name }}</td>
                 <td> {{ player.birthday }}</td>
@@ -48,14 +52,112 @@
                 <td> {{ player.gegner }}</td>
                 <td> {{ player.startjahr }}</td>
                 <td> {{ player.endjahr }}</td>
+                <td>
+                    <button ng-click="editPlayer(player)" type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
+        <div ng-show="isEditMode">
+            <h1>Hero Form</h1>
+            <form class="form-horizontal">
+
+                <div class="form-group">
+                    <label for="inputPlatz" class="col-sm-2 control-label">Platz</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="editPlayer.platz" class="form-control" id="inputPlatz"
+                               placeholder="Platz">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="editPlayer.name" class="form-control" id="inputName"
+                               placeholder="Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputBirthday" class="col-sm-2 control-label">Birthday</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="editPlayer.birthday" class="form-control" id="inputBirthday"
+                               placeholder="Birthday">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputCountry" class="col-sm-2 control-label">Country</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="editPlayer.country" class="form-control" id="inputCountry"
+                               placeholder="Country">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputVerband" class="col-sm-2 control-label">Verband</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="editPlayer.verband" class="form-control" id="inputVerband"
+                               placeholder="Verband">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPosition" class="col-sm-2 control-label">Position</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="editPlayer.position" class="form-control" id="inputPosition"
+                               placeholder="Position">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputHundertesSpiel" class="col-sm-2 control-label">HundertesSpiel</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="editPlayer.hundertesSpiel" class="form-control"
+                               id="inputHundertesSpiel" placeholder="HundertesSpiel">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputGegner" class="col-sm-2 control-label">Gegner</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="editPlayer.gegner" class="form-control" id="inputGegner"
+                               placeholder="Gegner">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputFifa_spiele" class="col-sm-2 control-label">Fifa_spiele</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="editPlayer.fifa_spiele" class="form-control" id="inputFifa_spiele"
+                               placeholder="Fifa_spiele">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputRsssf_spiele" class="col-sm-2 control-label">Rsssf_spiele</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="editPlayer.rsssf_spiele" class="form-control"
+                               id="inputRsssf_spiele" placeholder="Rsssf_spiele">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputStartjahr" class="col-sm-2 control-label">Startjahr</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="editPlayer.startjahr" class="form-control" id="inputStartjahr"
+                               placeholder="Startjahr">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEndjahr" class="col-sm-2 control-label">Endjahr</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="editPlayer.endjahr" class="form-control" id="inputEndjahr"
+                               placeholder="Endjahr">
+                    </div>
+                </div>
+
+                <button ng-click="savePlayer()" class="btn btn-success">Speichern</button>
+                <button ng-click="cancelEdit()" class="btn btn-warning">Abbrechen</button>
+            </form>
+        </div>
+    </div>
 </div>
 
-
-</div>
 <script src="main.js"></script>
 </body>
 </html>
