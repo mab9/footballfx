@@ -1,6 +1,7 @@
 package ch.fhnw.oop2.footballfx.core.base;
 
 import org.glassfish.jersey.server.ResourceConfig;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import ch.fhnw.oop2.footballfx.core.player.api.PlayerApi;
@@ -12,4 +13,10 @@ public class JerseyConfig extends ResourceConfig {
         register(PlayerApi.class);
         register(CorsResponseFilter.class);
     }
+
+    @Bean
+    SpringBeanInjectionHelper injectionHelper() {
+        return new SpringBeanInjectionHelper();
+    }
+
 }

@@ -7,7 +7,6 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.client.ClientConfig;
@@ -51,7 +50,8 @@ public class FootballService {
 
     public Player updatePlayer(Player player) throws ServerConnectionException {
         try {
-        Response response = client.target(BASE_URL).path("/football").path(player.getId().toString()).request()
+            Response response = client.target(BASE_URL).path("/football").path("/" + player.getId().toString())
+                    .request(APPLICATION_JSON_TYPE)
                 .put(Entity.entity(player, APPLICATION_JSON_TYPE));
         return response.readEntity(Player.class);
         } catch (ProcessingException e) {

@@ -21,7 +21,9 @@ import javax.ws.rs.core.Response;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import ch.fhnw.oop2.footballfx.core.base.SpringBeanInjectionHelper;
 import ch.fhnw.oop2.footballfx.core.player.business.PlayerService;
 import ch.fhnw.oop2.footballfx.core.player.model.Player;
 
@@ -30,12 +32,12 @@ public class PlayerApi {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    private final PlayerService playerService;
+    @Autowired
+    private PlayerService playerService;
 
-    public PlayerApi(PlayerService playerService) {
-        this.playerService = playerService;
+    public PlayerApi() {
+        SpringBeanInjectionHelper.inject(this);
     }
-
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -46,12 +48,12 @@ public class PlayerApi {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Player createPlayer(@NotNull @Valid Player player) {
+    public Player createPlayer(Player player) {
         return playerService.createPlayer(player);
     }
 
     @PUT
-    @Path("/{id}")
+    @Path("/add/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Player updatePlayer(@NotNull @PathParam("id") UUID id, @NotNull @Valid Player player) {
