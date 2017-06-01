@@ -1,13 +1,13 @@
 package ch.fhnw.oop2.footballfx.client.presentationmodel;
 
-import java.util.List;
-
 import ch.fhnw.oop2.footballfx.client.business.FootballService;
 import ch.fhnw.oop2.footballfx.client.business.ServerConnectionException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.List;
 
 public class PresentationModel {
 
@@ -29,6 +29,7 @@ public class PresentationModel {
     private final StringProperty playerLaenderspiele = new SimpleStringProperty();
     private final StringProperty playerStartJahr = new SimpleStringProperty();
     private final StringProperty playerEndJahr = new SimpleStringProperty();
+    private final StringProperty playerMehrSpiele = new SimpleStringProperty();
 
     public PresentationModel() {
         try {
@@ -63,6 +64,11 @@ public class PresentationModel {
             playerRSSSF.set(player.getRsssf_spiele().get());
             playerStartJahr.set(player.getStartJahr().get());
             playerEndJahr.set(player.getEndJahr().get());
+            if (Integer.valueOf(player.getFifa_spiele().get())>Integer.valueOf(player.getRsssf_spiele().get())){
+                playerMehrSpiele.set(player.getFifa_spiele().get());
+            }else{
+                playerMehrSpiele.set(player.getRsssf_spiele().get());
+            }
         } else {
             playerName.set("");
             playerBirthDate.set("");
@@ -76,6 +82,7 @@ public class PresentationModel {
             playerPlatz.set("");
             playerStartJahr.set("");
             playerEndJahr.set("");
+            playerMehrSpiele.set("");
         }
     }
 
@@ -130,6 +137,9 @@ public class PresentationModel {
 
     public StringProperty getPlayerEndJahr() {
         return playerEndJahr;
+    }
+    public StringProperty getPlayerMehrSpiele() {
+        return playerMehrSpiele;
     }
 
     public void addPlayer(Player player) {
