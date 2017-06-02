@@ -11,8 +11,6 @@ import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.client.ClientConfig;
 
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-
 import ch.fhnw.oop2.footballfx.client.presentationmodel.Player;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE;
@@ -40,9 +38,11 @@ public class FootballService {
 
     public Player createPlayer(Player player) throws ServerConnectionException {
         try {
-            Response response = client.target(BASE_URL).path("/football").path("/add").request(APPLICATION_JSON_TYPE)
-                    .put(Entity.entity(player, APPLICATION_JSON_TYPE));
-            return response.readEntity(Player.class);
+            Response response = client.target(BASE_URL).path("/football").request(APPLICATION_JSON_TYPE)
+                    .post(Entity.entity(player, APPLICATION_JSON_TYPE));
+            Player newPlayer = response.readEntity(Player.class);
+            player.setId(newPlayer.getId());
+            return player;
         } catch (ProcessingException e) {
             throw new ServerConnectionException("Can not connect to server. Connection aborder.", e);
         }

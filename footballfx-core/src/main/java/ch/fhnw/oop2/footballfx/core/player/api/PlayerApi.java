@@ -53,7 +53,7 @@ public class PlayerApi {
     }
 
     @PUT
-    @Path("/add/{id}")
+    @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Player updatePlayer(@NotNull @PathParam("id") UUID id, @NotNull @Valid Player player) {

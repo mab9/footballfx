@@ -133,27 +133,25 @@ public class PresentationModel {
     }
 
     public void addPlayer(Player player) {
-        Player p = new Player();
-        p.setName("der player");
-
         try {
-            footballService.createPlayer(p);
+            data.add(footballService.createPlayer(player));
         } catch (ServerConnectionException e) {
             System.err.println(e);
         }
     }
 
-    public void updatePlayer(Player player) {
+    public void updatePlayer(int index, Player player) {
         try {
-            footballService.updatePlayer(player);
+            data.set(index, footballService.updatePlayer(player));
         } catch (ServerConnectionException e) {
             System.err.println(e);
         }
     }
 
-    public void removePlayer(Player player) {
+    public void removePlayer(int index, Player player) {
         try {
             footballService.deletePlayer(player);
+            data.remove(index);
         } catch (ServerConnectionException e) {
             System.err.println(e);
         }
