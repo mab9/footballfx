@@ -1,17 +1,24 @@
 package ch.fhnw.oop2.footballfx.client.view;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import ch.fhnw.oop2.footballfx.client.presentationmodel.Player;
 import ch.fhnw.oop2.footballfx.client.presentationmodel.PresentationModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class ApplicationUI extends VBox {
 
@@ -315,14 +322,17 @@ public class ApplicationUI extends VBox {
 
         buttonAddPlayer.setOnAction(e -> {
             Player player = new Player();
-            player.setName("hans ruedi");
-            model.addPlayer(player);
+            playerTableView.getItems().add(player);
+            playerTableView.getSelectionModel().select(playerTableView.getItems().size() - 1);
         });
 
         buttonRemovePlayer.setOnAction(e -> {
             int selectedIndex = playerTableView.getSelectionModel().getSelectedIndex();
             if (selectedIndex >= 0) {
-                model.removePlayer(selectedIndex, playerTableView.getItems().get(selectedIndex));
+                if (getSelectedPlayer(selectedIndex).getId() != null) {
+                    model.removePlayer(getSelectedPlayer(selectedIndex));
+                }
+                playerTableView.getItems().remove(selectedIndex);
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("No Selection");
@@ -334,8 +344,19 @@ public class ApplicationUI extends VBox {
 
         buttonSavePlayer.setOnAction(e -> {
             int selectedIndex = playerTableView.getSelectionModel().getSelectedIndex();
-            model.updatePlayer(selectedIndex, playerTableView.getItems().get(selectedIndex));
+            if (getSelectedPlayer(selectedIndex).getId() != null) {
+                Player updatedPlayer = model.updatePlayer(getSelectedPlayer(selectedIndex));
+                playerTableView.getItems().remove(selectedIndex);
+                playerTableView.getItems().add(updatedPlayer);
+            } else {
+                Player newPlayer = model.addPlayer(getSelectedPlayer(selectedIndex));
+                playerTableView.getItems().add(newPlayer);
+            }
         });
+    }
+
+    private Player getSelectedPlayer(int selectedIndex) {
+        return playerTableView.getItems().get(selectedIndex);
     }
 
     private void setupValueChangedListeners() {

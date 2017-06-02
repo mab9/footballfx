@@ -1,13 +1,13 @@
 package ch.fhnw.oop2.footballfx.client.presentationmodel;
 
+import java.util.List;
+
 import ch.fhnw.oop2.footballfx.client.business.FootballService;
 import ch.fhnw.oop2.footballfx.client.business.ServerConnectionException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.util.List;
 
 public class PresentationModel {
 
@@ -142,26 +142,28 @@ public class PresentationModel {
         return playerMehrSpiele;
     }
 
-    public void addPlayer(Player player) {
+    public Player addPlayer(Player player) {
         try {
-            data.add(footballService.createPlayer(player));
+            return footballService.createPlayer(player);
         } catch (ServerConnectionException e) {
             System.err.println(e);
+            return null;
+            // TODO ADD EXCEPTION HANDLING
         }
     }
 
-    public void updatePlayer(int index, Player player) {
+    public Player updatePlayer(Player player) {
         try {
-            data.set(index, footballService.updatePlayer(player));
+            return footballService.updatePlayer(player);
         } catch (ServerConnectionException e) {
             System.err.println(e);
+            return null;
         }
     }
 
-    public void removePlayer(int index, Player player) {
+    public void removePlayer(Player player) {
         try {
             footballService.deletePlayer(player);
-            data.remove(index);
         } catch (ServerConnectionException e) {
             System.err.println(e);
         }
