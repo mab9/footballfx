@@ -1,24 +1,17 @@
 package ch.fhnw.oop2.footballfx.client.view;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 import ch.fhnw.oop2.footballfx.client.presentationmodel.Player;
 import ch.fhnw.oop2.footballfx.client.presentationmodel.PresentationModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class ApplicationUI extends VBox {
 
@@ -276,13 +269,13 @@ public class ApplicationUI extends VBox {
         String lStringsplit[] = comboBoxLanguges.getValue().toString().split("_");
         Locale locale = new Locale(lStringsplit[0].toString(),lStringsplit[1].toString());
         ResourceBundle messages = ResourceBundle.getBundle("MessegesBundle", locale);
-        lblOverName.setText("");
-        lblOverLand.setText("");
-        lblOverLaenderspiele.setText("");
+        //lblOverName.setText("");
+        //lblOverLand.setText("");
+        //lblOverLaenderspiele.setText("");
         lblTextLaenderspiele.setText(messages.getString("internationalgames"));
-        lblOverStartJahr.setText("");
+        //lblOverStartJahr.setText("");
         lblTextBis.setText(messages.getString("to"));
-        lblOverEndJahr.setText("");
+        //lblOverEndJahr.setText("");
 
         // Text for Editor
         lblTextName.setText(messages.getString("name"));
@@ -425,5 +418,6 @@ public class ApplicationUI extends VBox {
         lblOverLand.textProperty().bindBidirectional(model.getPlayerCountry());
         lblOverStartJahr.textProperty().bindBidirectional(model.getPlayerStartJahr());
         lblOverEndJahr.textProperty().bindBidirectional(model.getPlayerEndJahr());
+        lblOverLaenderspiele.textProperty().bindBidirectional(model.getPlayerMehrSpiele());
     }
 }
