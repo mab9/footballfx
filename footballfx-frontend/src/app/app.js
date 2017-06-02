@@ -12,7 +12,7 @@ app.controller('MainController', function ($scope, $http) {
     $scope.players = [];
     $scope.title = 'Football Fx Pro Version!';
     $scope.isEditMode = false;
-    $scope.playerEditing = {};
+    $scope.editPlayer = {};
 
     $http.get(backendUrl)
         .then(function (response) {
@@ -21,27 +21,32 @@ app.controller('MainController', function ($scope, $http) {
 
     $scope.editPlayer = function (player) {
         $scope.isEditMode = true;
-        $scope.playerEditing = angular.copy(player);
+        $scope.editPlayer = angular.copy(player);
     };
 
     $scope.cancelEdit = function () {
         $scope.isEditMode = false;
-        $scope.playerEditing = {};
+        $scope.editPlayer = {};
     };
 
-    $scope.savePlayer = function () {
-        $http.put('http://localhost:8080/football/', $scope.playerEditing.id, $scope.playerEditing)
+    $scope.addPlayer = function () {
+        $scope.isEditMode = false;
+        $scope.editPlayer = {}
+    };
+
+    $scope.savePlayer = function (player) {
+        $http.put(backendUrl, $scope.editPlayer.id, $scope.editPlayer)
             .then(function (response) {
                 $scope.players = response.data;
             });
-        $scope.playerEditing = {};
+        $scope.editPlayer = {};
         $scope.isEditMode = false;
     };
 
     $scope.removePlayer = function (player) {
-        $http.delete('http://localhost:8080/football/', player.id)
+        $http.delete(backendUrl, player.id)
             .then(function (response) {
-                $scope.players = response.data;
+                $scope.players.splice($scope.players.indexOf(player), 1);
             });
     };
 });

@@ -56,6 +56,10 @@
                     <button ng-click="editPlayer(player)" type="button" class="btn btn-primary">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </button>
+
+                    <button ng-click="removePlayer(player)" type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
                 </td>
             </tr>
             </tbody>
@@ -68,7 +72,8 @@
                 <div class="form-group">
                     <label for="inputPlatz" class="col-sm-2 control-label">Platz</label>
                     <div class="col-sm-2">
-                        <input type="text" ng-model="editPlayer.platz" class="form-control" id="inputPlatz"
+                        <input type="text" ng-model="editPlayer.platz" class="form-control"
+                               id="inputPlatz"
                                placeholder="Platz">
                     </div>
                 </div>
