@@ -1,15 +1,26 @@
-# OOP2 Programmierprojekt
+# Footballfx 
+Footballfx besteht aus einem Spring Backend, dass Fussballspieler verwaltet.
+Mit einer Angular Frontend Applikation kann über eine GUI Fussballspieler verwaltet werden.
+Zusätlich gibt es einen Java native client mit dem die Fussballspieler verwaltet werden können.
+Beide GUIs laden beim Starten alle persisiterte Fussballspielder vom Backend.
 
-## Hinweise zu Git
-Dieses Git-Repository enthält einige Ressourcen als [Submodul](https://git-scm.com/book/de/v1/Git-Tools-Submodule), damit diese bei der Auswertung nicht wieder dutzende Male heruntergeladen werden müssen.
-Aus diesem Grund muss das Repository mit `git clone --recursive <Pfad zum Repository>` heruntergeladen werden. Falls Sie das beim ersten `clone` vergessen haben, können Sie die Ressourcen mit den folgenden beiden Befehlen nachladen:
-1. `git submodule init`
-2. `git submodule update`
+## Starten des Backends 'footballfx-core'
 
-## FootballplayerFX
-Implementieren Sie eine Applikation auf Basis JavaFX gemäss der Aufgabenbeschreibung aus der Lektion (siehe Moodle). 
- - Benutzen Sie zur Umsetzung die vorgegebene Struktur des "Application-Template".
- - Die Verwendung von SceneBuilder und FXML ist nicht erlaubt.
+1. 'mvn clean install' ausführen
+2. Ausführen der Main Klasse
+
+## Starten des Fronten 'foobtallfx-frontend'
+
+1. cd zu footballfx-core
+2. 'gulp browserify' ausführen um die 
+3. 'gulp' ausführen zum frontend server starten
+4. localhost:4000 im Browser aufrufen
+
+## Starten des Java native client
+
+1. mvn clean install
+2. FootallFX Backend starten
+3. Main Klasse des clients ausführen
 
 
 ## Abgabe
@@ -32,17 +43,3 @@ Implementieren Sie eine Applikation auf Basis JavaFX gemäss der Aufgabenbeschre
    - Löschen bestehender Einträge  
    
  - Nicht compilierbarer Code wird mit einer 1.0 gewertet.
-
- - Das Programmierprojekt kann auch in Zweierteams bearbeitet werden. 
-   - Es wird erwartet, dass die Lösung gemeinsam erarbeitet und implementiert wird (Stichwort: Pair-Programming).
-   - Teams wird bei der Endnote eine Notenstufe (-1) abgezogen.
- 
- - Die Teams müssen sich spätestens bis Freitag, den 5.5. gebildet haben.
- 
- - Das Team arbeitet dann auf dem Git-Repository eines der Team-Mitglieder.
- 
- - Das jeweils andere Team-Mitglied muss als Collaborator in diesem Repository eingetragen sein.
- 
- - Collaborator fügt man über `Settings -> Collaborators & teams` hinzu.
- 
- - Das Programmierzentrum ist geöffnet und Nachfragen werden zum Beispiel auch per Mail gerne beantwortet.
