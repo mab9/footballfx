@@ -1,24 +1,17 @@
 package ch.fhnw.oop2.footballfx.client.view;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 import ch.fhnw.oop2.footballfx.client.presentationmodel.Player;
 import ch.fhnw.oop2.footballfx.client.presentationmodel.PresentationModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class ApplicationUI extends VBox {
 
@@ -361,63 +354,63 @@ public class ApplicationUI extends VBox {
 
     private void setupValueChangedListeners() {
         txtPlayerName.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (isItemSeleected()) {
+            if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setName(newValue);
             }
         });
         txtPlayerCountry.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (isItemSeleected()) {
+            if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setCountry(newValue);
             }
         });
         txtPlayerVerband.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (isItemSeleected()) {
+            if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setVerband(newValue);
             }
         });
         txtPlayerFifa.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (isItemSeleected()) {
+            if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setFifa_spiele(newValue);
             }
         });
         txtPlayerRSSSF.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (isItemSeleected()) {
+            if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setRsssf_spiele(newValue);
             }
         });
         txtPlayerHundertesSpiel.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (isItemSeleected()) {
+            if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setHundertesSpiel(newValue);
             }
         });
         txtPlayerErstesSpiel.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (isItemSeleected()) {
+            if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setStartjahr(newValue);
             }
         });
         txtPlayerBirthDate.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (isItemSeleected()) {
+            if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setBirthday(newValue);
             }
         });
         txtPlayerPosition.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (isItemSeleected()) {
+            if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setPosition(newValue);
             }
         });
         txtPlayerGegen.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (isItemSeleected()) {
+            if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setGegner(newValue);
             }
         });
         txtPlayerLetztesSpiel.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (isItemSeleected()) {
+            if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setEndjahr(newValue);
             }
         });
     }
 
-    private boolean isItemSeleected() {
+    private boolean isItemSelected() {
         return playerTableView.getSelectionModel().getSelectedItem() != null;
     }
 
