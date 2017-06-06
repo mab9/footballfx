@@ -65,7 +65,7 @@ public class PresentationModel {
             playerStartJahr.set(player.getStartJahr().get());
             playerEndJahr.set(player.getEndJahr().get());
             try {
-                if (Integer.valueOf(player.getFifa_spiele().get()) > Integer.valueOf(player.getRsssf_spiele().get())) {
+                if (Integer.valueOf(player.getFifa_spiele().get()) >= Integer.valueOf(player.getRsssf_spiele().get())) {
                     playerMehrSpiele.set(player.getFifa_spiele().get());
                 } else if (Integer.valueOf(player.getFifa_spiele().get()) < Integer.valueOf(player.getRsssf_spiele().get())) {
                     playerMehrSpiele.set(player.getRsssf_spiele().get());

@@ -176,6 +176,7 @@ public class ApplicationUI extends VBox {
         VBox vBoxright = new VBox();
         vBoxright.getChildren().addAll(gridTop, gridBottom);
         vBoxright.setSpacing(10);
+        vBoxright.getStyleClass().add("vBoxRight");
         gridTop.setHgap(3);
         gridTop.setVgap(3);
 
