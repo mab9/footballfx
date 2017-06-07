@@ -108,7 +108,7 @@
 
 .button  {
     -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: white;
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: transparent;
@@ -116,6 +116,7 @@
     -fx-font-size: 11pt;
     -fx-text-fill: white;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-pref-width: 180;
 }
 
 .button:hover {
@@ -153,7 +154,7 @@
 /* Combobox */
 .combo-box {
     -fx-padding: 0 8 0 8;
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: white;
     -fx-border-width: 2;
     -fx-background-radius:0;
     -fx-background-color: transparent;
@@ -184,20 +185,23 @@
 }
 
 .combo-box:default {
-    -fx-background-color: transparent;
-    -fx-text-fill: #ffffff;
+   /* -fx-background-color: rgba(51,105,30, 1); */
+    -fx-text-fill: white;
 }
 
 .combo-box:default:hover {
-    -fx-background-color: transparent;
+    -fx-background-color: rgba(98,151,73, 1);
+    -fx-text-fill: white;
 }
 
 .combo-box .list-cell {
-    -fx-background-color: transparent;
+    -fx-background-color: rgba(51,105,30, 1);
+    -fx-text-fill: white;
 }
 
 .combo-box .list-cell:hover {
-    -fx-background-color: transparent;
+    -fx-background-color: rgba(98,151,73, 1);
+    -fx-text-fill: white;
 }
 
 .combo-box .label {
@@ -209,6 +213,9 @@
     -fx-background-color: rgba(51,105,30, 0.7);
     -fx-padding: 5;
     -fx-text-fill: #ffffff;
+}
+.gridTop .label,.gridBottom .label{
+    -fx-pref-width: 120;
 }
 
 /* TextView */
