@@ -63,6 +63,7 @@ public class ApplicationUI extends VBox {
     private Label lblTextLetztesSpiel;
     private Locale localeDE;
     private Locale localeEN;
+    private Locale localeFR;
     private TableColumn<Player, String> numberColumn;
     private TableColumn<Player, String> nameColumn;
     private TableColumn<Player, String> birthDateColumn;
@@ -97,6 +98,7 @@ public class ApplicationUI extends VBox {
 
         localeDE = new Locale("en","US");
         localeEN = new Locale("de","DE");
+        localeFR = new Locale("fr", "FR");
 
         buttonAddPlayer = new Button();
         buttonRemovePlayer = new Button();
@@ -255,7 +257,8 @@ public class ApplicationUI extends VBox {
         ObservableList<Locale> options =
                 FXCollections.observableArrayList(
                     localeDE,
-                    localeEN
+                    localeEN,
+                    localeFR
                 );
         comboBoxLanguges.setItems(options);
         comboBoxLanguges.getSelectionModel().select(0);
@@ -264,6 +267,7 @@ public class ApplicationUI extends VBox {
         });
         hBox.getChildren().addAll(playerTableView, vBoxright);
         this.getChildren().addAll(toolBar, hBox);
+        this.getStyleClass().add("topVBox");
     }
     private void setTextLocalized(){
         // Text for Overview
