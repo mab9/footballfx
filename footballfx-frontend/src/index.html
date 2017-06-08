@@ -38,7 +38,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="player in players">
+            <tr ng-repeat="player in players | orderBy : 'platz'">
                 <td><img ng-src="app/assets/images/flags/{{player.country}}.png" alt="{{player.country}} image"></td>
                 <td> {{ player.platz }}</td>
                 <td> {{ player.name }}</td>
@@ -57,7 +57,7 @@
                         <span class="glyphicon glyphicon-pencil"></span>
                     </button>
 
-                    <button ng-click="removePlayer(player)" type="button" class="btn btn-primary">
+                    <button ng-click="deletePlayer(player)" type="button" class="btn btn-primary">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
                 </td>
@@ -157,7 +157,7 @@
                     </div>
                 </div>
 
-                <button ng-click="savePlayer()" class="btn btn-success">Speichern</button>
+                <button ng-click="updatePlayer()" class="btn btn-success">Speichern</button>
                 <button ng-click="cancelEdit()" class="btn btn-warning">Abbrechen</button>
             </form>
         </div>

@@ -14,10 +14,12 @@ app.controller('MainController', function ($scope, $http) {
     $scope.isEditMode = false;
     $scope.editingPlayer = {};
 
-    $http.get(backendUrl)
-        .then(function (response) {
-            $scope.players = response.data;
-        });
+    $scope.getPlayers = function () {
+        $http.get(backendUrl)
+            .then(function (response) {
+                $scope.players = response.data;
+            });
+    };
 
     $scope.editPlayer = function (player) {
         $scope.isEditMode = true;
@@ -34,19 +36,26 @@ app.controller('MainController', function ($scope, $http) {
         $scope.editingPlayer = {}
     };
 
-    $scope.savePlayer = function (player) {
-        $http.put(backendUrl, $scope.editPlayer.id, $scope.editPlayer)
+    $scope.updatePlayer = function () {
+        $http.put(backendUrl + $scope.editingPlayer.id, $scope.editingPlayer)
             .then(function (response) {
-                $scope.players = response.data;
+                $scope.getPlayers();
             });
         $scope.editingPlayer = {};
         $scope.isEditMode = false;
     };
 
-    $scope.removePlayer = function (player) {
+    $scope.deletePlayer = function (player) {
         $http.delete(backendUrl + player.id)
-            .then(function (response) {
-                $scope.players.splice($scope.players.indexOf(player), 1);
+            .then(function () {
+                $scope.removePlayer(player)
             });
     };
+
+    $scope.removePlayer = function (player) {
+        $scope.players.splice($scope.players.indexOf(player), 1);
+    };
+
+
+    $scope.getPlayers();
 });
