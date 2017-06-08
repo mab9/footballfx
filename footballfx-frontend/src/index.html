@@ -15,10 +15,14 @@
 
 <div class="container">
     <div ng-controller="MainController">
-        <div ng-hide="isEditMode">
+        <div ng-hide="isEditMode || isCreateMode">
             <h1>{{ title }}</h1>
 
-        <table class="table table-striped">
+            <br/>
+
+            <button ng-click="addPlayer()" class="btn btn-success pull-right">Player erstellen</button>
+
+            <table class="table table-striped">
             <thead>
             <tr>
                 <th>Wappen</th>
@@ -64,9 +68,112 @@
             </tr>
             </tbody>
         </table>
-    </div>
+        </div>
+
+        <div ng-show="isCreateMode">
+            <h1>Create Football-Fx Pro Player </h1>
+            <br/>
+
+            <form class="form-horizontal">
+
+                <div class="form-group">
+                    <label for="inputPlatz1" class="col-sm-2 control-label">Platz</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="createPlayer.platz" class="form-control"
+                               id="inputPlatz1"
+                               placeholder="Platz">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputName1" class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="createPlayer.name" class="form-control" id="inputName1"
+                               placeholder="Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputBirthday1" class="col-sm-2 control-label">Birthday</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="createPlayer.birthday" class="form-control"
+                               id="inputBirthday1"
+                               placeholder="Birthday">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputCountry1" class="col-sm-2 control-label">Country</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="createPlayer.country" class="form-control" id="inputCountry"
+                               placeholder="Country">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputVerband1" class="col-sm-2 control-label">Verband</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="createPlayer.verband" class="form-control" id="inputVerband"
+                               placeholder="Verband">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPosition1" class="col-sm-2 control-label">Position</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="createPlayer.position" class="form-control" id="inputPosition"
+                               placeholder="Position">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputHundertesSpiel1" class="col-sm-2 control-label">HundertesSpiel</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="createPlayer.hundertesSpiel" class="form-control"
+                               id="inputHundertesSpiel1" placeholder="HundertesSpiel">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputGegner1" class="col-sm-2 control-label">Gegner</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="createPlayer.gegner" class="form-control" id="inputGegner1"
+                               placeholder="Gegner">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputFifa_spiele" class="col-sm-2 control-label">Fifa_spiele</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="createPlayer.fifa_spiele" class="form-control"
+                               id="inputFifa_spiele1"
+                               placeholder="Fifa_spiele">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputRsssf_spiele1" class="col-sm-2 control-label">Rsssf_spiele</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="createPlayer.rsssf_spiele" class="form-control"
+                               id="inputRsssf_spiele1" placeholder="Rsssf_spiele">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputStartjahr1" class="col-sm-2 control-label">Startjahr</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="createPlayer.startjahr" class="form-control"
+                               id="inputStartjahr1"
+                               placeholder="Startjahr">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEndjahr1" class="col-sm-2 control-label">Endjahr</label>
+                    <div class="col-sm-2">
+                        <input type="text" ng-model="createPlayer.endjahr" class="form-control" id="inputEndjahr1"
+                               placeholder="Endjahr">
+                    </div>
+                </div>
+
+                <button ng-click="savePlayer()" class="btn btn-success">Speichern</button>
+                <button ng-click="cancelEdit()" class="btn btn-warning">Abbrechen</button>
+            </form>
+        </div>
+
         <div ng-show="isEditMode">
-            <h1>Hero Form</h1>
+            <h1>Edit Football-Fx Pro Player</h1>
+            <br/>
             <form class="form-horizontal">
 
                 <div class="form-group">
@@ -95,21 +202,21 @@
                 <div class="form-group">
                     <label for="inputCountry" class="col-sm-2 control-label">Country</label>
                     <div class="col-sm-2">
-                        <input type="text" ng-model="editingPlayer.country" class="form-control" id="inputCountry"
+                        <input type="text" ng-model="editingPlayer.country" class="form-control" id="inputCountry1"
                                placeholder="Country">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputVerband" class="col-sm-2 control-label">Verband</label>
                     <div class="col-sm-2">
-                        <input type="text" ng-model="editingPlayer.verband" class="form-control" id="inputVerband"
+                        <input type="text" ng-model="editingPlayer.verband" class="form-control" id="inputVerband1"
                                placeholder="Verband">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPosition" class="col-sm-2 control-label">Position</label>
                     <div class="col-sm-2">
-                        <input type="text" ng-model="editingPlayer.position" class="form-control" id="inputPosition"
+                        <input type="text" ng-model="editingPlayer.position" class="form-control" id="inputPosition1"
                                placeholder="Position">
                     </div>
                 </div>

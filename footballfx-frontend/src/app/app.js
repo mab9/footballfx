@@ -13,6 +13,8 @@ app.controller('MainController', function ($scope, $http) {
     $scope.title = 'Football Fx Pro Version!';
     $scope.isEditMode = false;
     $scope.editingPlayer = {};
+    $scope.isCreateMode = false;
+    $scope.createPlayer = {};
 
     $scope.getPlayers = function () {
         $http.get(backendUrl)
@@ -29,16 +31,26 @@ app.controller('MainController', function ($scope, $http) {
     $scope.cancelEdit = function () {
         $scope.isEditMode = false;
         $scope.editingPlayer = {};
+        $scope.isCreateMode = false;
+        $scope.createPlayer = {};
     };
 
     $scope.addPlayer = function () {
-        $scope.isEditMode = false;
-        $scope.editingPlayer = {}
+        $scope.isCreateMode = true;
+    };
+
+    $scope.savePlayer = function () {
+        $http.post(backendUrl, $scope.createPlayer)
+            .then(function () {
+                $scope.getPlayers();
+            });
+        $scope.createPlayer = {};
+        $scope.isCreateMode = false;
     };
 
     $scope.updatePlayer = function () {
         $http.put(backendUrl + $scope.editingPlayer.id, $scope.editingPlayer)
-            .then(function (response) {
+            .then(function () {
                 $scope.getPlayers();
             });
         $scope.editingPlayer = {};
@@ -55,7 +67,6 @@ app.controller('MainController', function ($scope, $http) {
     $scope.removePlayer = function (player) {
         $scope.players.splice($scope.players.indexOf(player), 1);
     };
-
 
     $scope.getPlayers();
 });
