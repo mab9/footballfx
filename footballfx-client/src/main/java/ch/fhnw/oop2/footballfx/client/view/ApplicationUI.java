@@ -8,7 +8,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.InputStream;
@@ -171,7 +170,7 @@ public class ApplicationUI extends VBox {
     }
 
     private void layoutControls() {
-        HBox hBox = new HBox();
+        SplitPane splitPane = new SplitPane();
         ToolBar toolBar = new ToolBar();
         GridPane gridTop = new GridPane();
         gridTop.getStyleClass().add("gridTop");
@@ -267,8 +266,8 @@ public class ApplicationUI extends VBox {
         comboBoxLanguges.setOnAction((event) -> {
             setTextLocalized();
         });
-        hBox.getChildren().addAll(playerTableView, vBoxright);
-        this.getChildren().addAll(toolBar, hBox);
+        splitPane.getItems().addAll(playerTableView,vBoxright);
+        this.getChildren().addAll(toolBar, splitPane);
         this.getStyleClass().add("topVBox");
     }
     private void setTextLocalized(){
@@ -444,7 +443,6 @@ public class ApplicationUI extends VBox {
         lblOverLaenderspiele.textProperty().bindBidirectional(model.getPlayerMehrSpiele());
     }
     private void displayImage(ImageView target, String imgSubPath){
-        //todo make images load. Path doesn't seem to be right
         InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(""+ imgSubPath +".png");
         if ( null != stream){
             Image img = new Image(stream);
