@@ -1,6 +1,5 @@
 package ch.fhnw.oop2.footballfx.client.view;
 
-import ch.fhnw.oop2.footballfx.client.AppStarter;
 import ch.fhnw.oop2.footballfx.client.presentationmodel.Player;
 import ch.fhnw.oop2.footballfx.client.presentationmodel.PresentationModel;
 import javafx.collections.FXCollections;
@@ -446,7 +445,7 @@ public class ApplicationUI extends VBox {
     }
     private void displayImage(ImageView target, String imgSubPath){
         //todo make images load. Path doesn't seem to be right
-        InputStream stream = AppStarter.class.getResourceAsStream("/resources/"+ imgSubPath +".png");
+        InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(""+ imgSubPath +".png");
         if ( null != stream){
             Image img = new Image(stream);
             target.setImage(img);
