@@ -1,15 +1,18 @@
 package ch.fhnw.oop2.footballfx.client.view;
 
+import ch.fhnw.oop2.footballfx.client.AppStarter;
 import ch.fhnw.oop2.footballfx.client.presentationmodel.Player;
 import ch.fhnw.oop2.footballfx.client.presentationmodel.PresentationModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.InputStream;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -366,11 +369,13 @@ public class ApplicationUI extends VBox {
         txtPlayerCountry.textProperty().addListener((observable, oldValue, newValue) -> {
             if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setCountry(newValue);
+                displayImage(countryImageView, "flags/" + newValue);
             }
         });
         txtPlayerVerband.textProperty().addListener((observable, oldValue, newValue) -> {
             if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setVerband(newValue);
+                displayImage(teamImageView, "associations/" +newValue);
             }
         });
         txtPlayerFifa.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -438,5 +443,13 @@ public class ApplicationUI extends VBox {
         lblOverStartJahr.textProperty().bindBidirectional(model.getPlayerStartJahr());
         lblOverEndJahr.textProperty().bindBidirectional(model.getPlayerEndJahr());
         lblOverLaenderspiele.textProperty().bindBidirectional(model.getPlayerMehrSpiele());
+    }
+    private void displayImage(ImageView target, String imgSubPath){
+        //todo make images load. Path doesn't seem to be right
+        InputStream stream = AppStarter.class.getResourceAsStream("/resources/"+ imgSubPath +".png");
+        if ( null != stream){
+            Image img = new Image(stream);
+            target.setImage(img);
+        }
     }
 }
