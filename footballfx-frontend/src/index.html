@@ -15,59 +15,71 @@
 
 <div class="container">
     <div ng-controller="MainController">
+        <div class="pull-right" ng-hide="isEditMode || isCreateMode">
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="search" placeholder="Search"
+                           style="margin-right: 10px;">
+                </div>
+                <button ng-click="addPlayer()" class="btn btn-info pull-right">Player erstellen</button>
+            </form>
+        </div>
         <div ng-hide="isEditMode || isCreateMode">
             <h1>{{ title }}</h1>
-
             <br/>
-
-            <button ng-click="addPlayer()" class="btn btn-success pull-right">Player erstellen</button>
-
             <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Wappen</th>
-                <th>Platz</th>
-                <th>Name</th>
-                <th>Birthday</th>
-                <th>Country</th>
-                <th>Verband</th>
-                <th>Position</th>
-                <th>Fifa_spiele</th>
-                <th>Rsssf_spiele</th>
-                <th>HudertesSpiel</th>
-                <th>Gegner</th>
-                <th>Startjahr</th>
-                <th>Endjahr</th>
-                <th>Bearbeiten</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="player in players | orderBy : 'platz'">
-                <td><img ng-src="app/assets/images/flags/{{player.country}}.png" alt="{{player.country}} image"></td>
-                <td> {{ player.platz }}</td>
-                <td> {{ player.name }}</td>
-                <td> {{ player.birthday }}</td>
-                <td> {{ player.country }}</td>
-                <td> {{ player.verband }}</td>
-                <td> {{ player.position }}</td>
-                <td> {{ player.fifa_spiele }}</td>
-                <td> {{ player.rsssf_spiele }}</td>
-                <td> {{ player.hundertesSpiel }}</td>
-                <td> {{ player.gegner }}</td>
-                <td> {{ player.startjahr }}</td>
-                <td> {{ player.endjahr }}</td>
-                <td>
-                    <button ng-click="editPlayer(player)" type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </button>
+                <thead>
+                <tr>
+                    <th>Wappen</th>
+                    <th>Platz</th>
+                    <th>Name</th>
+                    <th>Birthday</th>
+                    <th>Country</th>
+                    <th>Verband</th>
+                    <th>Position</th>
+                    <th>Fifa_spiele</th>
+                    <th>Rsssf_spiele</th>
+                    <th>HudertesSpiel</th>
+                    <th>Gegner</th>
+                    <th>Startjahr</th>
+                    <th>Endjahr</th>
+                    <th>Bearbeiten</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="player in players | orderBy : 'platz' | filter: search">
+                    <td><img style="width: 40px;" ng-src="app/assets/images/flags/{{player.country}}.png"
+                             alt="{{player.country}} image">
+                    </td>
+                    <td> {{ player.platz }}</td>
+                    <td> {{ player.name }}</td>
+                    <td> {{ player.birthday }}</td>
+                    <td> {{ player.country }}</td>
+                    <td> {{ player.verband }}</td>
+                    <td> {{ player.position }}</td>
+                    <td> {{ player.fifa_spiele }}</td>
+                    <td> {{ player.rsssf_spiele }}</td>
+                    <td> {{ player.hundertesSpiel }}</td>
+                    <td> {{ player.gegner }}</td>
+                    <td> {{ player.startjahr }}</td>
+                    <td> {{ player.endjahr }}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button style="width: 35px;" ng-click="editPlayer(player)" type="button"
+                                    class="btn btn-primary">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
 
-                    <button ng-click="deletePlayer(player)" type="button" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                            <button style="width: 35px;" ng-click="deletePlayer(player)" type="button"
+                                    class="btn btn-primary btn-danger">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </div>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
 
         <div ng-show="isCreateMode">
