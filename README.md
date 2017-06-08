@@ -12,9 +12,10 @@ Beide GUIs laden beim Starten alle persisiterte Fussballspielder vom Backend.
 ## Starten des Fronten 'foobtallfx-frontend'
 
 1. cd zu footballfx-core
-2. 'gulp browserify' ausführen um die 
-3. 'gulp' ausführen zum frontend server starten
-4. localhost:4000 im Browser aufrufen
+2. 'npm install' ausführen
+3. 'gulp browserify' ausführen um die 
+4. 'gulp' ausführen zum frontend server starten
+5. localhost:4000 im Browser aufrufen
 
 ## Starten des Java native client
 
