@@ -1,6 +1,6 @@
 .topVBox{
     -fx-background-image: url('bg.jpg');
-    -fx-background-color: rgba(51,105,30, 0.8);
+    -fx-background-color: transparent;
 
 }
 .tool-bar {
@@ -42,6 +42,7 @@
     -fx-table-cell-border-color: rgba(98,151,73, 1);
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
+
 }
 
 .table-view .column-header-background {
@@ -72,9 +73,9 @@
     -fx-background-color: transparent;
 }
 
-.split-pane:horizontal > .split-pane-divider {
-    -fx-border-color: transparent;
-    -fx-background-color: transparent;
+.split-pane > .split-pane-divider {
+    -fx-border-color: rgba(51,105,30, 1);
+    -fx-background-color: rgba(98,151,73, 1);;
 }
 
 .split-pane {
@@ -215,14 +216,21 @@
     -fx-text-fill: #ffffff;
 }
 .gridTop .label,.gridBottom .label{
-    -fx-pref-width: 120;
+    -fx-min-width: 145;
+    -fx-max-width: 145;
+}
+.vBoxRight {
+    -fx-pref-height: 400;
+    -fx-max-height:360;
+    -fx-alignment: top-left;
+
 }
 
 /* TextView */
 .text-field {
     -fx-text-alignment: center;
-    -fx-border-color: #e2e2e2;
-    -fx-border-width: 0;
+    -fx-border-color: rgba(51,105,30, 0.8);
+    -fx-border-width: 1;
     -fx-background-radius: 0;
     -fx-background-color: transparent;
     -fx-font-family: "Roboto", monospace, Arial, sans-serif;
@@ -231,4 +239,5 @@
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
     -fx-padding: 5;
 }
+
 

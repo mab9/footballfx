@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import java.io.InputStream;
@@ -191,7 +192,7 @@ public class ApplicationUI extends VBox {
         gridTop.add(lblOverLand, 0, 1);
         gridTop.add(countryImageView, 3, 1, 1, 2);
         gridTop.add(lblOverLaenderspiele, 0, 2);
-        gridTop.add(lblTextLaenderspiele, 1, 2);
+        gridTop.add(lblTextLaenderspiele, 1, 2,4,1);
         gridTop.add(teamImageView, 3, 2, 1, 2);
         gridTop.add(lblOverStartJahr, 0, 3);
         gridTop.add(lblTextBis, 1, 3);
@@ -242,6 +243,7 @@ public class ApplicationUI extends VBox {
         playerTableView.getColumns().add(startjahrColumn);
         playerTableView.getColumns().add(endjahrColumn);
 
+
         numberColumn.setCellValueFactory(e -> e.getValue().getPlatz());
         nameColumn.setCellValueFactory(e -> e.getValue().getName());
         birthDateColumn.setCellValueFactory(e -> e.getValue().getBirthday());
@@ -255,33 +257,45 @@ public class ApplicationUI extends VBox {
         startjahrColumn.setCellValueFactory(e -> e.getValue().getStartJahr());
         endjahrColumn.setCellValueFactory(e -> e.getValue().getEndJahr());
 
-        ObservableList<Locale> options =
+        ObservableList<String> options =
                 FXCollections.observableArrayList(
-                    localeDE,
-                    localeEN,
-                    localeFR
+                    "Deutsch",
+                    "English",
+                    "Francais"
                 );
+
         comboBoxLanguges.setItems(options);
         comboBoxLanguges.getSelectionModel().select(0);
         comboBoxLanguges.setOnAction((event) -> {
             setTextLocalized();
         });
+
+        this.setVgrow(splitPane,Priority.ALWAYS);
         splitPane.getItems().addAll(playerTableView,vBoxright);
         this.getChildren().addAll(toolBar, splitPane);
         this.getStyleClass().add("topVBox");
     }
     private void setTextLocalized(){
         // Text for Overview
-        String lStringsplit[] = comboBoxLanguges.getValue().toString().split("_");
-        Locale locale = new Locale(lStringsplit[0].toString(),lStringsplit[1].toString());
+        String currentLanguage = comboBoxLanguges.getValue().toString();
+        Locale locale;
+        switch (currentLanguage){
+            case "Deutsch":
+                locale = new Locale("de","DE");
+                break;
+            case "English":
+                locale = new Locale("en","US");
+                break;
+            case "Francais":
+                locale = new Locale("fr","FR");
+                break;
+            default:
+                locale = new Locale("en","US");
+                break;
+        }
         ResourceBundle messages = ResourceBundle.getBundle("MessegesBundle", locale);
-        //lblOverName.setText("");
-        //lblOverLand.setText("");
-        //lblOverLaenderspiele.setText("");
         lblTextLaenderspiele.setText(messages.getString("internationalgames"));
-        //lblOverStartJahr.setText("");
         lblTextBis.setText(messages.getString("to"));
-        //lblOverEndJahr.setText("");
 
         // Text for Editor
         lblTextName.setText(messages.getString("name"));
@@ -368,12 +382,14 @@ public class ApplicationUI extends VBox {
             if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setCountry(newValue);
                 displayImage(countryImageView, "flags/" + newValue);
+                displayImage(teamImageView, "associations/" +newValue);
+
             }
         });
         txtPlayerVerband.textProperty().addListener((observable, oldValue, newValue) -> {
             if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setVerband(newValue);
-                displayImage(teamImageView, "associations/" +newValue);
+               // displayImage(teamImageView, "associations/" +newValue);
             }
         });
         txtPlayerFifa.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -443,7 +459,7 @@ public class ApplicationUI extends VBox {
         lblOverLaenderspiele.textProperty().bindBidirectional(model.getPlayerMehrSpiele());
     }
     private void displayImage(ImageView target, String imgSubPath){
-        InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(""+ imgSubPath +".png");
+            InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(imgSubPath +".png");
         if ( null != stream){
             Image img = new Image(stream);
             target.setImage(img);

@@ -14,7 +14,7 @@ public class PresentationModel {
     private final FootballService footballService = new FootballService();
     private ObservableList<Player> data = FXCollections.observableArrayList();
 
-    private final StringProperty applicationTitle = new SimpleStringProperty("JavaFX Application");
+    private final StringProperty applicationTitle = new SimpleStringProperty("Football FX - Marc-Antoine Brülhart & Peer Jüttner");
 
     private final StringProperty playerPlatz = new SimpleStringProperty();
     private final StringProperty playerName = new SimpleStringProperty();
