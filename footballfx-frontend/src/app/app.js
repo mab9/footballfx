@@ -90,3 +90,34 @@ app.controller('MainController', function ($scope, $http) {
     $scope.getAssociations();
     $scope.getCountries();
 });
+
+
+app.directive("editPlayer", function () {
+    return {
+        restrict: 'E',
+        templateUrl: "app/modules/directive/editplayer.html"
+    }
+});
+
+app.directive("createPlayer", function () {
+    return {
+        restrict: 'E',
+        templateUrl: "app/modules/directive/createplayer.html"
+    }
+});
+
+app.directive("player", function () {
+    return {
+        restrict: 'E',
+        templateUrl: "app/modules/directive/player.html"
+    }
+});
+
+app.directive("header", function () {
+    return {
+        restrict: 'E',
+        templateUrl: "app/modules/directive/header.html"
+    }
+});
+
+

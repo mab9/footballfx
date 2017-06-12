@@ -1,0 +1,126 @@
+<h1>Edit Football-Fx Pro Player</h1>
+<br/>
+<form class="form-horizontal">
+
+    <div class="row">
+        <div class="col-xs-3 form-group">
+            <label for="inputName" class="control-label">Name</label>
+            <input type="text" ng-model="editingPlayer.name" class="form-control" id="inputName"
+                   placeholder="Name">
+        </div>
+        <div class="col-xs-1 form-group"></div>
+        <div class="col-xs-3 form-group">
+            <label for="inputBirthday" class="control-label">Birthday</label>
+            <input type="text" ng-model="editingPlayer.birthday" class="form-control" id="inputBirthday"
+                   placeholder="Birthday">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3 form-group">
+            <label for="inputCountry" class="control-label">Country</label>
+            <select class="form-control" id="inputCountry"
+                    ng-model="editingPlayer.country" required>
+                <option ng-repeat="country in countries | orderBy: 'country'"
+                        value="{{country.country}}">
+                    {{country.country}}
+                </option>
+            </select>
+        </div>
+        <div class="col-xs-1 form-group"></div>
+        <div class="col-xs-3 form-group">
+            <label for="imageCountry" class="control-label">{{editingPlayer.country}}</label>
+            <img class="form-control" id="imageCountry" style="width: 40px;"
+                 ng-src="app/assets/images/country/{{editingPlayer.country}}.png"
+                 alt="{{editingPlayer.country}} image">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3 form-group">
+            <label for="inputVerband" class="control-label">Verband</label>
+            <select class="form-control" id="inputVerband"
+                    ng-model="editingPlayer.verband" required>
+
+                <option ng-repeat="association in associations | orderBy: 'verband'"
+                        value="{{association.verband}}">
+                    {{association.verband}}
+                </option>
+            </select>
+        </div>
+        <div class="col-xs-1 form-group"></div>
+        <div class="col-xs-3 form-group">
+            <label for="imageVerband" class="control-label">{{editingPlayer.verband}}</label>
+            <img class="form-control" id="imageVerband" style="width: 40px;"
+                 ng-src="app/assets/images/flags/{{editingPlayer.country}}.png"
+                 alt="{{editingPlayer.country}} image">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3 form-group">
+            <label for="inputPlatz" class="control-label">Platz</label>
+            <input type="text" ng-model="editingPlayer.platz" class="form-control"
+                   id="inputPlatz"
+                   placeholder="Platz">
+        </div>
+        <div class="col-xs-1 form-group"></div>
+        <div class="col-xs-3 form-group">
+            <label for="inputPosition1" class="control-label">Position</label>
+            <input type="text" ng-model="editingPlayer.position" class="form-control" id="inputPosition1"
+                   placeholder="Position">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3 form-group">
+            <label for="inputHundertesSpiel" class="control-label">HundertesSpiel</label>
+            <input type="text" ng-model="editingPlayer.hundertesSpiel" class="form-control"
+                   id="inputHundertesSpiel" placeholder="HundertesSpiel">
+        </div>
+        <div class="col-xs-1 form-group"></div>
+        <div class="col-xs-3 form-group">
+            <label for="inputGegner" class="control-label">Gegner</label>
+            <input type="text" ng-model="editingPlayer.gegner" class="form-control" id="inputGegner"
+                   placeholder="Gegner">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3 form-group">
+            <label for="inputFifa_spiele" class="control-label">Fifa_spiele</label>
+            <input type="text" ng-model="editingPlayer.fifa_spiele" class="form-control"
+                   id="inputFifa_spiele"
+                   placeholder="Fifa_spiele">
+        </div>
+        <div class="col-xs-1 form-group"></div>
+        <div class="col-xs-3 form-group">
+            <label for="inputRsssf_spiele" class="control-label">Rsssf_spiele</label>
+            <input type="text" ng-model="editingPlayer.rsssf_spiele" class="form-control"
+                   id="inputRsssf_spiele" placeholder="Rsssf_spiele">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3 form-group">
+            <label for="inputStartjahr" class="control-label">Startjahr</label>
+            <input type="text" ng-model="editingPlayer.startjahr" class="form-control" id="inputStartjahr"
+                   placeholder="Startjahr">
+        </div>
+        <div class="col-xs-1 form-group"></div>
+        <div class="col-xs-3 form-group">
+            <label for="inputEndjahr" class="control-label">Endjahr</label>
+            <input type="text" ng-model="editingPlayer.endjahr" class="form-control" id="inputEndjahr"
+                   placeholder="Endjahr">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3 form-group"></div>
+        <div class="col-xs-1 form-group"></div>
+        <div class="col-xs-3 form-group">
+            <button ng-click="updatePlayer()" class="btn btn-success">Speichern</button>
+            <button ng-click="cancelEdit()" class="btn btn-warning">Abbrechen</button>
+        </div>
+    </div>
+</form>

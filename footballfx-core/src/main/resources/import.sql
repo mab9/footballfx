@@ -23,6 +23,8 @@ INSERT INTO association (id, verband) VALUES ('332cc22626b342fca81264d9b525af54'
 INSERT INTO association (id, verband) VALUES ('332bb22626b342fca81264d9b525af54', 'Deutschland');
 INSERT INTO association (id, verband) VALUES ('332aa22626b342fca81264d9b525af54', 'Dänemark');
 INSERT INTO association (id, verband) VALUES ('3322222626b342dda81264d9b525af54', 'Ecuador');
+
+
 INSERT INTO association (id, verband) VALUES ('3322222626b342ffa81264d9b525af54', 'Elfenbeinküste');
 INSERT INTO association (id, verband) VALUES ('3322222626b342faa81264d9b525af54', 'England');
 INSERT INTO association (id, verband) VALUES ('3322222626b342fba81264d9b525af54', 'Estland');
@@ -91,6 +93,7 @@ INSERT INTO association (id, verband) VALUES ('3322222626b342fca81264d90525af54'
 INSERT INTO association (id, verband) VALUES ('3322222626b342fca81264d9b525a054', 'Zypern');
 INSERT INTO association (id, verband) VALUES ('3322222626b342fca81264d9b525a154', 'Ägypten');
 INSERT INTO association (id, verband) VALUES ('3322222626b342fca81264d9b525a254', 'Österreich');
+
 
 INSERT INTO country (id, country) VALUES ('5524422626b342fca81264d9b525af54', 'Afghanistan');
 INSERT INTO country (id, country) VALUES ('5525522626b342fca81264d9b525af54', 'African-Union');
