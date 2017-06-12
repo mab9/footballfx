@@ -1,19 +1,27 @@
 package ch.fhnw.oop2.footballfx.client.view;
 
+import java.io.InputStream;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import ch.fhnw.oop2.footballfx.client.presentationmodel.Player;
 import ch.fhnw.oop2.footballfx.client.presentationmodel.PresentationModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-
-import java.io.InputStream;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class ApplicationUI extends VBox {
 
@@ -338,8 +346,8 @@ public class ApplicationUI extends VBox {
 
         buttonAddPlayer.setOnAction(e -> {
             Player player = new Player();
-            playerTableView.getItems().add(player);
-            playerTableView.getSelectionModel().select(playerTableView.getItems().size() - 1);
+            playerTableView.getItems().add(0, player);
+            playerTableView.getSelectionModel().select(0);
         });
 
         buttonRemovePlayer.setOnAction(e -> {
@@ -350,25 +358,37 @@ public class ApplicationUI extends VBox {
                 }
                 playerTableView.getItems().remove(selectedIndex);
             } else {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("No Selection");
-                alert.setHeaderText("No player selected");
-                alert.setContentText("Please select a player in the table.");
-                alert.showAndWait();
+                warningNoPlayerSelected();
             }
         });
 
         buttonSavePlayer.setOnAction(e -> {
             int selectedIndex = playerTableView.getSelectionModel().getSelectedIndex();
-            if (getSelectedPlayer(selectedIndex).getId() != null) {
-                Player updatedPlayer = model.updatePlayer(getSelectedPlayer(selectedIndex));
-                playerTableView.getItems().remove(selectedIndex);
-                playerTableView.getItems().add(updatedPlayer);
+            if (selectedIndex >= 0) {
+                savePlayer(selectedIndex);
             } else {
-                Player newPlayer = model.addPlayer(getSelectedPlayer(selectedIndex));
-                playerTableView.getItems().add(newPlayer);
+                warningNoPlayerSelected();
             }
         });
+    }
+
+    private void warningNoPlayerSelected() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("No Selection");
+        alert.setHeaderText("No player selected");
+        alert.setContentText("Please select a player in the table.");
+        alert.showAndWait();
+    }
+
+    private void savePlayer(int selectedIndex) {
+        if (getSelectedPlayer(selectedIndex).getId() != null) {
+            Player updatedPlayer = model.updatePlayer(getSelectedPlayer(selectedIndex));
+            playerTableView.getItems().remove(selectedIndex);
+            playerTableView.getItems().add(updatedPlayer);
+        } else {
+            Player newPlayer = model.addPlayer(getSelectedPlayer(selectedIndex));
+            playerTableView.getItems().add(newPlayer);
+        }
     }
 
     private Player getSelectedPlayer(int selectedIndex) {
@@ -461,6 +481,7 @@ public class ApplicationUI extends VBox {
         lblOverEndJahr.textProperty().bindBidirectional(model.getPlayerEndJahr());
         lblOverLaenderspiele.textProperty().bindBidirectional(model.getPlayerMehrSpiele());
     }
+
     private void displayImage(ImageView target, String imgSubPath){
             InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(imgSubPath +".png");
         if ( null != stream){

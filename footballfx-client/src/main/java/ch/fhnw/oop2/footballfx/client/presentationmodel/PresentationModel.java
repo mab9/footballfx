@@ -1,13 +1,13 @@
 package ch.fhnw.oop2.footballfx.client.presentationmodel;
 
+import java.util.List;
+
 import ch.fhnw.oop2.footballfx.client.business.FootballService;
 import ch.fhnw.oop2.footballfx.client.business.ServerConnectionException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.util.List;
 
 public class PresentationModel {
 
@@ -64,17 +64,7 @@ public class PresentationModel {
             playerRSSSF.set(player.getRsssf_spiele().get());
             playerStartJahr.set(player.getStartJahr().get());
             playerEndJahr.set(player.getEndJahr().get());
-            try {
-                if (Integer.valueOf(player.getFifa_spiele().get()) >= Integer.valueOf(player.getRsssf_spiele().get())) {
-                    playerMehrSpiele.set(player.getFifa_spiele().get());
-                } else if (Integer.valueOf(player.getFifa_spiele().get()) < Integer.valueOf(player.getRsssf_spiele().get())) {
-                    playerMehrSpiele.set(player.getRsssf_spiele().get());
-                } else {
-                    playerMehrSpiele.set("");
-                }
-            } catch (NumberFormatException e){
-                System.out.print("New Item Created - Values was NULL");
-            }
+            setMostInternationalGames(player);
         } else {
             playerName.set("");
             playerBirthDate.set("");
@@ -92,6 +82,20 @@ public class PresentationModel {
         }
     }
 
+    private void setMostInternationalGames(Player player) {
+        try {
+            if (Integer.valueOf(player.getFifa_spiele().get()) >= Integer.valueOf(player.getRsssf_spiele().get())) {
+                playerMehrSpiele.set(player.getFifa_spiele().get());
+            } else if (Integer.valueOf(player.getFifa_spiele().get()) < Integer
+                    .valueOf(player.getRsssf_spiele().get())) {
+                playerMehrSpiele.set(player.getRsssf_spiele().get());
+            } else {
+                playerMehrSpiele.set("");
+            }
+        } catch (NumberFormatException e) {
+            System.out.print("New Item Created - Values was NULL");
+        }
+    }
 
     public StringProperty applicationTitleProperty() {
         return applicationTitle;
@@ -144,6 +148,7 @@ public class PresentationModel {
     public StringProperty getPlayerEndJahr() {
         return playerEndJahr;
     }
+
     public StringProperty getPlayerMehrSpiele() {
         return playerMehrSpiele;
     }

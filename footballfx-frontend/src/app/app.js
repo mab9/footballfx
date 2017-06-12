@@ -9,7 +9,9 @@ var app = angular.module('app', []);
 app.controller('MainController', function ($scope, $http) {
 
     var backendUrl = "http://localhost:8080/football/";
+
     $scope.players = [];
+    $scope.associations = [];
     $scope.title = 'Football Fx Pro Version!';
     $scope.isEditMode = false;
     $scope.editingPlayer = {};
@@ -20,6 +22,14 @@ app.controller('MainController', function ($scope, $http) {
         $http.get(backendUrl)
             .then(function (response) {
                 $scope.players = response.data;
+            });
+    };
+
+    $scope.getAssociations = function () {
+        $http.get(backendUrl + 'association')
+            .then(function (response) {
+                console.info(response.data);
+                $scope.associations = response.data;
             });
     };
 
@@ -69,4 +79,5 @@ app.controller('MainController', function ($scope, $http) {
     };
 
     $scope.getPlayers();
+    $scope.getAssociations();
 });

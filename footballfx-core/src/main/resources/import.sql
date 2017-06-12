@@ -10,3 +10,7 @@ INSERT INTO player (id, platz, name, birthday, country, verband, position, hunde
 INSERT INTO player (id, platz, name, birthday, country, verband, position, hundertes_spiel, gegner, fifa_spiele, rsssf_spiele, startjahr, endjahr) VALUES ('1022222626b342fca81264d9b525af54', '1', 'Landon Donovan', '1982', 'USA', 'CONCACAF', 'Sturm', '08.06.2008', 'Argentinien', '154', '156', '2000', '2014');
 INSERT INTO player (id, platz, name, birthday, country, verband, position, hundertes_spiel, gegner, fifa_spiele, rsssf_spiele, startjahr, endjahr) VALUES ('1122222626b342fca81264d9b525af54', '1', 'Lothar Matthäus', '1961', 'Deutschland', 'UEFA', 'Mittelfeld/Abwehr', '13.06.1993', 'USA', '150', '150', '1980', '2000');
 INSERT INTO player (id, platz, name, birthday, country, verband, position, hundertes_spiel, gegner, fifa_spiele, rsssf_spiele, startjahr, endjahr) VALUES ('1222222626b342fca81264d9b525af54', '1', 'Ali Daei', '1969', 'Iran', 'AFC', 'Sturm', '05.10.2001', 'Thailand', '148', '149', '1993', '2006');
+
+
+INSERT INTO association (id, verband) VALUES ('3322222626b342fca81264d9b525af54', 'DER');
+INSERT INTO association (id, verband) VALUES ('4422222626b342fca81264d9b525af54', 'DAS');

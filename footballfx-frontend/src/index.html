@@ -31,6 +31,7 @@
                 <thead>
                 <tr>
                     <th>Wappen</th>
+                    <th>Land</th>
                     <th>Platz</th>
                     <th>Name</th>
                     <th>Birthday</th>
@@ -48,7 +49,12 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="player in players | orderBy : 'platz' | filter: search">
-                    <td><img style="width: 40px;" ng-src="app/assets/images/flags/{{player.country}}.png"
+                    <td>
+                        <img style="width: 40px;" ng-src="app/assets/images/associations/{{player.country}}.png"
+                             alt="{{player.country}} image">
+                    </td>
+                    <td>
+                        <img style="width: 40px;" ng-src="app/assets/images/flags/{{player.country}}.png"
                              alt="{{player.country}} image">
                     </td>
                     <td> {{ player.platz }}</td>
@@ -120,10 +126,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputVerband1" class="col-sm-2 control-label">Verband</label>
+
+                <label for="inputVerband1" class="col-sm-2 control-label">Verband</label>
                     <div class="col-sm-2">
-                        <input type="text" ng-model="createPlayer.verband" class="form-control" id="inputVerband"
-                               placeholder="Verband">
+
+                        <select type="text" class="form-control" name="{{c.name}}" id="inputVerband1"
+                                ng-model="createPlayer.verband" required>
+                            <option ng-repeat="association in associations | orderBy: 'verband'"
+                                    value="{{association.verband}}">
+                                {{association.verband}}
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -221,7 +234,7 @@
                 <div class="form-group">
                     <label for="inputVerband" class="col-sm-2 control-label">Verband</label>
                     <div class="col-sm-2">
-                        <input type="text" ng-model="editingPlayer.verband" class="form-control" id="inputVerband1"
+                        <input type="text" ng-model="editingPlayer.verband" class="form-control" id="inputVerband"
                                placeholder="Verband">
                     </div>
                 </div>

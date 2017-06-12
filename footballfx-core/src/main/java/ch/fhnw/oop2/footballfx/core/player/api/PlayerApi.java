@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import ch.fhnw.oop2.footballfx.core.base.SpringBeanInjectionHelper;
 import ch.fhnw.oop2.footballfx.core.player.business.PlayerService;
+import ch.fhnw.oop2.footballfx.core.player.model.Association;
 import ch.fhnw.oop2.footballfx.core.player.model.Player;
 
 @Path("football")
@@ -81,5 +82,12 @@ public class PlayerApi {
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             throw new WebApplicationException("UUID not match", Response.Status.NOT_ACCEPTABLE);
         }
+    }
+
+    @GET
+    @Path("association")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Association> retrieveAllAssociation() {
+        return playerService.retrieveAllAssociation();
     }
 }
