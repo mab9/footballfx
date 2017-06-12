@@ -121,16 +121,25 @@
                 <div class="form-group">
                     <label for="inputCountry1" class="col-sm-2 control-label">Country</label>
                     <div class="col-sm-2">
-                        <input type="text" ng-model="createPlayer.country" class="form-control" id="inputCountry"
-                               placeholder="Country">
+                        <select type="text" class="form-control" name="{{c.name}}" id="inputCountry1"
+                                ng-model="createPlayer.country" required>
+                            <option ng-repeat="country in countries | orderBy: 'country'"
+                                    value="{{country.country}}">
+                                {{country.country}}
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
-
                 <label for="inputVerband1" class="col-sm-2 control-label">Verband</label>
                     <div class="col-sm-2">
-
-
+                        <select type="text" class="form-control" name="{{c.name}}" id="inputVerband1"
+                                ng-model="createPlayer.verband" required>
+                            <option ng-repeat="association in associations | orderBy: 'verband'"
+                                    value="{{association.verband}}">
+                                {{association.verband}}
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -221,16 +230,23 @@
                 <div class="form-group">
                     <label for="inputCountry" class="col-sm-2 control-label">Country</label>
                     <div class="col-sm-2">
-                        <input type="text" ng-model="editingPlayer.country" class="form-control" id="inputCountry1"
-                               placeholder="Country">
+                        <select type="text" class="form-control" id="inputCountry"
+                                ng-model="editingPlayer.country" required>
+
+                            <option ng-repeat="country in countries | orderBy: 'country'"
+                                    value="{{country.country}}">
+                                {{country.country}}
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputVerband" class="col-sm-2 control-label">Verband</label>
                     <div class="col-sm-2">
-                        <select type="text" class="form-control" name="{{c.name}}" id="inputVerband"
+                        <select type="text" class="form-control" id="inputVerband"
                                 ng-model="editingPlayer.verband" required>
-                            <option ng-repeat="association in associations | orderBy: 'verband'"
+
+                        <option ng-repeat="association in associations | orderBy: 'verband'"
                                     value="{{association.verband}}">
                                 {{association.verband}}
                             </option>
@@ -238,7 +254,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputPosition" class="col-sm-2 control-label">Position</label>
+                    <label for="inputPosition1" class="col-sm-2 control-label">Position</label>
                     <div class="col-sm-2">
                         <input type="text" ng-model="editingPlayer.position" class="form-control" id="inputPosition1"
                                placeholder="Position">

@@ -26,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ch.fhnw.oop2.footballfx.core.base.SpringBeanInjectionHelper;
 import ch.fhnw.oop2.footballfx.core.player.business.PlayerService;
 import ch.fhnw.oop2.footballfx.core.player.model.Association;
+import ch.fhnw.oop2.footballfx.core.player.model.Country;
 import ch.fhnw.oop2.footballfx.core.player.model.Player;
 
 @Path("football")
@@ -89,5 +90,12 @@ public class PlayerApi {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Association> retrieveAllAssociation() {
         return playerService.retrieveAllAssociation();
+    }
+
+    @GET
+    @Path("country")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Country> retrieveAllCountries() {
+        return playerService.retrieveAllCountries();
     }
 }

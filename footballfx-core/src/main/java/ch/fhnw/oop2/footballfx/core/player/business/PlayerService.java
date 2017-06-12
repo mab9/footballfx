@@ -24,6 +24,7 @@ public class PlayerService {
             CountryRepository countryRepository) {
         this.playerRepository = playerRepository;
         this.associationRepository = associationRepository;
+        this.countryRepository = countryRepository;
     }
 
     public List<Player> retrieveAllPlayers() {
