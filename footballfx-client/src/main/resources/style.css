@@ -240,4 +240,9 @@
     -fx-padding: 5;
 }
 
+.Image-View {
+    -fx-max-width: 100;
+    -fx-max-height: 1201;
+}
+
 

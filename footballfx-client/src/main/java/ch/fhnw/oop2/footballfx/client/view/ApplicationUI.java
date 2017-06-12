@@ -183,17 +183,20 @@ public class ApplicationUI extends VBox {
         vBoxright.getStyleClass().add("vBoxRight");
         gridTop.setHgap(3);
         gridTop.setVgap(3);
+        countryImageView.setFitHeight(60);
+        countryImageView.setFitWidth(60);
+        teamImageView.setFitHeight(60);
+        teamImageView.setFitWidth(60);
 
         // Add toolbar
         toolBar.getItems().addAll(buttonSavePlayer, buttonAddPlayer, buttonRemovePlayer, comboBoxLanguges);
-
         // Add Grid
         gridTop.add(lblOverName, 0, 0, 4, 1);
         gridTop.add(lblOverLand, 0, 1);
-        gridTop.add(countryImageView, 3, 1, 1, 2);
+        gridTop.add(countryImageView, 3, 0, 1, 2);
         gridTop.add(lblOverLaenderspiele, 0, 2);
         gridTop.add(lblTextLaenderspiele, 1, 2,4,1);
-        gridTop.add(teamImageView, 3, 2, 1, 2);
+        gridTop.add(teamImageView, 3, 2, 1, 3);
         gridTop.add(lblOverStartJahr, 0, 3);
         gridTop.add(lblTextBis, 1, 3);
         gridTop.add(lblOverEndJahr, 2, 3);
