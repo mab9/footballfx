@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import ch.fhnw.oop2.footballfx.core.player.business.PlayerService;
 import ch.fhnw.oop2.footballfx.core.player.dataaccess.AssociationRepository;
+import ch.fhnw.oop2.footballfx.core.player.dataaccess.CountryRepository;
 import ch.fhnw.oop2.footballfx.core.player.dataaccess.PlayerRepository;
 
 @Configuration
@@ -15,7 +16,7 @@ public class PlayerConfig {
 
     @Bean
     public PlayerService playerService() {
-        return new PlayerService(playerRepository(), associationRepository());
+        return new PlayerService(playerRepository(), associationRepository(), countryRepository());
     }
 
     @Bean
@@ -26,5 +27,10 @@ public class PlayerConfig {
     @Bean
     public AssociationRepository associationRepository() {
         return new AssociationRepository();
+    }
+
+    @Bean
+    public CountryRepository countryRepository() {
+        return new CountryRepository();
     }
 }

@@ -130,13 +130,7 @@
                 <label for="inputVerband1" class="col-sm-2 control-label">Verband</label>
                     <div class="col-sm-2">
 
-                        <select type="text" class="form-control" name="{{c.name}}" id="inputVerband1"
-                                ng-model="createPlayer.verband" required>
-                            <option ng-repeat="association in associations | orderBy: 'verband'"
-                                    value="{{association.verband}}">
-                                {{association.verband}}
-                            </option>
-                        </select>
+
                     </div>
                 </div>
                 <div class="form-group">
@@ -234,8 +228,13 @@
                 <div class="form-group">
                     <label for="inputVerband" class="col-sm-2 control-label">Verband</label>
                     <div class="col-sm-2">
-                        <input type="text" ng-model="editingPlayer.verband" class="form-control" id="inputVerband"
-                               placeholder="Verband">
+                        <select type="text" class="form-control" name="{{c.name}}" id="inputVerband"
+                                ng-model="editingPlayer.verband" required>
+                            <option ng-repeat="association in associations | orderBy: 'verband'"
+                                    value="{{association.verband}}">
+                                {{association.verband}}
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">

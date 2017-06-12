@@ -8,15 +8,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Association {
+public class Country {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    private String verband;
+    private String country;
 
-    public Association() {
+    public Country() {
     }
 
     public UUID getId() {
@@ -27,11 +27,11 @@ public class Association {
         this.id = id;
     }
 
-    public String getVerband() {
-        return verband;
+    public String getCountry() {
+        return country;
     }
 
-    public void setVerband(String verband) {
-        this.verband = verband;
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
