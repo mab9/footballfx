@@ -21,7 +21,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="player in players | orderBy : 'platz' | filter: search">
+    <tr ng-repeat="player in players | orderBy : 'name' | filter: search">
         <td>
             <img style="width: 40px;" ng-src="app/assets/images/associations/{{player.country}}.png"
                  alt="{{player.verband}} image">
