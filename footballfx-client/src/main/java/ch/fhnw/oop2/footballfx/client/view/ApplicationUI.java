@@ -1,18 +1,29 @@
 package ch.fhnw.oop2.footballfx.client.view;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import ch.fhnw.oop2.footballfx.client.presentationmodel.Player;
 import ch.fhnw.oop2.footballfx.client.presentationmodel.PresentationModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-
-import java.io.InputStream;
-import java.util.*;
 
 public class ApplicationUI extends VBox {
 
@@ -68,16 +79,15 @@ public class ApplicationUI extends VBox {
     private TableColumn<Player, String> numberColumn;
     private TableColumn<Player, String> nameColumn;
     private TableColumn<Player, String> birthDateColumn;
-    private TableColumn<Player, String> countryColumn ;
-    private TableColumn<Player, String> verbandColumn ;
-    private TableColumn<Player, String> positionColumn ;
-    private TableColumn<Player, String> hundertesSpielColumn ;
-    private TableColumn<Player, String> gegenColumn ;
-    private TableColumn<Player, String> fifaColumn ;
-    private TableColumn<Player, String> rsssfColumn ;
-    private TableColumn<Player, String> startjahrColumn ;
-    private TableColumn<Player, String> endjahrColumn ;
-
+    private TableColumn<Player, String> countryColumn;
+    private TableColumn<Player, String> verbandColumn;
+    private TableColumn<Player, String> positionColumn;
+    private TableColumn<Player, String> hundertesSpielColumn;
+    private TableColumn<Player, String> gegenColumn;
+    private TableColumn<Player, String> fifaColumn;
+    private TableColumn<Player, String> rsssfColumn;
+    private TableColumn<Player, String> startjahrColumn;
+    private TableColumn<Player, String> endjahrColumn;
 
     public ApplicationUI(PresentationModel model) {
         this.model = model;
@@ -97,8 +107,8 @@ public class ApplicationUI extends VBox {
 
     private void initializeControls() {
         newplayers = new ArrayList<>();
-        localeDE = new Locale("en","US");
-        localeEN = new Locale("de","DE");
+        localeDE = new Locale("en", "US");
+        localeEN = new Locale("de", "DE");
         localeFR = new Locale("fr", "FR");
 
         buttonAddPlayer = new Button();
@@ -158,15 +168,15 @@ public class ApplicationUI extends VBox {
         numberColumn = new TableColumn<>();
         nameColumn = new TableColumn<>();
         birthDateColumn = new TableColumn<>();
-        countryColumn  = new TableColumn<>();
-        verbandColumn  = new TableColumn<>();
-        positionColumn  = new TableColumn<>();
-        hundertesSpielColumn  = new TableColumn<>();
-        gegenColumn  = new TableColumn<>();
-        fifaColumn  = new TableColumn<>();
-        rsssfColumn  = new TableColumn<>();
-        startjahrColumn  = new TableColumn<>();
-        endjahrColumn  = new TableColumn<>();
+        countryColumn = new TableColumn<>();
+        verbandColumn = new TableColumn<>();
+        positionColumn = new TableColumn<>();
+        hundertesSpielColumn = new TableColumn<>();
+        gegenColumn = new TableColumn<>();
+        fifaColumn = new TableColumn<>();
+        rsssfColumn = new TableColumn<>();
+        startjahrColumn = new TableColumn<>();
+        endjahrColumn = new TableColumn<>();
     }
 
     private void layoutControls() {
@@ -194,7 +204,7 @@ public class ApplicationUI extends VBox {
         gridTop.add(lblOverLand, 0, 1);
         gridTop.add(countryImageView, 3, 0, 1, 2);
         gridTop.add(lblOverLaenderspiele, 0, 2);
-        gridTop.add(lblTextLaenderspiele, 1, 2,4,1);
+        gridTop.add(lblTextLaenderspiele, 1, 2, 4, 1);
         gridTop.add(teamImageView, 3, 2, 1, 3);
         gridTop.add(lblOverStartJahr, 0, 3);
         gridTop.add(lblTextBis, 1, 3);
@@ -245,7 +255,6 @@ public class ApplicationUI extends VBox {
         playerTableView.getColumns().add(startjahrColumn);
         playerTableView.getColumns().add(endjahrColumn);
 
-
         numberColumn.setCellValueFactory(e -> e.getValue().getPlatz());
         nameColumn.setCellValueFactory(e -> e.getValue().getName());
         birthDateColumn.setCellValueFactory(e -> e.getValue().getBirthday());
@@ -259,12 +268,7 @@ public class ApplicationUI extends VBox {
         startjahrColumn.setCellValueFactory(e -> e.getValue().getStartJahr());
         endjahrColumn.setCellValueFactory(e -> e.getValue().getEndJahr());
 
-        ObservableList<String> options =
-                FXCollections.observableArrayList(
-                    "Deutsch",
-                    "English",
-                    "Francais"
-                );
+        ObservableList<String> options = FXCollections.observableArrayList("Deutsch", "English", "Francais");
 
         comboBoxLanguges.setItems(options);
         comboBoxLanguges.getSelectionModel().select(0);
@@ -272,28 +276,29 @@ public class ApplicationUI extends VBox {
             setTextLocalized();
         });
 
-        this.setVgrow(splitPane,Priority.ALWAYS);
-        splitPane.getItems().addAll(playerTableView,vBoxright);
+        this.setVgrow(splitPane, Priority.ALWAYS);
+        splitPane.getItems().addAll(playerTableView, vBoxright);
         this.getChildren().addAll(toolBar, splitPane);
         this.getStyleClass().add("topVBox");
     }
-    private void setTextLocalized(){
+
+    private void setTextLocalized() {
         // Text for Overview
         String currentLanguage = comboBoxLanguges.getValue().toString();
         Locale locale;
-        switch (currentLanguage){
-            case "Deutsch":
-                locale = new Locale("de","DE");
-                break;
-            case "English":
-                locale = new Locale("en","US");
-                break;
-            case "Francais":
-                locale = new Locale("fr","FR");
-                break;
-            default:
-                locale = new Locale("en","US");
-                break;
+        switch (currentLanguage) {
+        case "Deutsch":
+            locale = new Locale("de", "DE");
+            break;
+        case "English":
+            locale = new Locale("en", "US");
+            break;
+        case "Francais":
+            locale = new Locale("fr", "FR");
+            break;
+        default:
+            locale = new Locale("en", "US");
+            break;
         }
         ResourceBundle messages = ResourceBundle.getBundle("MessegesBundle", locale);
         lblTextLaenderspiele.setText(messages.getString("internationalgames"));
@@ -345,10 +350,10 @@ public class ApplicationUI extends VBox {
 
         buttonRemovePlayer.setOnAction(e -> {
             int selectedIndex = playerTableView.getSelectionModel().getSelectedIndex();
-            if(newplayers.contains(getSelectedPlayer(selectedIndex))){
+            if (newplayers.contains(getSelectedPlayer(selectedIndex))) {
                 newplayers.remove(getSelectedPlayer(selectedIndex));
             }
-            if (!(newplayers.size()>0)){
+            if (!(newplayers.size() > 0)) {
                 buttonAddPlayer.setDisable(false);
             }
             if (selectedIndex >= 0) {
@@ -369,7 +374,7 @@ public class ApplicationUI extends VBox {
             } else {
                 warningNoPlayerSelected();
             }
-            if(newplayers.contains(getSelectedPlayer(selectedIndex))){
+            if (newplayers.contains(getSelectedPlayer(selectedIndex))) {
                 playerTableView.getItems().remove(selectedIndex);
                 newplayers.remove(getSelectedPlayer(selectedIndex));
                 buttonAddPlayer.setDisable(false);
@@ -388,13 +393,21 @@ public class ApplicationUI extends VBox {
 
     private void savePlayer(int selectedIndex) {
         if (getSelectedPlayer(selectedIndex).getId() != null) {
-            Player updatedPlayer = model.updatePlayer(getSelectedPlayer(selectedIndex));
-            playerTableView.getItems().remove(selectedIndex);
-            playerTableView.getItems().add(updatedPlayer);
+            updatePlayer(selectedIndex);
         } else {
-            Player newPlayer = model.addPlayer(getSelectedPlayer(selectedIndex));
-            playerTableView.getItems().add(newPlayer);
+            createPlayer(selectedIndex);
         }
+    }
+
+    private void createPlayer(int selectedIndex) {
+        Player newPlayer = model.createPlayer(getSelectedPlayer(selectedIndex));
+        playerTableView.getItems().add(newPlayer);
+    }
+
+    private void updatePlayer(int selectedIndex) {
+        Player updatedPlayer = model.updatePlayer(getSelectedPlayer(selectedIndex));
+        playerTableView.getItems().remove(selectedIndex);
+        playerTableView.getItems().add(updatedPlayer);
     }
 
     private Player getSelectedPlayer(int selectedIndex) {
@@ -411,14 +424,13 @@ public class ApplicationUI extends VBox {
             if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setCountry(newValue);
                 displayImage(countryImageView, "flags/" + newValue);
-                displayImage(teamImageView, "associations/" +newValue);
+                displayImage(teamImageView, "associations/" + newValue);
 
             }
         });
         txtPlayerVerband.textProperty().addListener((observable, oldValue, newValue) -> {
             if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setVerband(newValue);
-               // displayImage(teamImageView, "associations/" +newValue);
             }
         });
         txtPlayerFifa.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -488,9 +500,9 @@ public class ApplicationUI extends VBox {
         lblOverLaenderspiele.textProperty().bindBidirectional(model.getPlayerMehrSpiele());
     }
 
-    private void displayImage(ImageView target, String imgSubPath){
-            InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(imgSubPath +".png");
-        if ( null != stream){
+    private void displayImage(ImageView target, String imgSubPath) {
+        InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(imgSubPath + ".png");
+        if (null != stream) {
             Image img = new Image(stream);
             target.setImage(img);
         }

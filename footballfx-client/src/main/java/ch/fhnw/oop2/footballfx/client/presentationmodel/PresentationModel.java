@@ -153,13 +153,12 @@ public class PresentationModel {
         return playerMehrSpiele;
     }
 
-    public Player addPlayer(Player player) {
+    public Player createPlayer(Player player) {
         try {
             return footballService.createPlayer(player);
         } catch (ServerConnectionException e) {
             System.err.println(e);
             return null;
-            // TODO ADD EXCEPTION HANDLING
         }
     }
 
