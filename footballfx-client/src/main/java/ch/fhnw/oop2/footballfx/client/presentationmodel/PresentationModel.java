@@ -1,13 +1,13 @@
 package ch.fhnw.oop2.footballfx.client.presentationmodel;
 
-import java.util.List;
-
 import ch.fhnw.oop2.footballfx.client.business.FootballService;
 import ch.fhnw.oop2.footballfx.client.business.ServerConnectionException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.List;
 
 public class PresentationModel {
 
@@ -40,6 +40,15 @@ public class PresentationModel {
         }
         showPlayerDetails(data.get(1));
     }
+    /**
+     * Returns the Data of players in the List.
+     *
+     * @return      ObservableList<player> with data on players inside
+     * @author      Peer Jüttner
+     * @author      Marc-Antoine Brülhart
+     * @version     %I%, %G%
+     * @since       1.0
+     */
 
     public ObservableList<Player> getData() {
         return data;
@@ -49,6 +58,16 @@ public class PresentationModel {
         List<Player> playerss = footballService.retrieveAllPlayers();
         return FXCollections.observableArrayList(playerss);
     }
+    /**
+     *
+     * @param player to be shown in the Player Overview in the right side of the GUI. Tests for an Empty object first.
+     *               If a player is selected, the Player's Data is loaded using the getter Methods.
+     * @return      the image at the specified URL
+     * @author      Peer Jüttner
+     * @author      Marc-Antoine Brülhart
+     * @version     %I%, %G%
+     * @since       1.0
+     */
 
     public void showPlayerDetails(Player player) {
         if (player != null) {
@@ -86,8 +105,7 @@ public class PresentationModel {
         try {
             if (Integer.valueOf(player.getFifa_spiele().get()) >= Integer.valueOf(player.getRsssf_spiele().get())) {
                 playerMehrSpiele.set(player.getFifa_spiele().get());
-            } else if (Integer.valueOf(player.getFifa_spiele().get()) < Integer
-                    .valueOf(player.getRsssf_spiele().get())) {
+            } else if (Integer.valueOf(player.getFifa_spiele().get()) < Integer.valueOf(player.getRsssf_spiele().get())) {
                 playerMehrSpiele.set(player.getRsssf_spiele().get());
             } else {
                 playerMehrSpiele.set("");
@@ -152,17 +170,36 @@ public class PresentationModel {
     public StringProperty getPlayerMehrSpiele() {
         return playerMehrSpiele;
     }
-
+    /**
+     *  Adds a new player to the Footballservice-backend. Tests for a Connection to the backend server. If a connection is possible
+     *  the player is added by calling footballService.createPlayer(Player)
+     *
+     * @param       player object to be created.
+     * @return      the newly created Player object
+     * @author      Peer Jüttner
+     * @author      Marc-Antoine Brülhart
+     * @version     %I%, %G%
+     * @since       1.0
+     */
     public Player addPlayer(Player player) {
         try {
             return footballService.createPlayer(player);
         } catch (ServerConnectionException e) {
             System.err.println(e);
             return null;
-            // TODO ADD EXCEPTION HANDLING
         }
     }
-
+    /**
+     *  Pushes a player's info to the Footballservice-backend. Tests for a Connection to the backend server. If a connection is possible
+     *  the player is modified by calling footballService.updatePlayer(Player)
+     *
+     * @param       player object to be edited, complete with updated Values.
+     * @return      the newly modified Player object
+     * @author      Peer Jüttner
+     * @author      Marc-Antoine Brülhart
+     * @version     %I%, %G%
+     * @since       1.0
+     */
     public Player updatePlayer(Player player) {
         try {
             return footballService.updatePlayer(player);
@@ -171,7 +208,17 @@ public class PresentationModel {
             return null;
         }
     }
-
+    /**
+     *  Removes a player from the Footballservice-backend. Tests for a Connection to the backend server. If a connection is possible
+     *  the player is removed by calling footballService.deletePlayer(Player)
+     *
+     * @param       player object to be deleted.
+     * @return      void
+     * @author      Peer Jüttner
+     * @author      Marc-Antoine Brülhart
+     * @version     %I%, %G%
+     * @since       1.0
+     */
     public void removePlayer(Player player) {
         try {
             footballService.deletePlayer(player);
