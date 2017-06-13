@@ -18,15 +18,11 @@
         <header></header>
 
         <div ng-hide="isEditMode || isCreateMode">
-            <player></player>
+            <table-player></table-player>
         </div>
 
-        <div ng-show="isCreateMode">
-            <create-player></create-player>
-        </div>
-
-        <div ng-show="isEditMode">
-            <edit-player></edit-player>
+        <div ng-show="isEditMode || isCreateMode">
+            <form-player></form-player>
         </div>
     </div>
 </div>
