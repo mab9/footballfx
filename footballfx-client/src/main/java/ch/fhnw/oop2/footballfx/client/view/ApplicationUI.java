@@ -44,17 +44,17 @@ public class ApplicationUI extends VBox {
     private TextField txtPlayerLaenderspiele;
     private TextField txtPlayerStartJahr;
     private TextField txtPlayerEndJahr;
-    private TextField txtPlayerGegen;
+    private TextField txtPlayerAgainst;
     private TextField txtPlayerFifa;
     private TextField txtPlayerRSSSF;
     private TextField txtPlayerPosition;
     private TextField txtPlayerBirthDate;
-    private TextField txtPlayerHundertesSpiel;
-    private TextField txtPlayerErstesSpiel;
+    private TextField txtPlayerHundrethGame;
+    private TextField txtPlayerFirstGame;
     private TextField txtPlayerLetztesSpiel;
-    private TextField txtPlayerVerband;
+    private TextField txtPlayerAssociation;
     private Label lblTextLaenderspiele;
-    private Label lblPlayerPlatz;
+    private Label lblPlayerRang;
     private Label lblTextName;
     private Label lblOverName;
     private Label lblOverLand;
@@ -73,9 +73,7 @@ public class ApplicationUI extends VBox {
     private Label lblTextGegen;
     private Label lblTextErstesSpiel;
     private Label lblTextLetztesSpiel;
-    private Locale localeDE;
-    private Locale localeEN;
-    private Locale localeFR;
+    private Locale locale;
     private TableColumn<Player, String> numberColumn;
     private TableColumn<Player, String> nameColumn;
     private TableColumn<Player, String> birthDateColumn;
@@ -98,6 +96,7 @@ public class ApplicationUI extends VBox {
         setupValueChangedListeners();
         setupBindings();
         setTextLocalized();
+        cleanUiForNewPlayer();
     }
 
     private void initializeSelf() {
@@ -107,9 +106,6 @@ public class ApplicationUI extends VBox {
 
     private void initializeControls() {
         newplayers = new ArrayList<>();
-        localeDE = new Locale("en", "US");
-        localeEN = new Locale("de", "DE");
-        localeFR = new Locale("fr", "FR");
 
         buttonAddPlayer = new Button();
         buttonRemovePlayer = new Button();
@@ -135,15 +131,15 @@ public class ApplicationUI extends VBox {
         txtPlayerLaenderspiele = new TextField();
         txtPlayerStartJahr = new TextField();
         txtPlayerEndJahr = new TextField();
-        txtPlayerVerband = new TextField();
+        txtPlayerAssociation = new TextField();
         txtPlayerFifa = new TextField();
         txtPlayerRSSSF = new TextField();
-        txtPlayerHundertesSpiel = new TextField();
-        txtPlayerErstesSpiel = new TextField();
-        lblPlayerPlatz = new Label();
+        txtPlayerHundrethGame = new TextField();
+        txtPlayerFirstGame = new TextField();
+        lblPlayerRang = new Label();
         txtPlayerBirthDate = new TextField();
         txtPlayerPosition = new TextField();
-        txtPlayerGegen = new TextField();
+        txtPlayerAgainst = new TextField();
         txtPlayerLetztesSpiel = new TextField();
         lblTextLaenderspiele = new Label();
         lblTextName = new Label();
@@ -219,10 +215,10 @@ public class ApplicationUI extends VBox {
 
         gridBottom.add(txtPlayerName, 1, 0);
         gridBottom.add(txtPlayerCountry, 1, 1);
-        gridBottom.add(txtPlayerVerband, 1, 2);
+        gridBottom.add(txtPlayerAssociation, 1, 2);
         gridBottom.add(txtPlayerFifa, 1, 3);
-        gridBottom.add(txtPlayerHundertesSpiel, 1, 4);
-        gridBottom.add(txtPlayerErstesSpiel, 1, 5);
+        gridBottom.add(txtPlayerHundrethGame, 1, 4);
+        gridBottom.add(txtPlayerFirstGame, 1, 5);
 
         // Column 2
         gridBottom.add(lblTextBirthDate, 2, 0);
@@ -235,9 +231,9 @@ public class ApplicationUI extends VBox {
         // Column 3
         gridBottom.add(txtPlayerBirthDate, 3, 0);
         gridBottom.add(txtPlayerPosition, 3, 1);
-        gridBottom.add(lblPlayerPlatz, 3, 2);
+        gridBottom.add(lblPlayerRang, 3, 2);
         gridBottom.add(txtPlayerRSSSF, 3, 3);
-        gridBottom.add(txtPlayerGegen, 3, 4);
+        gridBottom.add(txtPlayerAgainst, 3, 4);
         gridBottom.add(txtPlayerLetztesSpiel, 3, 5);
 
         playerTableView.getItems().setAll(model.getData());
@@ -281,25 +277,23 @@ public class ApplicationUI extends VBox {
         this.getChildren().addAll(toolBar, splitPane);
         this.getStyleClass().add("topVBox");
     }
-
-    private void setTextLocalized() {
-        // Text for Overview
+    private void setTextLocalized(){
         String currentLanguage = comboBoxLanguges.getValue().toString();
-        Locale locale;
-        switch (currentLanguage) {
-        case "Deutsch":
-            locale = new Locale("de", "DE");
-            break;
-        case "English":
-            locale = new Locale("en", "US");
-            break;
-        case "Francais":
-            locale = new Locale("fr", "FR");
-            break;
-        default:
-            locale = new Locale("en", "US");
-            break;
+        switch (currentLanguage){
+            case "Deutsch":
+                locale = new Locale("de","DE");
+                break;
+            case "English":
+                locale = new Locale("en","US");
+                break;
+            case "Francais":
+                locale = new Locale("fr","FR");
+                break;
+            default:
+                locale = new Locale("en","US");
+                break;
         }
+        // Text for Overview
         ResourceBundle messages = ResourceBundle.getBundle("MessegesBundle", locale);
         lblTextLaenderspiele.setText(messages.getString("internationalgames"));
         lblTextBis.setText(messages.getString("to"));
@@ -341,20 +335,22 @@ public class ApplicationUI extends VBox {
                 .addListener((observable, oldValue, newValue) -> model.showPlayerDetails(newValue));
 
         buttonAddPlayer.setOnAction(e -> {
-            Player player = new Player();
-            playerTableView.getItems().add(0, player);
-            playerTableView.getSelectionModel().select(0);
-            newplayers.add(player);
-            buttonAddPlayer.setDisable(true);
+            if (newplayers.size()>0){
+                warningNotSavedYet();
+            } else {
+                cleanUiForNewPlayer();
+                Player player = new Player();
+                playerTableView.getItems().add(0, player);
+                playerTableView.getSelectionModel().select(0);
+                newplayers.add(player);
+            }
+
         });
 
         buttonRemovePlayer.setOnAction(e -> {
             int selectedIndex = playerTableView.getSelectionModel().getSelectedIndex();
             if (newplayers.contains(getSelectedPlayer(selectedIndex))) {
                 newplayers.remove(getSelectedPlayer(selectedIndex));
-            }
-            if (!(newplayers.size() > 0)) {
-                buttonAddPlayer.setDisable(false);
             }
             if (selectedIndex >= 0) {
                 if (getSelectedPlayer(selectedIndex).getId() != null) {
@@ -377,17 +373,43 @@ public class ApplicationUI extends VBox {
             if (newplayers.contains(getSelectedPlayer(selectedIndex))) {
                 playerTableView.getItems().remove(selectedIndex);
                 newplayers.remove(getSelectedPlayer(selectedIndex));
-                buttonAddPlayer.setDisable(false);
             }
 
         });
     }
 
+    private void cleanUiForNewPlayer() {
+        countryImageView.setImage(null);
+        teamImageView.setImage(null);
+        txtPlayerName.textProperty().setValue("");
+        txtPlayerCountry.textProperty().setValue("");
+        txtPlayerAssociation.textProperty().setValue("");
+        txtPlayerFifa.textProperty().setValue("");
+        txtPlayerHundrethGame.textProperty().setValue("");
+        txtPlayerFirstGame.textProperty().setValue("");
+        txtPlayerBirthDate.textProperty().setValue("");
+        txtPlayerPosition.textProperty().setValue("");
+        lblPlayerRang.textProperty().setValue("");
+        txtPlayerRSSSF.textProperty().setValue("");
+        txtPlayerAgainst.textProperty().setValue("");
+        lblOverLaenderspiele.textProperty().setValue("");
+    }
+
     private void warningNoPlayerSelected() {
+        ResourceBundle messages = ResourceBundle.getBundle("MessegesBundle", locale);
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("No Selection");
-        alert.setHeaderText("No player selected");
-        alert.setContentText("Please select a player in the table.");
+        alert.setTitle(messages.getString("notselected"));
+        alert.setHeaderText(messages.getString("notselectedheader"));
+        alert.setContentText(messages.getString("notselectedcontent"));
+        alert.showAndWait();
+    }
+
+    private void warningNotSavedYet() {
+        ResourceBundle messages = ResourceBundle.getBundle("MessegesBundle", locale);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(messages.getString("notsaved"));
+        alert.setHeaderText(messages.getString("notsavedheader"));
+        alert.setContentText(messages.getString("notsavedcontent"));
         alert.showAndWait();
     }
 
@@ -428,7 +450,7 @@ public class ApplicationUI extends VBox {
 
             }
         });
-        txtPlayerVerband.textProperty().addListener((observable, oldValue, newValue) -> {
+        txtPlayerAssociation.textProperty().addListener((observable, oldValue, newValue) -> {
             if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setVerband(newValue);
             }
@@ -443,12 +465,12 @@ public class ApplicationUI extends VBox {
                 playerTableView.getSelectionModel().getSelectedItem().setRsssf_spiele(newValue);
             }
         });
-        txtPlayerHundertesSpiel.textProperty().addListener((observable, oldValue, newValue) -> {
+        txtPlayerHundrethGame.textProperty().addListener((observable, oldValue, newValue) -> {
             if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setHundertesSpiel(newValue);
             }
         });
-        txtPlayerErstesSpiel.textProperty().addListener((observable, oldValue, newValue) -> {
+        txtPlayerFirstGame.textProperty().addListener((observable, oldValue, newValue) -> {
             if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setStartjahr(newValue);
             }
@@ -463,7 +485,7 @@ public class ApplicationUI extends VBox {
                 playerTableView.getSelectionModel().getSelectedItem().setPosition(newValue);
             }
         });
-        txtPlayerGegen.textProperty().addListener((observable, oldValue, newValue) -> {
+        txtPlayerAgainst.textProperty().addListener((observable, oldValue, newValue) -> {
             if (isItemSelected()) {
                 playerTableView.getSelectionModel().getSelectedItem().setGegner(newValue);
             }
@@ -480,17 +502,17 @@ public class ApplicationUI extends VBox {
     }
 
     private void setupBindings() {
-        lblPlayerPlatz.textProperty().bindBidirectional(model.getPlayerPlatz());
+        lblPlayerRang.textProperty().bindBidirectional(model.getPlayerPlatz());
         txtPlayerName.textProperty().bindBidirectional(model.getPlayerName());
         txtPlayerCountry.textProperty().bindBidirectional(model.getPlayerCountry());
-        txtPlayerVerband.textProperty().bindBidirectional(model.getPlayerVerband());
+        txtPlayerAssociation.textProperty().bindBidirectional(model.getPlayerVerband());
         txtPlayerFifa.textProperty().bindBidirectional(model.getPlayerFifa());
         txtPlayerRSSSF.textProperty().bindBidirectional(model.getPlayerRSSSF());
-        txtPlayerHundertesSpiel.textProperty().bindBidirectional(model.getPlayerHundertesSpiel());
-        txtPlayerErstesSpiel.textProperty().bindBidirectional(model.getPlayerStartJahr());
+        txtPlayerHundrethGame.textProperty().bindBidirectional(model.getPlayerHundertesSpiel());
+        txtPlayerFirstGame.textProperty().bindBidirectional(model.getPlayerStartJahr());
         txtPlayerBirthDate.textProperty().bindBidirectional(model.getPlayerBirthDate());
         txtPlayerPosition.textProperty().bindBidirectional(model.getPlayerPosition());
-        txtPlayerGegen.textProperty().bindBidirectional(model.getPlayerGegen());
+        txtPlayerAgainst.textProperty().bindBidirectional(model.getPlayerGegen());
         txtPlayerLetztesSpiel.textProperty().bindBidirectional(model.getPlayerEndJahr());
 
         lblOverName.textProperty().bindBidirectional(model.getPlayerName());
