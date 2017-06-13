@@ -370,6 +370,7 @@ public class ApplicationUI extends VBox {
                 warningNoPlayerSelected();
             }
             if(newplayers.contains(getSelectedPlayer(selectedIndex))){
+                playerTableView.getItems().remove(selectedIndex);
                 newplayers.remove(getSelectedPlayer(selectedIndex));
                 buttonAddPlayer.setDisable(false);
             }
