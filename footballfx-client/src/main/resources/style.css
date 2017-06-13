@@ -219,12 +219,6 @@
     -fx-min-width: 145;
     -fx-max-width: 145;
 }
-.vBoxRight {
-    -fx-pref-height: 400;
-    -fx-max-height:360;
-    -fx-alignment: top-left;
-
-}
 
 /* TextView */
 .text-field {
@@ -241,8 +235,8 @@
 }
 
 .Image-View {
-    -fx-max-width: 100;
-    -fx-max-height: 1201;
+    -fx-max-height: 100 ;
+    -fx-max-width: 120;
 }
 
 
