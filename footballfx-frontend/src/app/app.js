@@ -15,9 +15,8 @@ app.controller('MainController', function ($scope, $http) {
     $scope.associations = [];
     $scope.countries = [];
     $scope.isEditMode = false;
-    $scope.editingPlayer = {};
     $scope.isCreateMode = false;
-    $scope.createPlayer = {};
+    $scope.player = {};
 
     $scope.getPlayers = function () {
         $http.get(backendUrl)
@@ -41,38 +40,39 @@ app.controller('MainController', function ($scope, $http) {
     };
 
     $scope.editPlayer = function (player) {
-        console.info(player);
         $scope.isEditMode = true;
-        $scope.editingPlayer = angular.copy(player);
+        $scope.player = angular.copy(player);
     };
 
     $scope.cancelEdit = function () {
         $scope.isEditMode = false;
-        $scope.editingPlayer = {};
         $scope.isCreateMode = false;
-        $scope.createPlayer = {};
+        $scope.player = {};
     };
 
     $scope.addPlayer = function () {
         $scope.isCreateMode = true;
+        $scope.player = {};
     };
 
     $scope.savePlayer = function () {
-        $http.post(backendUrl, $scope.createPlayer)
+        $http.post(backendUrl, $scope.player)
             .then(function () {
                 $scope.getPlayers();
             });
-        $scope.createPlayer = {};
+        $scope.isEditMode = false;
         $scope.isCreateMode = false;
+        $scope.player = {};
     };
 
     $scope.updatePlayer = function () {
-        $http.put(backendUrl + $scope.editingPlayer.id, $scope.editingPlayer)
+        $http.put(backendUrl + $scope.player.id, $scope.player)
             .then(function () {
                 $scope.getPlayers();
             });
-        $scope.editingPlayer = {};
         $scope.isEditMode = false;
+        $scope.isCreateMode = false;
+        $scope.player = {};
     };
 
     $scope.deletePlayer = function (player) {
@@ -92,21 +92,14 @@ app.controller('MainController', function ($scope, $http) {
 });
 
 
-app.directive("editPlayer", function () {
+app.directive("formPlayer", function () {
     return {
         restrict: 'E',
-        templateUrl: "app/modules/directive/editplayer.html"
+        templateUrl: "app/modules/directive/formplayer.html"
     }
 });
 
-app.directive("createPlayer", function () {
-    return {
-        restrict: 'E',
-        templateUrl: "app/modules/directive/createplayer.html"
-    }
-});
-
-app.directive("player", function () {
+app.directive("tablePlayer", function () {
     return {
         restrict: 'E',
         templateUrl: "app/modules/directive/player.html"
