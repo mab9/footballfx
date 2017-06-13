@@ -277,21 +277,22 @@ public class ApplicationUI extends VBox {
         this.getChildren().addAll(toolBar, splitPane);
         this.getStyleClass().add("topVBox");
     }
-    private void setTextLocalized(){
+
+    private void setTextLocalized() {
         String currentLanguage = comboBoxLanguges.getValue().toString();
-        switch (currentLanguage){
-            case "Deutsch":
-                locale = new Locale("de","DE");
-                break;
-            case "English":
-                locale = new Locale("en","US");
-                break;
-            case "Francais":
-                locale = new Locale("fr","FR");
-                break;
-            default:
-                locale = new Locale("en","US");
-                break;
+        switch (currentLanguage) {
+        case "Deutsch":
+            locale = new Locale("de", "DE");
+            break;
+        case "English":
+            locale = new Locale("en", "US");
+            break;
+        case "Francais":
+            locale = new Locale("fr", "FR");
+            break;
+        default:
+            locale = new Locale("en", "US");
+            break;
         }
         // Text for Overview
         ResourceBundle messages = ResourceBundle.getBundle("MessegesBundle", locale);
@@ -335,7 +336,7 @@ public class ApplicationUI extends VBox {
                 .addListener((observable, oldValue, newValue) -> model.showPlayerDetails(newValue));
 
         buttonAddPlayer.setOnAction(e -> {
-            if (newplayers.size()>0){
+            if (newplayers.size() > 0) {
                 warningNotSavedYet();
             } else {
                 cleanUiForNewPlayer();
