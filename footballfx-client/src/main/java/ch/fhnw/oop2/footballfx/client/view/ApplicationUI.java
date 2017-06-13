@@ -1,32 +1,23 @@
 package ch.fhnw.oop2.footballfx.client.view;
 
-import java.io.InputStream;
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 import ch.fhnw.oop2.footballfx.client.presentationmodel.Player;
 import ch.fhnw.oop2.footballfx.client.presentationmodel.PresentationModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+import java.io.InputStream;
+import java.util.*;
+
 public class ApplicationUI extends VBox {
 
     private final PresentationModel model;
-
+    private List<Player> newplayers;
     private ComboBox comboBoxLanguges;
     private Button buttonAddPlayer;
     private Button buttonRemovePlayer;
@@ -105,7 +96,7 @@ public class ApplicationUI extends VBox {
     }
 
     private void initializeControls() {
-
+        newplayers = new ArrayList<>();
         localeDE = new Locale("en","US");
         localeEN = new Locale("de","DE");
         localeFR = new Locale("fr", "FR");
@@ -348,10 +339,18 @@ public class ApplicationUI extends VBox {
             Player player = new Player();
             playerTableView.getItems().add(0, player);
             playerTableView.getSelectionModel().select(0);
+            newplayers.add(player);
+            buttonAddPlayer.setDisable(true);
         });
 
         buttonRemovePlayer.setOnAction(e -> {
             int selectedIndex = playerTableView.getSelectionModel().getSelectedIndex();
+            if(newplayers.contains(getSelectedPlayer(selectedIndex))){
+                newplayers.remove(getSelectedPlayer(selectedIndex));
+            }
+            if (!(newplayers.size()>0)){
+                buttonAddPlayer.setDisable(false);
+            }
             if (selectedIndex >= 0) {
                 if (getSelectedPlayer(selectedIndex).getId() != null) {
                     model.removePlayer(getSelectedPlayer(selectedIndex));
@@ -360,6 +359,7 @@ public class ApplicationUI extends VBox {
             } else {
                 warningNoPlayerSelected();
             }
+
         });
 
         buttonSavePlayer.setOnAction(e -> {
@@ -369,6 +369,12 @@ public class ApplicationUI extends VBox {
             } else {
                 warningNoPlayerSelected();
             }
+            if(newplayers.contains(getSelectedPlayer(selectedIndex))){
+                playerTableView.getItems().remove(selectedIndex);
+                newplayers.remove(getSelectedPlayer(selectedIndex));
+                buttonAddPlayer.setDisable(false);
+            }
+
         });
     }
 
